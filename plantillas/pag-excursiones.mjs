@@ -134,10 +134,18 @@ export function detalle(e) {
     organizer: { '@type': 'TravelAgency', name: sitio.nombre, url: sitio.url },
   };
 
+  const pe = e.puntoEncuentro || {};
+  const horas = e.horaSalida || {};
+  const salidaTxt = [
+    hay(horas['puerto-plata']) ? `Puerto Plata a las ${horas['puerto-plata']}` : null,
+    hay(horas.santiago) ? `Santiago a las ${horas.santiago}` : null,
+  ].filter(Boolean);
   const politicas = [
-    ['Punto de encuentro', [e.puntoEncuentro?.santiago, e.puntoEncuentro?.['puerto-plata']].every(hay) ? `Santiago: ${e.puntoEncuentro.santiago}. Puerto Plata: ${e.puntoEncuentro['puerto-plata']}.` : null, 'Lugar y hora de salida en Santiago y Puerto Plata'],
-    ['Niños', sitio.politicas.menores, 'Edad mínima y precio de niños'],
-    ['Si no puedes ir', sitio.politicas.cambios, 'Cambios de nombre y devolución del depósito'],
+    ['Hora de salida', salidaTxt.length ? `En la madrugada del ${fechaLarga(e.fecha, { anio: false })}: ${salidaTxt.join(' y ')}`.replace(/\.?$/, '.') : null, 'Hora de salida en Santiago y Puerto Plata'],
+    ['Punto de encuentro', hay(pe.santiago) && hay(pe['puerto-plata']) ? `Santiago: ${pe.santiago}. Puerto Plata: ${pe['puerto-plata']}.` : null, 'Lugar exacto de salida en Santiago y en Puerto Plata'],
+    ['Buggies', e.requisitoBuggy, 'Requisitos para manejar el buggy'],
+    ['Niños', e.notaNinos || sitio.politicas.menores, 'Edad mínima y precio de niños'],
+    ['Si no puedes ir', e.politicaCambios || (sitio.politicas.deposito && sitio.politicas.cambios ? `${sitio.politicas.deposito} ${sitio.politicas.cambios}` : null), 'Cambios de nombre y devolución del depósito'],
     ['Si llueve', sitio.politicas.clima, 'Qué pasa si hay mal tiempo'],
   ].filter(([, v]) => hay(v) || BORRADOR);
 
@@ -146,7 +154,7 @@ export function detalle(e) {
   <div class="cont exc-hero">
     <div class="exc-hero__txt">
       ${m.html}
-      <div class="chips"><span class="chip chip--lleno">${icono('calendario')}${esc(fechaLarga(e.fecha))}</span><span class="chip">${cuenta(e.fecha)}</span><span class="chip" data-dato="salidas:${e.slug}:cupos" data-formato="estado">${hay(e.cupos) ? `Quedan ${e.cupos} cupos` : 'Cupos disponibles'}</span></div>
+      <div class="chips"><span class="chip chip--lleno">${icono('calendario')}${esc(fechaLarga(e.fecha))}</span><span class="chip">${cuenta(e.fecha, { hora: e.horaCuenta })}</span><span class="chip" data-dato="salidas:${e.slug}:cupos" data-formato="estado">${hay(e.cupos) ? `Quedan ${e.cupos} cupos` : 'Cupos disponibles'}</span></div>
       <h1 class="t-titulo">${esc(e.nombre)}</h1>
       <p class="t-lead">${esc(e.resumen)}</p>
       ${boletos(e)}
@@ -179,7 +187,7 @@ export function detalle(e) {
     <div>
       ${cabeza({ titulo: 'Así va el día', id: 'dia-t', texto: 'Horario aproximado. Antes de salir te confirmamos la hora exacta por WhatsApp.' })}
       <ol class="itinerario${e.itinerario.some((p) => hay(p.hora)) || BORRADOR ? '' : ' itinerario--sin-hora'}">${e.itinerario
-        .map((p) => `<li>${hay(p.hora) || BORRADOR ? `<span class="itinerario__hora">${hay(p.hora) ? esc(p.hora) : ph(null, 'Hora')}</span>` : ''}<span class="itinerario__t">${esc(p.titulo)}</span></li>`)
+        .map((p) => `<li>${e.itinerario.some((x) => hay(x.hora)) || BORRADOR ? `<span class="itinerario__hora">${hay(p.hora) ? esc(p.hora) : BORRADOR ? ph(null, 'Hora') : '—'}</span>` : ''}<span class="itinerario__t">${esc(p.titulo)}</span></li>`)
         .join('')}</ol>
     </div>
     <div>
@@ -197,11 +205,11 @@ export function detalle(e) {
 
 <section class="seccion tema-oscuro" aria-labelledby="plan-t" id="plan">
   <div class="cont">
-    ${cabeza({ titulo: 'Arma tu plan de pagos', id: 'plan-t', texto: `Separas con ${rd(e.deposito)} por persona y el resto lo divides como te quede cómodo, siempre antes del ${fechaLarga(e.fecha, { anio: false })}.` })}
+    ${cabeza({ titulo: 'Arma tu plan de pagos', id: 'plan-t', texto: `Separas con ${rd(e.deposito)} por persona y el resto lo divides como te quede cómodo, siempre antes del ${fechaLarga(e.fechaLimitePago || e.fecha, { anio: false })}.` })}
     <div class="calc" data-calc="${e.slug}" data-deposito="${e.deposito}">
       <div class="calc__ctrl">
         ${opcionesTarjeta({ nombre: 'calc-salida', leyenda: '¿Desde dónde sales?', opciones: e.salidas.map((s) => ({ valor: s.id, titulo: s.ciudad, detalle: `${rd(s.precio)} por persona`, datos: { 'data-precio': s.precio } })) })}
-        ${contador({ nombre: 'calc-personas', etiqueta: '¿Cuántos van?', min: 1, max: 40, valor: personas, ayuda: hay(e.precioNino) ? '' : 'Contando adultos. Niños: consulta su precio.' })}
+        ${contador({ nombre: 'calc-personas', etiqueta: '¿Cuántos van?', min: 1, max: 40, valor: personas, ayuda: hay(e.precioNino) ? '' : 'Adultos. Esta excursión no se recomienda para niños.' })}
         ${opcionesTarjeta({
           nombre: 'calc-pagos',
           leyenda: 'Después del depósito, ¿en cuántos pagos completas?',
@@ -212,7 +220,7 @@ export function detalle(e) {
         <div class="calc__fila"><span>Total del viaje</span><strong data-calc-total>${rd(total)}</strong></div>
         <div class="calc__fila"><span>Para separar hoy</span><strong data-calc-deposito>${rd(dep)}</strong></div>
         <div><span class="calc__nota" data-calc-cuota-label>Luego, ${pagos} pagos de</span><div class="calc__grande" data-calc-cuota>${rd(cuota)}</div></div>
-        <p class="calc__nota">Todo pagado antes del ${esc(fechaLarga(e.fecha))}.${hay(e.fechaLimitePago) ? ` Fecha límite: ${esc(fechaLarga(e.fechaLimitePago))}.` : ''}</p>
+        <p class="calc__nota">${hay(e.fechaLimitePago) ? `Fecha límite para completar el pago: ${esc(fechaLarga(e.fechaLimitePago))}.` : `Todo pagado antes del ${esc(fechaLarga(e.fecha))}.`}</p>
         <a class="btn btn--arena btn--ancho" data-calc-reservar href="/reservar/?excursion=${e.slug}&amp;salida=${s0.id}&amp;adultos=${personas}&amp;pagos=${pagos}">Reservar con este plan</a>
       </div>
     </div>

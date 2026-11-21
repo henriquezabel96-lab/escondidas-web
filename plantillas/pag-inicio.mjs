@@ -34,7 +34,7 @@ export function inicio() {
     <a class="cont proxima__enlace" href="/excursiones/macao/">
       <span class="proxima__fecha"><span class="proxima__eti">Próxima salida</span>${flap(`${f.dia} ${f.fecha}`, { clase: 'flap--grande', animar: true })}</span>
       <span class="proxima__destino">${esc(mac.nombre)}</span>
-      <span class="proxima__precio"><span>Desde <strong data-dato="salidas:macao:precio_santiago" data-formato="rd">${rd(mac.salidas[0].precio)}</strong></span>${cuenta(mac.fecha)}</span>
+      <span class="proxima__precio"><span>Desde <strong data-dato="salidas:macao:precio_santiago" data-formato="rd">${rd(mac.salidas[0].precio)}</strong></span>${cuenta(mac.fecha, { hora: mac.horaCuenta })}</span>
       <span class="proxima__ir">${icono('flecha')}<span class="sr">Ver la excursión</span></span>
     </a>
   </div>
@@ -100,7 +100,7 @@ export function inicio() {
       ${foto('basilica-higuey', { clase: 'inserto', sizes: '(min-width: 1000px) 18vw, 38vw' })}
     </div>
     <div class="destacado__txt">
-      <div class="chips"><span class="chip chip--lleno">${icono('calendario')}${esc(fechaLarga(mac.fecha))}</span><span class="chip">${cuenta(mac.fecha)}</span></div>
+      <div class="chips"><span class="chip chip--lleno">${icono('calendario')}${esc(fechaLarga(mac.fecha))}</span><span class="chip">${cuenta(mac.fecha, { hora: mac.horaCuenta })}</span></div>
       <h2 class="t-seccion" id="mac-t">${esc(mac.nombre)}</h2>
       <p class="t-lead">${esc(mac.resumen)}</p>
       ${boletos(mac)}

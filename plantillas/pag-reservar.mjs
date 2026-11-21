@@ -66,7 +66,7 @@ export function reservar() {
           <legend class="paso__t" tabindex="-1">¿Cuántos van?</legend>
           <div>
             ${contador({ nombre: 'adultos', etiqueta: 'Adultos', min: 1, max: 40, valor: 1 })}
-            ${contador({ nombre: 'ninos', etiqueta: 'Niños', min: 0, max: 20, valor: 0, ayuda: hay(e0.precioNino) ? `${rd(e0.precioNino)} cada uno` : 'La agencia te confirma su precio' })}
+            ${contador({ nombre: 'ninos', etiqueta: 'Niños', min: 0, max: 20, valor: 0, ayuda: hay(e0.precioNino) ? `${rd(e0.precioNino)} cada uno` : e0.notaNinos ? 'No recomendado para esta excursión: escríbenos antes' : 'La agencia te confirma su precio' })}
           </div>
           ${campo({ nombre: 'edades_ninos', etiqueta: 'Edades de los niños', ayuda: 'Por ejemplo: 6 y 9 años.' })}
           ${campo({ tipo: 'select', nombre: 'pagos', etiqueta: 'Después del depósito, ¿en cuántos pagos completas?', opciones: [['1', '1 pago'], ['2', '2 pagos'], ['3', '3 pagos'], ['4', '4 pagos']], valor: '2' })}

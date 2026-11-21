@@ -31,10 +31,10 @@ export const sitio = {
     pais: 'República Dominicana',
     mapa: 'Edificio Reina, Los Jardines Metropolitanos, Santiago de los Caballeros',
   },
-  horario: null, // PENDIENTE: ej. 'Lunes a viernes, 9:00 a. m. a 6:00 p. m. · Sábados, 9:00 a. m. a 1:00 p. m.'
+  horario: 'Lunes a viernes de 8:30 a. m. a 5:00 p. m. y sábados de 9:00 a. m. a 1:00 p. m.',
   gerente: 'Lic. Pedro Hernández',
   redes: {
-    instagram: 'escondidasmultiservices', // CONFIRMAR usuario exacto
+    instagram: 'escondidasmultiservices',
     facebook: null,
     tiktok: null,
   },
@@ -50,14 +50,17 @@ export const sitio = {
       { banco: null, tipo: null, numero: null, titular: null }, // PENDIENTE
     ],
     efectivo: 'En la oficina de Los Jardines Metropolitanos, Santiago.',
-    tarjeta: null, // PENDIENTE: ¿aceptan tarjeta en la oficina o por enlace de pago?
+    tarjeta: 'Sí, aceptamos pagos con tarjeta.',
   },
   politicas: {
-    deposito: null, // PENDIENTE: ¿el depósito se devuelve? ¿en qué casos?
-    cambios: null, // PENDIENTE: cambios de nombre o de fecha
-    cancelacionAgencia: null, // PENDIENTE: qué pasa si la agencia cancela o mueve la fecha
-    menores: null, // PENDIENTE: edades, precio de niños, si deben ir con un adulto
-    clima: null, // PENDIENTE: qué pasa si llueve o hay mal tiempo
+    deposito:
+      'El depósito no es reembolsable. En algunos casos se devuelve como crédito para otro viaje, y en casos de fuerza mayor se devuelve en efectivo. Los tiempos de reembolso pueden variar según el método de pago y las condiciones.',
+    cambios:
+      'En viajes nacionales que no incluyen reserva de hotel, puedes pasar tu cupo a otra persona (cambio de nombre). En viajes internacionales o con reserva de hotel, los cambios pueden tener cargos extra.',
+    cancelacionAgencia: 'Si la agencia cancela el viaje, te devolvemos el monto total.',
+    menores: 'Depende de la actividad. En cada viaje te decimos si pueden ir niños y cuánto pagan.',
+    clima:
+      'Depende de la actividad. En muchos casos la excursión se pospone para el domingo siguiente. Si el COE emite una advertencia, por la seguridad de los viajeros esperamos a que la provincia o el lugar vuelva a alerta verde. Si no puedes asistir en la nueva fecha, se te genera un crédito, porque se considera fuerza mayor.',
   },
 };
 
@@ -79,17 +82,23 @@ export const excursiones = [
     nombreCorto: 'Macao',
     estado: 'activa',
     fecha: '2027-01-17',
-    horaSalida: null, // PENDIENTE: hora de salida desde Santiago
-    puntoEncuentro: { santiago: null, 'puerto-plata': null }, // PENDIENTE
+    horaSalida: { 'puerto-plata': '12:30 a. m.', santiago: '2:00 a. m.' }, // madrugada del domingo
+    horaCuenta: '00:30', // la cuenta regresiva llega a cero con la primera salida
+    puntoEncuentro: { santiago: null, 'puerto-plata': null }, // PENDIENTE: lugar exacto de salida
     region: 'Higüey y Punta Cana',
     salidas: [
       { id: 'santiago', ciudad: 'Santiago', precio: 3995 },
       { id: 'puerto-plata', ciudad: 'Puerto Plata', precio: 4450 },
     ],
     deposito: 1000,
-    precioNino: null, // PENDIENTE
-    fechaLimitePago: null, // PENDIENTE: ej. '2027-01-10'
-    cupos: null, // PENDIENTE: cupos disponibles (también se puede cambiar desde la hoja de Google)
+    precioNino: null,
+    notaNinos: 'No es recomendable llevar niños a esta excursión. Si aun así quieres llevarlos, escríbenos antes de reservar.',
+    requisitoBuggy: 'Para manejar el buggy necesitas licencia de conducir.',
+    politicaCambios:
+      'El depósito no es reembolsable, pero como es un viaje nacional sin hotel puedes pasarle tu cupo a otra persona. En algunos casos se devuelve como crédito para otro viaje, y en casos de fuerza mayor en efectivo.',
+    fechaLimitePago: '2026-12-30',
+    cuposTotal: 100,
+    cupos: 77, // 100 en total, 23 ya separados (también se puede cambiar desde la hoja de Google)
     palabraClave: 'MACAO',
     foto: 'buggy-amigas',
     resumen:
@@ -133,11 +142,12 @@ export const excursiones = [
       },
     ],
     itinerario: [
-      { hora: null, titulo: 'Salida desde Santiago y Puerto Plata' },
-      { hora: null, titulo: 'Desayuno en ruta' },
-      { hora: null, titulo: 'Visita a la Basílica de Higüey' },
-      { hora: null, titulo: 'Buggies, Cueva Taína y casa típica' },
-      { hora: null, titulo: 'Playa Macao y almuerzo buffet' },
+      { hora: '12:30 a. m.', titulo: 'Salida desde Puerto Plata' },
+      { hora: '2:00 a. m.', titulo: 'Salida desde Santiago' },
+      { hora: '6:30 a. m.', titulo: 'Llegada a la Basílica de Higüey' },
+      { hora: '8:30 a. m.', titulo: 'Playa Macao' },
+      { hora: '12:30 p. m.', titulo: 'Almuerzo buffet, hasta la 1:00 p. m.' },
+      { hora: '2:30 p. m.', titulo: 'Recorrido en buggy, con Cueva Taína y casa típica' },
       { hora: null, titulo: 'Regreso con rifas y animación' },
     ],
     llevar: [
@@ -157,11 +167,21 @@ export const excursiones = [
         p: '¿Puedo pagar el resto en partes?',
         r: 'Sí. Después del depósito abonas lo que falta en partes, como te quede cómodo, siempre antes del día de la excursión.',
       },
-      { p: '¿Desde dónde sale la guagua?', r: null, pendiente: 'Punto exacto y hora de salida en Santiago y en Puerto Plata' },
-      { p: '¿Hay que saber manejar para los buggies?', r: null, pendiente: 'Requisitos para manejar el buggy (edad mínima, licencia)' },
-      { p: '¿Pueden ir niños?', r: null, pendiente: 'Edad mínima, precio de niños y si deben ir con un adulto' },
-      { p: '¿Qué pasa si no puedo ir?', r: null, pendiente: 'Política de cambios y devolución del depósito' },
-      { p: '¿Qué pasa si llueve?', r: null, pendiente: 'Qué hace la agencia si hay mal tiempo' },
+      {
+        p: '¿A qué hora sale la guagua?',
+        r: 'En la madrugada del domingo 17: desde Puerto Plata a las 12:30 a. m. y desde Santiago a las 2:00 a. m. Antes del viaje te confirmamos por WhatsApp el punto exacto de salida.',
+      },
+      { p: '¿Hasta cuándo tengo para pagar?', r: 'Tienes hasta el 30 de diciembre de 2026 para completar el pago.' },
+      { p: '¿Hay que saber manejar para los buggies?', r: 'Para manejar el buggy necesitas tener licencia de conducir.' },
+      { p: '¿Pueden ir niños?', r: 'No es recomendable llevar niños a esta excursión. Si aun así quieres llevarlos, escríbenos antes de reservar.' },
+      {
+        p: '¿Qué pasa si no puedo ir?',
+        r: 'El depósito no es reembolsable, pero como es un viaje nacional sin hotel puedes pasarle tu cupo a otra persona. En algunos casos se devuelve como crédito para otro viaje, y en casos de fuerza mayor en efectivo.',
+      },
+      {
+        p: '¿Qué pasa si llueve?',
+        r: 'En muchos casos la excursión se pospone para el domingo siguiente. Si el COE emite una advertencia, esperamos a que la zona vuelva a alerta verde. Si no puedes ir en la nueva fecha, te queda un crédito.',
+      },
     ],
   },
   // Viajes de ejemplo para la sección "Próximas salidas". Se publican solo en borrador.
@@ -344,7 +364,11 @@ export const faqGeneral = [
     p: '¿Dónde están ubicados?',
     r: 'En el Edificio Reina, local B8, Los Jardines Metropolitanos, Santiago. También te atendemos completo por WhatsApp.',
   },
-  { p: '¿Qué pasa si no puedo ir?', r: null, pendiente: 'Política de cambios y devoluciones de la agencia' },
+  {
+    p: '¿Qué pasa si no puedo ir?',
+    r: 'El depósito no es reembolsable. En viajes nacionales sin hotel puedes pasarle tu cupo a otra persona; en viajes internacionales o con hotel, los cambios pueden tener cargos extra.',
+  },
+  { p: '¿Qué pasa si la agencia cancela?', r: 'Te devolvemos el monto total.' },
 ];
 
 // ─── TESTIMONIOS (solo con permiso del cliente) ──────────────────────────────

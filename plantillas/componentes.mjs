@@ -74,11 +74,11 @@ export function boletos(e, { compacto = false } = {}) {
 }
 
 // ── Cuenta regresiva (se actualiza con JS) ───────────────────────────────────
-export function cuenta(iso, { clase = '' } = {}) {
+export function cuenta(iso, { clase = '', hora = '06:00' } = {}) {
   if (!iso) return '';
   const d = diasHasta(iso);
   const texto = d > 1 ? `Faltan ${d} días` : d === 1 ? 'Falta 1 día' : 'Últimas horas';
-  return `<span class="cuenta ${clase}" data-cuenta="${iso}T06:00:00-04:00">${icono('reloj')}<span data-cuenta-texto>${texto}</span></span>`;
+  return `<span class="cuenta ${clase}" data-cuenta="${iso}T${hora || '06:00'}:00-04:00">${icono('reloj')}<span data-cuenta-texto>${texto}</span></span>`;
 }
 
 // ── Letras tipo tablero de aeropuerto ────────────────────────────────────────
