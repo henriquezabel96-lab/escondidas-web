@@ -1,0 +1,11 @@
+{
+  "name": "escondidas-web",
+  "private": true,
+  "type": "module",
+  "description": "Sitio web de Escondidas Multiservices",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && node herramientas/servidor.mjs"
+  },
+  "engines": { "node": ">=18" }
+}

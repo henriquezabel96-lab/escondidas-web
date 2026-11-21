@@ -1,0 +1,8 @@
+# Para publicar desde GitHub: Netlify genera el sitio con este comando.
+# (Si subes la carpeta dist a mano, este archivo no hace falta.)
+[build]
+  command = "node build.mjs"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
