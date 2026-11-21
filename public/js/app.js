@@ -330,9 +330,22 @@
     var lista = (CONFIG.reserva && CONFIG.reserva.excursiones) || [];
     if (!lista.length) return;
     function R(k) { return document.querySelector('[data-r="' + k + '"]'); }
+    var grid = $('.opciones--salida .opciones__grid', f), pintada = null;
+    // Cada excursión tiene sus propios puntos de salida y precios: se vuelven a pintar al cambiarla
+    function pintarSalidas(exc) {
+      if (!grid || pintada === exc.slug) return;
+      var previa = f.elements.salida ? f.elements.salida.value : '';
+      var elegida = exc.salidas.some(function (s) { return s.id === previa; }) ? previa : exc.salidas[0].id;
+      grid.innerHTML = exc.salidas.map(function (s) {
+        return '<label class="opcion"><input type="radio" name="salida" value="' + s.id + '"' + (s.id === elegida ? ' checked' : '') + ' required data-precio="' + s.precio + '">' +
+          '<span class="opcion__caja"><span class="opcion__t">' + s.ciudad + '</span><span class="opcion__d">' + rd(s.precio) + ' por persona</span></span></label>';
+      }).join('');
+      pintada = exc.slug;
+    }
     function actualizar() {
       var slug = f.elements.excursion ? f.elements.excursion.value : lista[0].slug;
       var exc = lista.filter(function (x) { return x.slug === slug; })[0] || lista[0];
+      pintarSalidas(exc);
       var salidaId = f.elements.salida ? f.elements.salida.value : exc.salidas[0].id;
       var sal = exc.salidas.filter(function (s) { return s.id === salidaId; })[0] || exc.salidas[0];
       var ad = Math.max(1, parseInt(f.elements.adultos.value, 10) || 1);
@@ -351,6 +364,9 @@
       R('cuotas').textContent = pagos === 1 ? '1 pago de ' + rd(resto) : pagos + ' pagos de ' + rd(cuota);
       R('total').textContent = rd(total);
       R('nota-ninos').hidden = !(ni > 0 && !exc.precioNino);
+      R('deposito-pp').textContent = rd(exc.deposito);
+      var ay = R('ayuda-ninos');
+      if (ay) ay.textContent = exc.precioNino ? rd(exc.precioNino) + ' cada uno' : exc.notaNinos ? 'No recomendado para esta excursión: escríbenos antes' : 'La agencia te confirma su precio';
       f.elements.excursion_nombre.value = exc.nombre;
       f.elements.fecha.value = exc.fechaTexto;
       f.elements.total_adultos.value = rd(sal.precio * ad);
@@ -576,6 +592,12 @@
         lista.forEach(function (x) {
           if (x.slug !== id) return;
           x.salidas.forEach(function (s) { if (s.id === sid) s.precio = n; });
+          var g = $('.opciones--salida .opciones__grid');
+          if (g) $$('input[name="salida"][value="' + sid + '"]', g).forEach(function (r) {
+            r.setAttribute('data-precio', n);
+            var d = r.parentNode.querySelector('.opcion__d');
+            if (d && x.slug === ($('input[name="excursion"]:checked') || {}).value) d.textContent = rd(n) + ' por persona';
+          });
         });
       });
     });

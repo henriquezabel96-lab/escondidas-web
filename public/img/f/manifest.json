@@ -248,5 +248,105 @@
    1080
   ],
   "color": "#3e3b39"
+ },
+ "exc-ballenas": {
+  "w": 1024,
+  "h": 411,
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "color": "#4e7d91"
+ },
+ "exc-cayo-arena": {
+  "w": 1024,
+  "h": 230,
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "color": "#72908a"
+ },
+ "exc-montecristi": {
+  "w": 1122,
+  "h": 425,
+  "anchos": [
+   480,
+   800,
+   1122
+  ],
+  "color": "#6d8a93"
+ },
+ "exc-el-dorado": {
+  "w": 1122,
+  "h": 405,
+  "anchos": [
+   480,
+   800,
+   1122
+  ],
+  "color": "#887f63"
+ },
+ "exc-tierra-tropical": {
+  "w": 1122,
+  "h": 379,
+  "anchos": [
+   480,
+   800,
+   1122
+  ],
+  "color": "#876c2b"
+ },
+ "flyer-ballenas": {
+  "w": 1024,
+  "h": 1536,
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "color": "#4b7184"
+ },
+ "flyer-cayo-arena": {
+  "w": 1024,
+  "h": 1536,
+  "anchos": [
+   480,
+   800,
+   1024
+  ],
+  "color": "#58716b"
+ },
+ "flyer-montecristi": {
+  "w": 1122,
+  "h": 1402,
+  "anchos": [
+   480,
+   800,
+   1122
+  ],
+  "color": "#567173"
+ },
+ "flyer-el-dorado": {
+  "w": 1122,
+  "h": 1402,
+  "anchos": [
+   480,
+   800,
+   1122
+  ],
+  "color": "#607060"
+ },
+ "flyer-tierra-tropical": {
+  "w": 1122,
+  "h": 1402,
+  "anchos": [
+   480,
+   800,
+   1122
+  ],
+  "color": "#676143"
  }
 }

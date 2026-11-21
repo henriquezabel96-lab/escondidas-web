@@ -4,9 +4,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sitio, excursiones, hoteles, cruceros } from './contenido/datos.mjs';
-import { sprite, BORRADOR } from './plantillas/ui.mjs';
+import { sprite, BORRADOR, visible } from './plantillas/ui.mjs';
 import { inicio } from './plantillas/pag-inicio.mjs';
-import { listado as excursionesListado, detalle as excursionDetalle, ics } from './plantillas/pag-excursiones.mjs';
+import { listado as excursionesListado, detalle as excursionDetalle, ficha as excursionFicha, ics } from './plantillas/pag-excursiones.mjs';
 import { reservar } from './plantillas/pag-reservar.mjs';
 import { listado as hotelesListado, ficha as hotelFicha } from './plantillas/pag-hoteles.mjs';
 import { paginaPaquetes, paginaCruceros, detalleCrucero } from './plantillas/pag-viajes.mjs';
@@ -30,9 +30,9 @@ function escribir(ruta, html, { mapa = true, prioridad = '0.6' } = {}) {
 
 escribir('/', inicio(), { prioridad: '1.0' });
 escribir('/excursiones/', excursionesListado(), { prioridad: '0.9' });
-for (const e of excursiones.filter((x) => x.estado === 'activa')) {
-  escribir(`/excursiones/${e.slug}/`, excursionDetalle(e), { prioridad: '0.9' });
-  fs.writeFileSync(path.join(DIST, `excursiones/${e.slug}/${e.slug}.ics`), ics(e));
+for (const e of excursiones.filter(visible)) {
+  escribir(`/excursiones/${e.slug}/`, e.detalle === false ? excursionFicha(e) : excursionDetalle(e), { prioridad: e.estado === 'activa' ? '0.9' : '0.7' });
+  if (e.fecha) fs.writeFileSync(path.join(DIST, `excursiones/${e.slug}/${e.slug}.ics`), ics(e));
 }
 escribir('/reservar/', reservar(), { prioridad: '0.8' });
 escribir('/hoteles/', hotelesListado(), { prioridad: '0.8' });

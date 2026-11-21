@@ -42,7 +42,15 @@ En la vista previa, cada dato pendiente aparece como un **recuadro punteado**. C
 - [ ] Depósito para separar
 - [ ] Qué incluye (comidas, entretenimiento, propinas e impuestos)
 
+## Próximas excursiones (flyers de nov 2026, ya en la web)
+- [x] Ballenas y Cayo Levantado (7 mar), Cayo Arena VIP (18 abr), Montecristi (22 may), El Dorado Park (24 jul), Tierra Tropical (junio, por confirmar)
+- [ ] Ballenas: ¿qué significa "DE 4 A 10 AÑOS" debajo de los precios? (¿precio de niños? ¿hay precio de adulto?)
+- [ ] Cayo Arena, Montecristi y El Dorado: ¿salen solo desde Santiago o también desde Puerto Plata (y a qué precio)?
+- [ ] Depósito para separar en cada una (la web usa RD$1,000 por ahora)
+- [ ] Qué incluye, hora y punto de salida e itinerario de cada una
+- [ ] Tierra Tropical: fecha exacta y precio
+- [ ] Agregar sus filas a la pestaña "salidas" de la hoja (ids: ballenas-cayo-levantado, cayo-arena, montecristi, tierra-tropical, el-dorado-park)
+
 ## Ejemplos que hay que confirmar o quitar
-- [ ] Próximas excursiones: Sur Profundo, Isla Saona, Samaná y Salto El Limón (fecha y precio)
 - [ ] Paquetes: Medellín y Guatapé, Río de Janeiro, Cofresí Palm Beach (noches y precio desde)
 - [ ] 3 testimonios reales con permiso del cliente (texto, nombre y viaje)

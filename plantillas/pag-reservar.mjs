@@ -18,6 +18,7 @@ export function reservar() {
         fechaTexto: fechaLarga(e.fecha),
         deposito: e.deposito,
         precioNino: e.precioNino,
+        notaNinos: !!e.notaNinos,
         salidas: e.salidas,
       })),
     },
@@ -53,12 +54,13 @@ export function reservar() {
             nombre: 'excursion',
             leyenda: 'Excursión',
             opciones: activas.map((e) => ({ valor: e.slug, titulo: e.nombre, detalle: esc(fechaLarga(e.fecha)) })),
-            clase: 'opciones--sin-leyenda',
+            clase: 'opciones--sin-leyenda opciones--lista',
           })}
           ${opcionesTarjeta({
             nombre: 'salida',
             leyenda: '¿Desde dónde sales?',
             opciones: e0.salidas.map((s) => ({ valor: s.id, titulo: s.ciudad, detalle: `${rd(s.precio)} por persona`, datos: { 'data-precio': s.precio } })),
+            clase: 'opciones--salida',
           })}
         </fieldset>
 
@@ -66,7 +68,7 @@ export function reservar() {
           <legend class="paso__t" tabindex="-1">¿Cuántos van?</legend>
           <div>
             ${contador({ nombre: 'adultos', etiqueta: 'Adultos', min: 1, max: 40, valor: 1 })}
-            ${contador({ nombre: 'ninos', etiqueta: 'Niños', min: 0, max: 20, valor: 0, ayuda: hay(e0.precioNino) ? `${rd(e0.precioNino)} cada uno` : e0.notaNinos ? 'No recomendado para esta excursión: escríbenos antes' : 'La agencia te confirma su precio' })}
+            ${contador({ nombre: 'ninos', etiqueta: 'Niños', min: 0, max: 20, valor: 0, ayuda: hay(e0.precioNino) ? `${rd(e0.precioNino)} cada uno` : e0.notaNinos ? 'No recomendado para esta excursión: escríbenos antes' : 'La agencia te confirma su precio' }).replace('<span class="campo__ayuda">', '<span class="campo__ayuda" data-r="ayuda-ninos">')}
           </div>
           ${campo({ nombre: 'edades_ninos', etiqueta: 'Edades de los niños', ayuda: 'Por ejemplo: 6 y 9 años.' })}
           ${campo({ tipo: 'select', nombre: 'pagos', etiqueta: 'Después del depósito, ¿en cuántos pagos completas?', opciones: [['1', '1 pago'], ['2', '2 pagos'], ['3', '3 pagos'], ['4', '4 pagos']], valor: '2' })}
@@ -117,7 +119,7 @@ export function reservar() {
       </dl>
       <div class="resumen__total"><span>Total</span><strong data-r="total">${rd(e0.salidas[0].precio)}</strong></div>
       <p class="resumen__nota" data-r="nota-ninos" hidden>Más el precio de los niños, que te confirma la agencia.</p>
-      <p class="resumen__nota">El depósito es de ${rd(e0.deposito)} por persona. Te enviamos el comprobante con el cupo a tu nombre.</p>
+      <p class="resumen__nota">El depósito es de <span data-r="deposito-pp">${rd(e0.deposito)}</span> por persona. Te enviamos el comprobante con el cupo a tu nombre.</p>
     </aside>
   </div>
 </section>

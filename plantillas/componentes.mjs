@@ -13,11 +13,11 @@ export function cabeza({ titulo, texto = '', id = '', nivel = 2, clase = '', ext
 
 // ── Tablero de próximas salidas ──────────────────────────────────────────────
 export function filaTablero(e) {
-  const f = fechaTablero(e.fecha);
-  const fechaHtml = e.fecha ? flap(f.fecha) : `<span class="fila__pronto">Por anunciar</span>`;
+  const f = e.fecha ? fechaTablero(e.fecha) : e.fechaAprox ? { dia: '', fecha: e.fechaAprox.split(' ')[0].toUpperCase() } : fechaTablero(null);
+  const fechaHtml = e.fecha || e.fechaAprox ? flap(f.fecha) : `<span class="fila__pronto">Por anunciar</span>`;
   const precioMin = e.salidas?.map((s) => s.precio).filter(hay).sort((a, b) => a - b)[0];
   const activa = e.estado === 'activa';
-  const href = activa ? `/excursiones/${e.slug}/` : `/excursiones/?destino=${e.slug}#avisame`;
+  const href = `/excursiones/${e.slug}/`;
   const salidas = e.salidas.map((s) => s.ciudad).join(' y ');
   const estado = activa
     ? hay(e.cupos)
@@ -25,7 +25,7 @@ export function filaTablero(e) {
         ? `Últimos ${e.cupos} cupos`
         : `Quedan ${e.cupos} cupos`
       : 'Cupos disponibles'
-    : 'Próximamente';
+    : e.fechaAprox ? 'Fecha por confirmar' : 'Próximamente';
   return `<li class="fila${activa ? ' fila--activa' : ''}${e.pendiente ? ' fila--pend' : ''}">
     <a class="fila__enlace" href="${href}">
       <span class="fila__fecha"><span class="fila__dia">${f.dia}</span><span class="fila__num">${fechaHtml}</span></span>
@@ -33,7 +33,7 @@ export function filaTablero(e) {
       <span class="fila__salida"><span class="sr">Sale desde </span>${esc(salidas)}</span>
       <span class="fila__precio">${precioMin ? `<span class="fila__desde">desde</span> <span data-dato="salidas:${e.slug}:precio_santiago" data-formato="rd">${rd(precioMin)}</span>` : `<span class="fila__desde">Precio por anunciar</span>`}</span>
       <span class="fila__estado${activa ? ' fila__estado--ok' : ''}"${activa ? ` data-dato="salidas:${e.slug}:cupos" data-formato="estado"` : ''}><span class="punto" aria-hidden="true"></span>${estado}</span>
-      <span class="fila__ir">${icono('flecha')}<span class="sr">${activa ? 'Ver la excursión' : 'Avísame cuando salga'}</span></span>
+      <span class="fila__ir">${icono('flecha')}<span class="sr">Ver la excursión</span></span>
     </a>
   </li>`;
 }
@@ -60,12 +60,12 @@ export function boletos(e, { compacto = false } = {}) {
         <div class="boleto__cuerpo">
           <span class="boleto__label">Sale desde</span>
           <span class="boleto__ciudad">${esc(s.ciudad)}</span>
-          <span class="boleto__precio" data-dato="salidas:${e.slug}:precio_${s.id.replace('-', '_')}" data-formato="rd">${rd(s.precio)}</span>
-          <span class="boleto__nota">por persona, todo incluido</span>
+          <span class="boleto__precio" data-dato="salidas:${e.slug}:precio_${s.id.replace('-', '_')}" data-formato="rd">${hay(s.precio) ? rd(s.precio) : 'Por confirmar'}</span>
+          <span class="boleto__nota">${esc(e.notaPrecio || 'por persona, todo incluido')}</span>
         </div>
         <div class="boleto__talon">
-          <span>Separa con <strong>${rd(e.deposito)}</strong></span>
-          <a class="boleto__btn" href="/reservar/?excursion=${e.slug}&amp;salida=${s.id}">Separar desde ${esc(s.ciudad)}</a>
+          ${hay(e.deposito) ? `<span>Separa con <strong>${rd(e.deposito)}</strong></span>` : '<span>Precio por confirmar</span>'}
+          ${e.estado === 'activa' ? `<a class="boleto__btn" href="/reservar/?excursion=${e.slug}&amp;salida=${s.id}">Separar desde ${esc(s.ciudad)}</a>` : `<a class="boleto__btn" href="#avisame">Avísame</a>`}
         </div>
       </div>`
       )
@@ -185,17 +185,18 @@ export function tarjetaHotel(h, zonas, { sizes = '(min-width: 1100px) 300px, (mi
 }
 
 export function tarjetaExcursion(e) {
+  const grande = !!e.destacada;
   const activa = e.estado === 'activa';
   const precioMin = e.salidas?.map((s) => s.precio).filter(hay).sort((a, b) => a - b)[0];
-  const href = activa ? `/excursiones/${e.slug}/` : `#avisame`;
-  return `<article class="tarjeta-exc${activa ? ' tarjeta-exc--activa' : ''}">
-    <a class="tarjeta-exc__enlace" href="${href}"${activa ? '' : ` data-avisame="${e.slug}"`}>
-      <div class="tarjeta-exc__media">${foto(e.foto, { sizes: activa ? '(min-width: 1000px) 60vw, 100vw' : '(min-width: 1000px) 30vw, (min-width: 640px) 50vw, 100vw', pos: activa ? '50% 40%' : null })}</div>
+  const fecha = e.fecha ? fechaLarga(e.fecha) : e.fechaAprox ? `${e.fechaAprox}, fecha por confirmar` : 'Fecha por anunciar';
+  return `<article class="tarjeta-exc${grande ? ' tarjeta-exc--activa' : ''}">
+    <a class="tarjeta-exc__enlace" href="/excursiones/${e.slug}/">
+      <div class="tarjeta-exc__media">${foto(e.foto, { sizes: grande ? '(min-width: 1000px) 60vw, 100vw' : '(min-width: 1100px) 30vw, (min-width: 760px) 46vw, 100vw', pos: grande ? '50% 40%' : null })}</div>
       <div class="tarjeta-exc__txt">
-        <span class="tarjeta-exc__fecha">${e.fecha ? esc(fechaLarga(e.fecha)) : 'Fecha por anunciar'}</span>
+        <span class="tarjeta-exc__fecha">${esc(fecha)}</span>
         <h3 class="tarjeta-exc__nombre">${esc(e.nombre)}</h3>
         <p>${esc(e.resumen)}</p>
-        <span class="tarjeta-exc__pie">${precioMin ? `<span>Desde <strong>${rd(precioMin)}</strong></span>` : '<span>Precio por anunciar</span>'}<span class="tarjeta-exc__cta">${activa ? 'Ver la excursión' : 'Avísame'}${icono('flecha')}</span></span>
+        <span class="tarjeta-exc__pie">${precioMin ? `<span>Desde <strong>${rd(precioMin)}</strong></span>` : '<span>Precio por confirmar</span>'}<span class="tarjeta-exc__cta">${activa ? 'Ver la excursión' : 'Ver y avisarme'}${icono('flecha')}</span></span>
       </div>
     </a>
   </article>`;

@@ -50,6 +50,17 @@ FUENTES = {
     'zemi': (W2 + 'zemi.jpg', None, None, False),
     'bayahibe': (W2 + 'sunscape.jpg', None, None, False),
     'guatape': ('/home/claude/esc/perfil/guatape.jpg', None, None, False),
+    # Flyers de la agencia (nov 2026): recorte de la parte de foto y el flyer completo
+    'exc-ballenas': (UP + 'b3581001-image.jpg', None, (0, .345, 1, .612), False),
+    'exc-cayo-arena': (UP + 'c5fc5f18-image.jpg', None, (0, .402, 1, .552), False),
+    'exc-montecristi': (UP + '1034effe-image.jpg', None, (0, .36, 1, .663), False),
+    'exc-el-dorado': (UP + '56426480-image.jpg', None, (0, .371, 1, .66), False),
+    'exc-tierra-tropical': (UP + 'c037dbf6-image.jpg', None, (0, .425, 1, .695), False),
+    'flyer-ballenas': (UP + 'b3581001-image.jpg', None, None, False),
+    'flyer-cayo-arena': (UP + 'c5fc5f18-image.jpg', None, None, False),
+    'flyer-montecristi': (UP + '1034effe-image.jpg', None, None, False),
+    'flyer-el-dorado': (UP + '56426480-image.jpg', None, None, False),
+    'flyer-tierra-tropical': (UP + 'c037dbf6-image.jpg', None, None, False),
 }
 
 

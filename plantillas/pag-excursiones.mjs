@@ -1,9 +1,9 @@
 // Excursiones: listado y página de cada excursión activa
-import { sitio, excursiones } from '../contenido/datos.mjs';
+import { sitio, excursiones, fotos } from '../contenido/datos.mjs';
 import { pagina, migas } from './base.mjs';
 import { esc, icono, foto, fotoUrl, boton, botonWa, wa, ph, rd, fechaLarga, visible, hay, BORRADOR } from './ui.mjs';
 import {
-  cabeza, boletos, cuenta, pasos, faq, cierre, credito, tarjetaExcursion, formInicio, campo, opcionesTarjeta, contador, panelEnviado,
+  cabeza, boletos, cuenta, pasos, faq, cierre, credito, tarjetaExcursion, tablero, formInicio, campo, opcionesTarjeta, contador, panelEnviado,
 } from './componentes.mjs';
 
 // Formulario "Avísame de la próxima salida"
@@ -39,7 +39,7 @@ export function listado() {
   <div class="cont">
     ${m.html}
     <h1 class="t-titulo">Excursiones en grupo desde Santiago y Puerto Plata</h1>
-    <p class="t-lead">Un día completo con transporte, comida y actividades. Separas con RD$1,000 por persona y pagas el resto en partes.</p>
+    <p class="t-lead">Salidas de un día en grupo, de enero a julio de 2027. Separas tu cupo con un depósito y pagas el resto en partes.</p>
   </div>
 </section>
 
@@ -72,7 +72,7 @@ ${cierre()}`;
   return pagina({
     ruta: '/excursiones/',
     titulo: 'Excursiones en grupo desde Santiago',
-    descripcion: 'Excursiones de un día en grupo desde Santiago y Puerto Plata: transporte, comida y actividades incluidas. Separa con RD$1,000 y paga en partes.',
+    descripcion: 'Excursiones de un día en grupo desde Santiago y Puerto Plata: Macao, ballenas en Samaná, Cayo Arena, Montecristi y más. Separa con un depósito y paga en partes.',
     cuerpo,
     og: '/img/og/macao.jpg',
     jsonld: [m.ld],
@@ -260,6 +260,154 @@ ${cierre({ titulo: '¿Te vas con tu coro?', texto: `Quedan pocas semanas para el
     og: `/img/og/${e.slug}.jpg`,
     flotante: false,
     jsonld: [m.ld, eventoLD, preguntas.ld],
+  });
+}
+
+// Página de una excursión anunciada con su flyer (sin itinerario detallado todavía)
+export function ficha(e) {
+  const m = migas([
+    { texto: 'Inicio', href: '/' },
+    { texto: 'Excursiones', href: '/excursiones/' },
+    { texto: e.nombreCorto || e.nombre, href: `/excursiones/${e.slug}/` },
+  ]);
+  const activa = e.estado === 'activa';
+  const precios = e.salidas.map((s) => s.precio).filter(hay);
+  const precioMin = precios.length ? Math.min(...precios) : null;
+  const fechaTxt = e.fecha ? fechaLarga(e.fecha) : `${e.fechaAprox}, fecha por confirmar`;
+  const msgWa = activa
+    ? `Hola, quiero información de la excursión ${e.nombre} del ${fechaLarga(e.fecha)}.`
+    : `Hola, quiero información de ${e.nombre} (${e.fechaAprox}).`;
+  const fl = fotos[e.flyer] ? e.flyer : null;
+  const otras = excursiones.filter((x) => x.slug !== e.slug && visible(x));
+
+  // Lo que aún no está en el flyer: visible como recuadro editable en borrador, oculto en la versión final
+  const porConfirmar = [
+    ['Qué incluye', e.incluye?.length ? e.incluye.map((x) => x.texto || x).join(', ') : null, 'Qué incluye el precio (transporte, comida, entradas…)'],
+    ['Hora y lugar de salida', e.horaSalidaTexto || null, 'Hora y punto de salida'],
+    ['Itinerario', e.itinerarioTexto || null, 'Itinerario del día'],
+  ].filter(([, v]) => hay(v) || BORRADOR);
+  const politicas = [
+    ['Para separar', hay(e.deposito) ? `Separas con ${rd(e.deposito)} por persona y pagas el resto en partes antes del viaje.` : null, 'Depósito para separar'],
+    ['Niños', e.notaNinos || sitio.politicas.menores, 'Edad mínima y precio de niños'],
+    ['Si no puedes ir', sitio.politicas.deposito && sitio.politicas.cambios ? `${sitio.politicas.deposito} ${sitio.politicas.cambios}` : null, 'Cambios de nombre y devolución del depósito'],
+    ['Si llueve', sitio.politicas.clima, 'Qué pasa si hay mal tiempo'],
+  ].filter(([, v]) => hay(v) || BORRADOR);
+
+  const eventoLD = e.fecha
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Event',
+        name: `Excursión ${e.nombre}`,
+        description: e.resumen,
+        startDate: e.fecha,
+        endDate: e.fecha,
+        eventStatus: 'https://schema.org/EventScheduled',
+        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        image: [sitio.url + fotoUrl(fl || e.foto, 1200)],
+        location: {
+          '@type': 'Place',
+          name: e.nombre,
+          address: { '@type': 'PostalAddress', ...(e.region ? { addressRegion: e.region } : {}), addressCountry: 'DO' },
+        },
+        offers: e.salidas.filter((s) => hay(s.precio)).map((s) => ({
+          '@type': 'Offer',
+          name: `Salida desde ${s.ciudad}`,
+          price: String(s.precio),
+          priceCurrency: 'DOP',
+          availability: 'https://schema.org/InStock',
+          url: `${sitio.url}/excursiones/${e.slug}/`,
+        })),
+        organizer: { '@type': 'TravelAgency', name: sitio.nombre, url: sitio.url },
+      }
+    : null;
+
+  const cuerpo = `
+<section class="tema-claro">
+  <div class="cont exc-hero exc-hero--flyer">
+    <div class="exc-hero__txt">
+      ${m.html}
+      <div class="chips"><span class="chip chip--lleno">${icono('calendario')}${esc(fechaTxt)}</span>${e.fecha ? `<span class="chip">${cuenta(e.fecha, { hora: e.horaCuenta })}</span>` : ''}<span class="chip"${activa ? ` data-dato="salidas:${e.slug}:cupos" data-formato="estado"` : ''}>${activa ? (hay(e.cupos) ? `Quedan ${e.cupos} cupos` : 'Cupos limitados') : 'Próximamente'}</span></div>
+      <h1 class="t-titulo">${esc(e.nombre)}</h1>
+      <p class="t-lead">${esc(e.resumen)}</p>
+      ${boletos(e)}
+      <div class="exc-hero__util">
+        ${e.fecha ? `<a href="/excursiones/${e.slug}/${e.slug}.ics" download>${icono('cal-mas')}Guardar la fecha</a>` : ''}
+        <button type="button" data-compartir data-titulo="${esc(e.nombre)}" data-texto="${esc(e.fecha ? `Vamos a ${e.nombre} el ${fechaLarga(e.fecha, { anio: false })}` : `Vamos a ${e.nombre} en ${e.fechaAprox.toLowerCase()}`)}">${icono('compartir')}<span>Compartir con tu coro</span></button>
+        <a href="${wa(msgWa)}" target="_blank" rel="noopener">${icono('whatsapp')}Preguntar por WhatsApp</a>
+      </div>
+    </div>
+    <figure class="exc-hero__flyer">
+      ${foto(fl || e.foto, { sizes: '(min-width: 1000px) 40vw, 92vw', prioridad: true })}
+      ${fl ? `<figcaption><a class="enlace" href="${fotoUrl(fl, 9999)}" target="_blank" rel="noopener">Ver el flyer en grande</a></figcaption>` : ''}
+    </figure>
+  </div>
+</section>
+
+<section class="seccion tema-bruma" aria-labelledby="saber-t" data-observar-barra>
+  <div class="cont dos-col">
+    ${cabeza({
+      titulo: 'Antes de reservar',
+      id: 'saber-t',
+      texto: activa
+        ? 'Lo que incluye y la hora exacta de salida te lo confirmamos por WhatsApp al reservar.'
+        : 'Todavía estamos cerrando la fecha y el precio. Déjanos tu WhatsApp y te avisamos primero.',
+      extra: `<div>${botonWa('Preguntar por WhatsApp', msgWa, { estilo: 'pizarra' })}</div>`,
+    })}
+    <div class="bueno-saber">${[...porConfirmar, ...politicas].map(([t, v, p]) => `<div><h3>${esc(t)}</h3><p>${hay(v) ? esc(v) : ph(null, p)}</p></div>`).join('')}</div>
+  </div>
+</section>
+
+${
+  activa
+    ? `<section class="seccion tema-claro" aria-labelledby="pasos-t">
+  <div class="cont">
+    ${cabeza({ titulo: 'Cómo reservar', id: 'pasos-t' })}
+    ${pasos({ deposito: e.deposito || 1000 })}
+  </div>
+</section>`
+    : `<section class="seccion tema-claro" id="avisame" aria-labelledby="avisame-t">
+  <div class="cont avisame">
+    ${cabeza({ titulo: 'Te avisamos cuando haya fecha', id: 'avisame-t', texto: `Apenas confirmemos el día y el precio de ${e.nombreCorto || e.nombre}, te escribimos por WhatsApp.` })}
+    ${formAvisame({ destino: e.slug })}
+  </div>
+</section>`
+}
+
+${
+  otras.length
+    ? `<section class="seccion tema-bruma">
+  <div class="cont">${tablero(otras, { titulo: 'Otras salidas', id: 'otras' })}</div>
+</section>`
+    : ''
+}
+
+${cierre({
+  titulo: activa ? '¿Te vas con tu coro?' : '¿Quieres apartar tu lugar?',
+  texto: activa ? `Separa hoy tu cupo para el ${fechaLarga(e.fecha, { anio: false })}. Los cupos son limitados.` : 'Escríbenos y te ponemos en la lista de los primeros en saber.',
+  accion: activa ? boton('Separar mi cupo', `/reservar/?excursion=${e.slug}`, { estilo: 'arena', clase: 'btn--grande' }) : '',
+})}
+
+${
+  activa
+    ? `<aside aria-label="Reserva rápida"><div class="barra-reserva" data-barra-reserva>
+  <div class="barra-reserva__precio"><span>Desde ${esc(e.salidas.map((s) => s.ciudad).join(' o '))}</span><strong>${precioMin ? rd(precioMin) : 'Por confirmar'}</strong></div>
+  <div class="barra-reserva__acc">
+    <a class="barra-reserva__wa" href="${wa(msgWa)}" target="_blank" rel="noopener" aria-label="Preguntar por WhatsApp">${icono('whatsapp')}</a>
+    <a class="btn btn--arena" href="/reservar/?excursion=${e.slug}">Separar mi cupo</a>
+  </div>
+</div></aside>`
+    : ''
+}`;
+
+  return pagina({
+    ruta: `/excursiones/${e.slug}/`,
+    titulo: `Excursión ${e.nombre} · ${e.fecha ? fechaLarga(e.fecha, { anio: false }) : e.fechaAprox}`,
+    descripcion: `${e.resumen} ${precioMin ? `Desde ${rd(precioMin)} por persona.` : ''} Salida en grupo con Escondidas Multiservices.`.replace(/\s+/g, ' ').trim(),
+    cuerpo,
+    clase: `pag-excursion${activa ? ' con-barra' : ''}`,
+    og: `/img/og/${e.slug}.jpg`,
+    flotante: !activa,
+    jsonld: [m.ld, eventoLD].filter(Boolean),
   });
 }
 
