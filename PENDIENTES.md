@@ -3,27 +3,24 @@
 En la vista previa, cada dato pendiente aparece como un **recuadro punteado**. Cuando la agencia confirme todo, se cambia `borrador: true` a `false` en `contenido/datos.mjs` y se vuelve a generar el sitio. Al hacerlo, los recuadros y los ejemplos marcados como "ejemplo" desaparecen.
 
 ## Agencia
-- [ ] Horario de la oficina
-- [ ] Confirmar el usuario exacto de Instagram (`@escondidasmultiservices`)
-- [ ] Cuentas para depósitos: banco, tipo de cuenta, número y a nombre de quién
-- [ ] ¿Aceptan tarjeta, en la oficina o por enlace de pago?
+- [x] Horario de la oficina
+- [x] Usuario de Instagram: @escondidasmultiservices
+- [ ] Cuentas para depósitos: banco, tipo de cuenta, número y a nombre de quién (Pedro envía foto)
+- [x] Aceptan tarjeta
 - [ ] (Opcional) Registro de la agencia y años organizando viajes
 
 ## Condiciones de reserva (términos y condiciones)
-- [ ] ¿El depósito se devuelve? ¿En qué casos?
-- [ ] Cambios de nombre o de fecha
-- [ ] Qué pasa si la agencia cancela o mueve la fecha
-- [ ] Niños: edad mínima, precio y si deben ir con un adulto
-- [ ] Qué pasa si llueve o hay mal tiempo
-- [ ] Revisión y aprobación del texto de términos por parte de Pedro
+- [x] Depósito, cambios de nombre, cancelación por la agencia, niños y mal tiempo
+- [ ] Revisión y aprobación final del texto de términos por parte de Pedro
 
 ## Excursión Macao + Basílica de Higüey (17 de enero)
-- [ ] Hora y punto exacto de salida en Santiago y en Puerto Plata
-- [ ] Horas aproximadas del itinerario (6 paradas)
-- [ ] Precio de niños
-- [ ] Fecha límite para completar el pago
-- [ ] Cupos disponibles (también se pueden manejar desde la hoja de Google)
-- [ ] Requisitos para manejar el buggy (edad, licencia)
+- [x] Horas de salida (Puerto Plata 12:30 a. m., Santiago 2:00 a. m.) e itinerario
+- [ ] Lugar exacto de salida en Santiago y en Puerto Plata
+- [ ] Hora aproximada de regreso
+- [ ] Niños: completar la frase "En caso de llevar…" (precio o condición)
+- [x] Fecha límite de pago: 30 de diciembre de 2026
+- [x] Cupos: 100 en total, 23 separados (la web muestra "Quedan 77 cupos"; se actualiza desde la hoja)
+- [x] Requisito para manejar el buggy: licencia de conducir
 
 ## Fotos
 - [ ] Autor y licencia de las fotos de Wikimedia: Basílica de Higüey (fachada y aérea), cuadro de la Altagracia y acantilado de Playa Macao
