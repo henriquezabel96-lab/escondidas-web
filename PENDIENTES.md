@@ -15,7 +15,7 @@ En la vista previa, cada dato pendiente aparece como un **recuadro punteado**. C
 
 ## Excursión Macao + Basílica de Higüey (17 de enero)
 - [x] Horas de salida (Puerto Plata 12:30 a. m., Santiago 2:00 a. m.) e itinerario
-- [ ] Lugar exacto de salida en Santiago y en Puerto Plata
+- [x] Lugar exacto de salida en Santiago y en Puerto Plata (Central 24 horas en Santiago y Total Energies en Puerto Plata)
 - [ ] Hora aproximada de regreso
 - [ ] Niños: completar la frase "En caso de llevar…" (precio o condición)
 - [x] Fecha límite de pago: 30 de diciembre de 2026

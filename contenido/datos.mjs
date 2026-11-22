@@ -9,6 +9,12 @@
 // `pendiente: true` (viajes de ejemplo, testimonios, etc.) no se publican.
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Lugares de donde salen todas las excursiones
+export const PUNTOS_SALIDA = {
+  santiago: 'Central 24 horas, en la Av. 27 de Febrero esquina Estrella Sadhalá',
+  'puerto-plata': 'Total Energies, casi frente a la entrada del teleférico',
+};
+
 export const sitio = {
   borrador: true,
   nombre: 'Escondidas Multiservices',
@@ -85,7 +91,7 @@ export const excursiones = [
     fecha: '2027-01-17',
     horaSalida: { 'puerto-plata': '12:30 a. m.', santiago: '2:00 a. m.' }, // madrugada del domingo
     horaCuenta: '00:30', // la cuenta regresiva llega a cero con la primera salida
-    puntoEncuentro: { santiago: null, 'puerto-plata': null }, // PENDIENTE: lugar exacto de salida
+    puntoEncuentro: PUNTOS_SALIDA,
     region: 'Higüey y Punta Cana',
     salidas: [
       { id: 'santiago', ciudad: 'Santiago', precio: 3995 },

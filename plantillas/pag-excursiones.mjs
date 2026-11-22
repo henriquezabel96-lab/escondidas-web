@@ -1,5 +1,5 @@
 // Excursiones: listado y página de cada excursión activa
-import { sitio, excursiones, fotos } from '../contenido/datos.mjs';
+import { sitio, excursiones, fotos, PUNTOS_SALIDA } from '../contenido/datos.mjs';
 import { pagina, migas } from './base.mjs';
 import { esc, icono, foto, fotoUrl, boton, botonWa, wa, ph, rd, fechaLarga, visible, hay, BORRADOR } from './ui.mjs';
 import {
@@ -283,7 +283,7 @@ export function ficha(e) {
   // Lo que aún no está en el flyer: visible como recuadro editable en borrador, oculto en la versión final
   const porConfirmar = [
     ['Qué incluye', e.incluye?.length ? e.incluye.map((x) => x.texto || x).join(', ') : null, 'Qué incluye el precio (transporte, comida, entradas…)'],
-    ['Hora y lugar de salida', e.horaSalidaTexto || null, 'Hora y punto de salida'],
+    ['Lugar de salida', e.salidas.map((x) => PUNTOS_SALIDA[x.id] && `${x.ciudad}: ${PUNTOS_SALIDA[x.id]}.`).filter(Boolean).join(' ') + (e.horaSalidaTexto ? ` ${e.horaSalidaTexto}` : ' La hora te la confirmamos al reservar.'), 'Hora y punto de salida'],
     ['Itinerario', e.itinerarioTexto || null, 'Itinerario del día'],
   ].filter(([, v]) => hay(v) || BORRADOR);
   const politicas = [
