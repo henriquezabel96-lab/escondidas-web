@@ -73,6 +73,12 @@ FUENTES = {
     'hotel-ocean-el-faro': (UP + '869bee26-image.png', None, (0.33, 0.535, 0.91, 0.87), False),
     'hotel-presidential-suites': (UP + '762c4af1-image.png', None, (0.2, 0.128, 0.835, 0.508), False),
     'hotel-tropical-cofresi': (UP + 'eb685f6b-image.png', None, (0.17, 0.132, 0.87, 0.52), False),
+    # Nov 2026: fotos reales de la excursión de Macao (Drive del cliente, carpeta "Contenido IG")
+    'macao-grupo-buggies': (ENT + 'drive/macao-grupo-video.mp4', 4.5, None, True),
+    'macao-buggy-saludo': (ENT + 'drive/macao-buggy-saludo.jpg', None, None, False),
+    'macao-amigas-paz': (ENT + 'drive/macao-buggy-paz.jpg', None, None, False),
+    'macao-amigas-risas': (ENT + 'drive/macao-buggy-risas.jpg', None, None, False),
+    'macao-brindis': (ENT + 'drive/macao-grupo-brindis.jpg', None, None, False),
     'flyer-cayo-arena': (UP + 'c5fc5f18-image.jpg', None, None, False),
     'flyer-montecristi': (UP + '1034effe-image.jpg', None, None, False),
     'flyer-el-dorado': (UP + '56426480-image.jpg', None, None, False),

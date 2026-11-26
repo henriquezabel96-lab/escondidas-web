@@ -134,9 +134,7 @@ export function inicio() {
   ${credito(crucero.foto)}
 </section>
 
-${
-  voces.length
-    ? `<section class="seccion tema-claro" aria-labelledby="real-t">
+${`<section class="seccion tema-claro" aria-labelledby="real-t">
   <div class="cont">
     <div class="cabeza cabeza--fila">
       <h2 class="t-seccion" id="real-t">Así se viven nuestras excursiones</h2>
@@ -144,7 +142,7 @@ ${
       <div class="cabeza__accion">${boton('Míranos en Instagram', ig(), { estilo: 'borde', ico: 'instagram', externo: true })}</div>
     </div>
     <div class="tira" tabindex="0" role="region" aria-label="Fotos de viajeros, desliza para ver más">
-      ${['buggy-amigas-2', 'buggy-casco', 'buggy-caravana', 'buggy-volante', 'buggy-camino']
+      ${['macao-amigas-paz', 'macao-brindis', 'macao-grupo-buggies', 'buggy-casco', 'macao-amigas-risas']
         .map((s) => `<figure>${foto(s, { sizes: '(min-width: 1000px) 18vw, 64vw' })}</figure>`)
         .join('')}
     </div>
@@ -158,9 +156,7 @@ ${
         : ''
     }
   </div>
-</section>`
-    : ''
-}
+</section>`}
 
 <section class="seccion tema-bruma" aria-labelledby="faq-t">
   <div class="cont dos-col">

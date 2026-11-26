@@ -105,7 +105,7 @@ export const excursiones = [
     cuposTotal: 100,
     cupos: 77, // 100 en total, 23 ya separados (también se puede cambiar desde la hoja de Google)
     palabraClave: 'MACAO',
-    foto: 'buggy-caravana',
+    foto: 'macao-buggy-saludo',
     resumen:
       'Un día completo con tu coro: buggies, Playa Macao, la Basílica de Higüey, Cueva Taína y casa típica. Con desayuno, almuerzo buffet y transporte desde Santiago o Puerto Plata.',
     incluye: [
@@ -162,7 +162,16 @@ export const excursiones = [
       'Muda de ropa para el regreso',
       'Efectivo para gastos personales',
     ],
-    galeria: ['buggy-casco', 'buggy-amigas-2', 'buggy-polvo', 'buggy-volante', 'buggy-camino', 'buggy-manejando'],
+    galeria: [
+      'macao-grupo-buggies',
+      'macao-brindis',
+      'macao-amigas-paz',
+      'buggy-casco',
+      'buggy-polvo',
+      'macao-amigas-risas',
+      'buggy-camino',
+      'buggy-manejando',
+    ],
     faq: [
       {
         p: '¿Cómo separo mi cupo?',
@@ -479,6 +488,12 @@ export const fotos = {
   'buggy-amigas-2': { alt: 'Amigas riendo dentro de un buggy lleno de lodo', credito: propia },
   'buggy-camino': { alt: 'Camino de tierra entre árboles verdes con buggies adelante', credito: propia },
   'buggy-volante': { alt: 'Volante de un buggy cubierto de lodo en pleno recorrido', credito: propia },
+  // foco: hacia dónde se recorta la foto cuando el espacio es más alto o más ancho que ella
+  'macao-grupo-buggies': { alt: 'El grupo completo con los brazos en alto frente a la fila de buggies', credito: propia, foco: '46% 72%' },
+  'macao-buggy-saludo': { alt: 'Tres viajeros en un buggy lleno de lodo, uno saludando con la mano en alto', credito: propia, foco: '55% 45%' },
+  'macao-amigas-paz': { alt: 'Dos amigas sonriendo y haciendo la señal de la paz dentro de un buggy', credito: propia, foco: '52% 45%' },
+  'macao-amigas-risas': { alt: 'Amigas riendo en un buggy cubierto de lodo bajo el cielo azul', credito: propia, foco: '40% 48%' },
+  'macao-brindis': { alt: 'Viajeras y viajeros con casco y bandana brindando bajo un techo de yagua', credito: propia, foco: '48% 50%' },
   'basilica-higuey': { alt: 'Fachada de la Basílica de Nuestra Señora de la Altagracia en Higüey', credito: pendienteWiki },
   'basilica-aerea': { alt: 'La Basílica de Higüey vista desde arriba, con la ciudad alrededor', credito: pendienteWiki },
   'altagracia-cuadro': { alt: 'Cuadro de la Virgen de la Altagracia', credito: pendienteWiki },

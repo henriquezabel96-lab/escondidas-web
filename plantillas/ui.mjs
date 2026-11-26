@@ -142,7 +142,8 @@ export function foto(slug, { sizes = '100vw', clase = '', carga = 'lazy', priori
   const info = fotos[slug] || {};
   const srcset = m.anchos.map((a) => `/img/f/${slug}-${a}.webp ${a}w`).join(', ');
   const def = m.anchos.find((a) => a >= 800) || m.anchos[m.anchos.length - 1];
-  const estilo = [`background-color:${m.color}`, pos ? `object-position:${pos}` : ''].filter(Boolean).join(';');
+  const foco = pos ?? info.foco ?? null; // punto de interés por defecto de cada foto
+  const estilo = [`background-color:${m.color}`, foco ? `object-position:${foco}` : ''].filter(Boolean).join(';');
   return `<img${attr({
     class: clase || undefined,
     src: `/img/f/${slug}-${def}.webp`,
