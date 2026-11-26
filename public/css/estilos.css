@@ -171,15 +171,15 @@ body { --texto-2: var(--gris); --borde: var(--linea); --fondo: var(--blanco); }
   display: flex; align-items: center; gap: .75rem;
   height: 64px; padding: 0 .45rem 0 .7rem;
   border-radius: 999px;
-  background: rgba(27, 36, 40, .64);
+  background: rgba(27, 36, 40, .84);
   -webkit-backdrop-filter: blur(16px) saturate(150%);
   backdrop-filter: blur(16px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, .1);
   color: #fff;
   --foco: var(--arena);
-  transition: background-color .3s;
+  transition: background-color .3s, box-shadow .3s;
 }
-.cab--solida .cab__barra { background: rgba(27, 36, 40, .92); }
+.cab--solida .cab__barra { background: rgba(27, 36, 40, .94); box-shadow: 0 10px 30px -18px rgba(20, 28, 31, .55); }
 .marca { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: #fff; margin-right: auto; border-radius: 999px; }
 .marca__emblema { width: 42px; height: 42px; }
 .marca__texto { display: flex; flex-direction: column; line-height: 1; }
@@ -238,18 +238,16 @@ body.menu-abierto { overflow: hidden; }
 .portada__media video { opacity: 0; transition: opacity 1s ease; }
 .portada__media video.listo { opacity: 1; }
 .portada__velo {
-  position: absolute; inset: 0; z-index: -1;
+  /* Velo para que el texto se lea sobre cualquier cuadro del video: un tono parejo que baja
+     el contraste de la imagen y un degradado más fuerte justo donde está el texto. */
+  position: absolute; inset: 0; z-index: 1; /* encima de la foto y el video, dentro de .portada__media */
   background:
-    linear-gradient(180deg, rgba(27,36,40,.6) 0%, rgba(27,36,40,0) 20%),
-    linear-gradient(0deg, rgba(27,36,40,.97) 0%, rgba(27,36,40,.86) 26%, rgba(27,36,40,.25) 58%, rgba(27,36,40,0) 72%);
+    linear-gradient(180deg, rgba(27,36,40,.62) 0%, rgba(27,36,40,.3) 16%, rgba(27,36,40,.42) 30%, rgba(27,36,40,.8) 50%, rgba(27,36,40,.93) 72%, rgba(27,36,40,.97) 100%);
 }
-.portada__velo { background:
-    linear-gradient(180deg, rgba(27,36,40,.6) 0%, rgba(27,36,40,0) 18%),
-    linear-gradient(0deg, rgba(27,36,40,.98) 0%, rgba(27,36,40,.9) 34%, rgba(27,36,40,.45) 62%, rgba(27,36,40,0) 78%); }
 @media (min-width: 900px) {
   .portada__velo { background:
-    linear-gradient(180deg, rgba(27,36,40,.6) 0%, rgba(27,36,40,0) 20%),
-    linear-gradient(0deg, rgba(27,36,40,.97) 0%, rgba(27,36,40,.86) 26%, rgba(27,36,40,.25) 58%, rgba(27,36,40,0) 72%); }
+    linear-gradient(90deg, rgba(27,36,40,.86) 0%, rgba(27,36,40,.7) 34%, rgba(27,36,40,.3) 62%, rgba(27,36,40,.12) 100%),
+    linear-gradient(0deg, rgba(27,36,40,.85) 0%, rgba(27,36,40,.35) 34%, rgba(27,36,40,.1) 62%, rgba(27,36,40,.45) 100%); }
 }
 .portada__contenido { padding-top: 8rem; padding-bottom: clamp(1.75rem, 4vw, 3rem); }
 .portada h1 { max-width: 12.5ch; text-shadow: 0 2px 24px rgba(20,28,31,.35); }
@@ -358,7 +356,7 @@ body.menu-abierto { overflow: hidden; }
   background: var(--pizarra); color: #fff; text-decoration: none; --foco: var(--arena);
 }
 .mosaico__item > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transition: transform .7s var(--curva); }
-.mosaico__item::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(27,36,40,0) 22%, rgba(27,36,40,.62) 55%, rgba(27,36,40,.94) 100%); }
+.mosaico__item::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(27,36,40,.1) 0%, rgba(27,36,40,.18) 28%, rgba(27,36,40,.72) 56%, rgba(27,36,40,.95) 100%); }
 .mosaico__txt { text-shadow: 0 1px 12px rgba(20,28,31,.35); }
 .mosaico__item:hover > img { transform: scale(1.045); }
 .mosaico__txt { padding: clamp(1.4rem, 2.5vw, 2rem); display: grid; gap: .5rem; }
@@ -478,13 +476,16 @@ body.menu-abierto { overflow: hidden; }
 /* ── Banda del crucero ────────────────────────────────────────────────────── */
 .banda { position: relative; isolation: isolate; overflow: hidden; color: #fff; min-height: min(92svh, 48rem); display: flex; align-items: flex-end; --foco: var(--arena); --borde: rgba(255,255,255,.28); }
 .banda > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-.banda::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(27,36,40,.95) 0%, rgba(27,36,40,.75) 42%, rgba(27,36,40,.05) 80%); }
+.banda::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(27,36,40,.96) 0%, rgba(27,36,40,.86) 38%, rgba(27,36,40,.6) 60%, rgba(27,36,40,.28) 80%, rgba(27,36,40,.42) 100%); }
 .banda__txt { padding-block: var(--sec); display: grid; gap: 1.25rem; max-width: 40rem; }
 .banda__txt p { color: rgba(255,255,255,.88); }
-.banda .credito { position: absolute; right: var(--pad); bottom: 1rem; color: rgba(255,255,255,.7); }
+.banda .credito { position: absolute; left: var(--pad); bottom: 1rem; color: rgba(255,255,255,.7); }
+@media (min-width: 900px) { .banda .credito { left: auto; right: var(--pad); } }
 @media (min-width: 900px) {
   .banda { align-items: center; }
-  .banda::before { background: linear-gradient(90deg, rgba(27,36,40,.94) 0%, rgba(27,36,40,.72) 42%, rgba(27,36,40,.05) 78%); }
+  .banda::before { background:
+    linear-gradient(90deg, rgba(27,36,40,.92) 0%, rgba(27,36,40,.78) 36%, rgba(27,36,40,.32) 62%, rgba(27,36,40,.12) 100%),
+    linear-gradient(180deg, rgba(27,36,40,.4) 0%, rgba(27,36,40,0) 22%); }
 }
 
 /* ── Fotos reales (tira) y testimonios ────────────────────────────────────── */
@@ -945,3 +946,71 @@ html:not(.js) .filtros { display: none; }
 .oferta-precios span { font-size: 1.05rem; color: var(--texto-2); }
 .oferta-precios strong { font-size: 2rem; font-stretch: 72%; font-weight: 820; line-height: 1; }
 @media (min-width: 900px) { .oferta-hotel { grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); } }
+
+/* ── Movimiento ───────────────────────────────────────────────────────────────
+   Un solo momento al cargar (la portada y el encabezado de cada página entran
+   en cascada), transición suave entre páginas, fotos que aparecen sin saltos y
+   listas que se revelan al bajar. Todo con opacity/transform para que sea fluido
+   en celulares, y nada de esto corre si la persona pidió reducir el movimiento. */
+@keyframes entra { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes aparece { from { opacity: 0; transform: scale(1.035); } to { opacity: 1; transform: none; } }
+@keyframes acerca { from { transform: scale(1.08); } to { transform: none; } }
+
+.js .portada__contenido > *,
+.js .banda--hero .banda__txt > *,
+.js .exc-hero__txt > *,
+.js .cabecera-pag .cont > * { animation: entra .85s var(--curva) both; }
+.js .portada__contenido > :nth-child(2), .js .banda--hero .banda__txt > :nth-child(2), .js .exc-hero__txt > :nth-child(2), .js .cabecera-pag .cont > :nth-child(2) { animation-delay: .07s; }
+.js .portada__contenido > :nth-child(3), .js .banda--hero .banda__txt > :nth-child(3), .js .exc-hero__txt > :nth-child(3), .js .cabecera-pag .cont > :nth-child(3) { animation-delay: .14s; }
+.js .portada__contenido > :nth-child(4), .js .banda--hero .banda__txt > :nth-child(4), .js .exc-hero__txt > :nth-child(4), .js .cabecera-pag .cont > :nth-child(4) { animation-delay: .21s; }
+.js .portada__contenido > :nth-child(n+5), .js .banda--hero .banda__txt > :nth-child(n+5), .js .exc-hero__txt > :nth-child(n+5), .js .cabecera-pag .cont > :nth-child(n+5) { animation-delay: .28s; }
+.js .proxima { animation: entra .85s var(--curva) .32s both; }
+.js .exc-hero__media, .js .exc-hero__flyer { animation: aparece 1s var(--curva) .12s both; }
+.js .portada__media picture img, .js .portada__media video, .js .banda--hero > img { animation: acerca 2.4s cubic-bezier(.2,.6,.2,1) both; }
+
+/* Menú del celular: las opciones entran en cascada */
+.js .menu:not([hidden]) .menu__lista li { animation: entra .5s var(--curva) both; }
+.js .menu:not([hidden]) .menu__lista li:nth-child(2) { animation-delay: .04s; }
+.js .menu:not([hidden]) .menu__lista li:nth-child(3) { animation-delay: .08s; }
+.js .menu:not([hidden]) .menu__lista li:nth-child(4) { animation-delay: .12s; }
+.js .menu:not([hidden]) .menu__lista li:nth-child(n+5) { animation-delay: .16s; }
+
+/* Fotos: aparecen sobre su color de fondo en vez de saltar */
+img.img-carga { transition: opacity .6s ease, transform .7s var(--curva); }
+img.img-carga.img-espera { opacity: 0; }
+
+/* Listas que se revelan al bajar (lo agrega app.js solo a lo que está fuera de la pantalla) */
+.revela { opacity: 0; transform: translateY(24px); }
+.revela.visto { opacity: 1; transform: none; transition: opacity .7s ease, transform .9s var(--curva); transition-delay: calc(var(--d, 0) * 75ms); }
+
+/* Tarjetas: se levantan un poco al pasar el mouse */
+@media (hover: hover) and (pointer: fine) {
+  .tarjeta-exc__enlace, .tarjeta-hotel__enlace, .mosaico__item { transition: transform .45s var(--curva), box-shadow .45s var(--curva); }
+  .tarjeta-exc__enlace:hover, .mosaico__item:hover { transform: translateY(-4px); box-shadow: 0 22px 44px -26px rgba(27, 36, 40, .45); }
+  .tarjeta-hotel__enlace:hover { transform: translateY(-3px); }
+  .btn:hover { transform: translateY(-1px); }
+}
+.btn:active { transform: scale(.97); }
+
+/* Preguntas: se abren deslizando (navegadores que lo soportan; el resto abre normal) */
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  .faq__item::details-content { block-size: 0; overflow: hidden; transition: block-size .4s var(--curva), content-visibility .4s allow-discrete; }
+  .faq__item[open]::details-content { block-size: auto; }
+}
+
+/* Transición suave entre páginas (Chrome, Edge y Safari recientes) */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  .cab { view-transition-name: cabecera; }
+  ::view-transition-old(root) { animation: vt-sale .22s ease both; }
+  ::view-transition-new(root) { animation: vt-entra .42s var(--curva) both; }
+  ::view-transition-group(cabecera) { animation-duration: .3s; }
+}
+@keyframes vt-sale { to { opacity: 0; } }
+@keyframes vt-entra { from { opacity: 0; transform: translateY(12px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .revela { opacity: 1; transform: none; }
+  img.img-carga.img-espera { opacity: 1; }
+}

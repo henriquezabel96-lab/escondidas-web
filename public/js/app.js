@@ -661,7 +661,50 @@
     });
   }
 
+  /* ── Fotos: aparecen suave cuando terminan de cargar ───────────────────── */
+  function imagenes() {
+    if (reducido) return;
+    $$('img[loading="lazy"]').forEach(function (img) {
+      if (img.complete && img.naturalWidth) return;
+      img.classList.add('img-carga', 'img-espera');
+      var listo = function () { img.classList.remove('img-espera'); };
+      img.addEventListener('load', listo, { once: true });
+      img.addEventListener('error', listo, { once: true });
+    });
+  }
+
+  /* ── Listas que se revelan al bajar ─────────────────────────────────────── */
+  // Solo lo que empieza fuera de la pantalla; al terminar se quitan las clases
+  // para que los efectos al pasar el mouse no hereden el retraso.
+  function revelar() {
+    if (reducido || !('IntersectionObserver' in window)) return;
+    var sel = '.fila, .tarjeta-exc, .tarjeta-hotel, .lugar, .mosaico__item, .mosaico__mas, .pasos > *, .voz, .habitacion, .cuenta-pago, .oferta-hotel, .galeria > *, .ficha__bloque, .faq__item';
+    var alto = window.innerHeight;
+    var els = $$(sel).filter(function (el) {
+      var padre = el.parentElement, ox = padre ? getComputedStyle(padre).overflowX : '';
+      if (ox === 'auto' || ox === 'scroll') return false; // carruseles horizontales: no
+      return !el.closest('[data-pista], .tira, .menu') && el.getBoundingClientRect().top > alto * 0.9;
+    });
+    var io = new IntersectionObserver(function (entradas) {
+      var lote = entradas.filter(function (e) { return e.isIntersecting; });
+      lote.forEach(function (e, i) {
+        var el = e.target;
+        io.unobserve(el);
+        el.style.setProperty('--d', Math.min(i, 6));
+        el.classList.add('visto');
+        var fin = function (ev) {
+          if (ev.target !== el || ev.propertyName !== 'transform') return;
+          el.classList.remove('revela', 'visto'); el.style.removeProperty('--d');
+          el.removeEventListener('transitionend', fin);
+        };
+        el.addEventListener('transitionend', fin);
+        setTimeout(function () { fin({ target: el, propertyName: 'transform' }); }, 1800); // por si la pestaña no estaba visible
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.08 });
+    els.forEach(function (el) { el.classList.add('revela'); io.observe(el); });
+  }
+
   /* ── Arranque ──────────────────────────────────────────────────────────── */
-  [vencimientos, cabecera, menu, aviso, flotante, videoPortada, tablero, cuentas, carruseles, filtros, contadores, calculadoras, formularios, copiarYCompartir, barraReserva, hoja]
+  [vencimientos, cabecera, menu, aviso, flotante, videoPortada, tablero, imagenes, revelar, cuentas, carruseles, filtros, contadores, calculadoras, formularios, copiarYCompartir, barraReserva, hoja]
     .forEach(function (fn) { try { fn(); } catch (e) { if (window.console) console.error(e); } });
 })();
