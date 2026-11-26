@@ -1,5 +1,5 @@
 // Página de inicio
-import { sitio, excursiones, hoteles, zonas, cruceros, otrosServicios, faqGeneral, testimonios } from '../contenido/datos.mjs';
+import { sitio, excursiones, hoteles, zonas, cruceros, otrosServicios, faqGeneral, testimonios, secciones } from '../contenido/datos.mjs';
 import { pagina, agenciaLD } from './base.mjs';
 import { esc, icono, foto, boton, botonWa, wa, ig, ph, rd, fechaLarga, fechaTablero, visible, hay, BORRADOR } from './ui.mjs';
 import { cabeza, tablero, boletos, cuenta, pasos, faq, cierre, credito, tarjetaHotel, flap, enlaceFlecha } from './componentes.mjs';
@@ -24,7 +24,7 @@ export function inicio() {
   <button class="portada__pausa" type="button" data-video-pausa aria-label="Pausar el video de fondo" hidden>${icono('pausa')}</button>
   <div class="cont portada__contenido">
     <h1 class="t-display" id="portada-t">Lo mejor de RD está escondido. Vamos a buscarlo.</h1>
-    <p class="portada__sub">Excursiones en grupo desde Santiago y Puerto Plata, resorts todo incluido, paquetes y cruceros. Separas con poco y pagas el resto en partes.</p>
+    <p class="portada__sub">Excursiones en grupo desde Santiago y Puerto Plata, resorts todo incluido y cruceros. Separas con poco y pagas el resto en partes.</p>
     <div class="acciones">
       ${boton('Separar mi cupo para Macao', '/reservar/?excursion=macao', { estilo: 'arena', clase: 'btn--grande' })}
       ${botonWa('Escribir por WhatsApp', 'Hola, quiero información de un viaje.', { estilo: 'borde', clase: 'btn--grande' })}
@@ -55,7 +55,7 @@ export function inicio() {
       id: 'serv-t',
       texto: 'Desde una excursión de un día hasta una semana en un resort o un crucero de Año Nuevo. Te cotizamos, reservamos y te acompañamos por WhatsApp.',
     })}
-    <div class="mosaico">
+    <div class="mosaico${secciones.paquetes ? '' : ' mosaico--sin-paq'}">
       <a class="mosaico__item mosaico__item--exc" href="/excursiones/">
         ${foto('buggy-amigas', { sizes: '(min-width: 900px) 56vw, 100vw', pos: '50% 38%' })}
         <div class="mosaico__txt"><h3 class="mosaico__t">Excursiones</h3><p class="mosaico__d">Salidas en grupo con transporte, comida y actividades incluidas.</p><span class="mosaico__cta">Ver excursiones${icono('flecha')}</span></div>
@@ -68,10 +68,14 @@ export function inicio() {
         ${foto('costa-pacifica', { sizes: '(min-width: 900px) 40vw, 100vw', pos: '60% 50%' })}
         <div class="mosaico__txt"><h3 class="mosaico__t">Cruceros</h3><p class="mosaico__d">Salidas en grupo, como el de Año Nuevo.</p><span class="mosaico__cta">Ver cruceros${icono('flecha')}</span></div>
       </a>
-      <a class="mosaico__item mosaico__item--paq" href="/paquetes/">
+      ${
+        secciones.paquetes
+          ? `<a class="mosaico__item mosaico__item--paq" href="/paquetes/">
         ${foto('guatape', { sizes: '(min-width: 900px) 40vw, 100vw' })}
         <div class="mosaico__txt"><h3 class="mosaico__t">Paquetes</h3><p class="mosaico__d">Vuelo, hotel y traslados en un solo precio.</p><span class="mosaico__cta">Ver paquetes${icono('flecha')}</span></div>
-      </a>
+      </a>`
+          : ''
+      }
       <div class="mosaico__mas">
         <h3>También te cotizamos</h3>
         <div>

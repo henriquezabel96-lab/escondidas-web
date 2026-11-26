@@ -1,5 +1,5 @@
 // Estructura común: <head>, cabecera, menú, pie y botón flotante.
-import { sitio } from '../contenido/datos.mjs';
+import { sitio, secciones } from '../contenido/datos.mjs';
 import { esc, icono, ph, wa, ig, BORRADOR, telPrincipal } from './ui.mjs';
 
 export const VERSION = Date.now().toString(36);
@@ -8,7 +8,7 @@ const ANIO = new Date().getFullYear();
 export const NAV = [
   { href: '/excursiones/', texto: 'Excursiones' },
   { href: '/hoteles/', texto: 'Hoteles' },
-  { href: '/paquetes/', texto: 'Paquetes' },
+  ...(secciones.paquetes ? [{ href: '/paquetes/', texto: 'Paquetes' }] : []),
   { href: '/cruceros/', texto: 'Cruceros' },
   { href: '/como-reservar/', texto: 'Cómo reservar' },
   { href: '/contacto/', texto: 'Contacto' },
@@ -59,7 +59,7 @@ function pie() {
   <div class="cont pie__grid">
     <div class="pie__intro">
       <img src="/img/marca/emblema.svg" width="64" height="64" alt="" class="pie__emblema">
-      <p>Agencia de viajes en Santiago de los Caballeros. Excursiones en grupo, resorts, paquetes y cruceros.</p>
+      <p>Agencia de viajes en Santiago de los Caballeros. Excursiones en grupo, resorts y cruceros.</p>
       <p class="lema">${esc(sitio.lema)}</p>
       <div class="pie__redes">
         <a href="${ig()}" target="_blank" rel="noopener" aria-label="Instagram de Escondidas">${icono('instagram')}</a>
@@ -73,7 +73,7 @@ function pie() {
         <li><a href="/excursiones/">Excursiones</a></li>
         <li><a href="/excursiones/macao/">Macao + Basílica de Higüey</a></li>
         <li><a href="/hoteles/">Hoteles y resorts</a></li>
-        <li><a href="/paquetes/">Paquetes</a></li>
+        ${secciones.paquetes ? '<li><a href="/paquetes/">Paquetes</a></li>' : ''}
         <li><a href="/cruceros/">Cruceros</a></li>
       </ul>
     </nav>

@@ -24,7 +24,7 @@ export const sitio = {
   url: 'https://escondidasmultiservices.com',
   urlNetlify: 'https://escondidasmultiservices.netlify.app',
   descripcion:
-    'Agencia de viajes en Santiago: excursiones en grupo desde Santiago y Puerto Plata, resorts todo incluido, paquetes y cruceros. Separa con poco y paga en partes.',
+    'Agencia de viajes en Santiago: excursiones en grupo desde Santiago y Puerto Plata, resorts todo incluido y cruceros. Separa con poco y paga en partes.',
   whatsapp: [
     { numero: '18298178000', visible: '829-817-8000' },
     { numero: '18098827271', visible: '809-882-7271' },
@@ -384,39 +384,12 @@ export const hoteles = [
   },
 ];
 
-// ─── PAQUETES (ejemplos pendientes de confirmar) ─────────────────────────────
-export const paquetes = [
-  {
-    slug: 'medellin-guatape',
-    nombre: 'Medellín y Guatapé',
-    pais: 'Colombia',
-    foto: 'guatape',
-    noches: null,
-    desde: null,
-    pendiente: true,
-    texto: 'Ciudad de la eterna primavera, Comuna 13 y el pueblo de colores.',
-  },
-  {
-    slug: 'rio-de-janeiro',
-    nombre: 'Río de Janeiro',
-    pais: 'Brasil',
-    foto: 'rio-botafogo',
-    noches: null,
-    desde: null,
-    pendiente: true,
-    texto: 'Pan de Azúcar, Copacabana y la ciudad vista desde arriba.',
-  },
-  {
-    slug: 'cofresi-palm-beach',
-    nombre: 'Cofresí Palm Beach',
-    pais: 'Puerto Plata, RD',
-    foto: 'cofresi-cabanas',
-    noches: 2,
-    desde: null,
-    pendiente: true,
-    texto: 'Fin de semana todo incluido a menos de una hora de Santiago.',
-  },
-];
+// ─── PAQUETES ────────────────────────────────────────────────────────────────
+// Sección apagada: la agencia todavía no confirma paquetes (nov 2026). No sale en el menú,
+// el pie, el inicio ni el formulario de contacto, y no se genera /paquetes/.
+// Para volver a mostrarla: `paquetes: true` y agregar aquí los paquetes reales.
+export const secciones = { paquetes: false };
+export const paquetes = [];
 
 // ─── CRUCEROS ────────────────────────────────────────────────────────────────
 export const cruceros = [
@@ -533,8 +506,6 @@ export const fotos = {
   'flyer-tierra-tropical': { alt: 'Flyer: Tierra Tropical en Baní, junio de 2027', credito: { autor: 'Escondidas Multiservices', licencia: 'Flyer de la agencia' } },
   'cueva-taina': { alt: 'Cueva de piedra con una poza de agua dulce cristalina y luz que entra desde arriba', credito: { autor: 'Escondidas Multiservices', licencia: 'Imagen ilustrativa generada con IA' } },
   'casa-tipica': { alt: 'Casa dominicana de madera pintada con café y cacao servidos en la galería', credito: { autor: 'Escondidas Multiservices', licencia: 'Imagen ilustrativa generada con IA' } },
-  'rio-botafogo': { alt: 'El Cristo Redentor y la bahía de Botafogo vistos desde el Pan de Azúcar, en Río de Janeiro', credito: { autor: 'Wilfredor', licencia: 'CC0', fuente: 'Wikimedia Commons' } },
-  'cofresi-cabanas': { alt: 'Camas de playa con cortinas blancas bajo las palmeras en Cofresí, Puerto Plata', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
   'hardrock-piscina': { alt: 'Piscina y edificios del Hard Rock Punta Cana entre palmeras, con el mar al fondo', credito: { autor: 'Magnus Bråth', licencia: 'CC BY 2.0', fuente: 'Wikimedia Commons' } },
   guatape: { alt: 'Casas de colores en el pueblo de Guatapé, Colombia', credito: { autor: 'Escondidas Multiservices', licencia: 'Publicación de la agencia en Instagram' } },
 };

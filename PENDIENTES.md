@@ -26,7 +26,7 @@ En la vista previa, cada dato pendiente aparece como un **recuadro punteado**. C
 - [ ] Autor y licencia de las fotos de Wikimedia: Basílica de Higüey (fachada y aérea), cuadro de la Altagracia y acantilado de Playa Macao
 - [ ] Fotos reales de la Cueva Taína y de la casa típica (hoy son imágenes ilustrativas hechas con IA en Higgsfield)
 - [ ] Confirmar permiso de la foto aérea de Hard Rock (o cambiarla por una del mayorista)
-- [x] Todas las secciones tienen foto (nov 2026): Río de Janeiro (Wilfredor, CC0), piscina de Hard Rock (Magnus Bråth, CC BY 2.0), Cofresí (recorte del flyer), Cueva Taína y casa típica (IA)
+- [x] Todas las secciones tienen foto (nov 2026): piscina de Hard Rock (Magnus Bråth, CC BY 2.0), Cueva Taína y casa típica (IA)
 
 ## Ofertas de resorts (flyers, nov 2026, ya en la web)
 - [x] Ocean Blue & Sand y Ocean El Faro (Black Friday, reservar hasta el 30 nov), Hard Rock (27 al 29 nov), The Tropical Beach & Cofresí Palm y Presidential Suites (hasta el 23 dic)
@@ -53,5 +53,5 @@ En la vista previa, cada dato pendiente aparece como un **recuadro punteado**. C
 - [ ] Agregar sus filas a la pestaña "salidas" de la hoja (ids: ballenas-cayo-levantado, cayo-arena, montecristi, tierra-tropical, el-dorado-park)
 
 ## Ejemplos que hay que confirmar o quitar
-- [ ] Paquetes: Medellín y Guatapé, Río de Janeiro, Cofresí Palm Beach (noches y precio desde)
+- [ ] Paquetes: la sección está apagada hasta que la agencia los confirme (`secciones.paquetes` en contenido/datos.mjs). Al volver, agregar los paquetes reales y su imagen para compartir en herramientas/og.mjs
 - [ ] 3 testimonios reales con permiso del cliente (texto, nombre y viaje)

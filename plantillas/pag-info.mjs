@@ -1,5 +1,5 @@
 // Páginas de información: cómo reservar, contacto, legales, créditos, gracias, 404
-import { sitio, faqGeneral, fotos, excursiones } from '../contenido/datos.mjs';
+import { sitio, faqGeneral, fotos, excursiones, secciones } from '../contenido/datos.mjs';
 import { pagina, migas, agenciaLD } from './base.mjs';
 import { esc, icono, foto, boton, botonWa, ph, rd, hay, wa, ig, mapaUrl, manifest, fechaLarga, BORRADOR } from './ui.mjs';
 import { cabeza, cierre, pasos, faq, formInicio, campo, panelEnviado } from './componentes.mjs';
@@ -114,7 +114,7 @@ export function contacto() {
         ${campo({ tipo: 'tel', nombre: 'whatsapp', etiqueta: 'Tu WhatsApp', requerido: true, autocomplete: 'tel', inputmode: 'tel', placeholder: '809 000 0000', patron: '[0-9 ()+\\-]{10,}', error: 'Escribe un número de 10 dígitos, por ejemplo 809 555 1234.' })}
         ${campo({ tipo: 'email', nombre: 'correo', etiqueta: 'Tu correo', autocomplete: 'email', error: 'Revisa el correo, parece incompleto.' })}
       </div>
-      ${campo({ tipo: 'select', nombre: 'interes', etiqueta: '¿Qué te interesa?', opciones: ['Excursión a Macao', 'Otra excursión', 'Hotel o resort', 'Paquete de viaje', 'Crucero', 'Boleto aéreo', 'Rent car', 'Seguro de viaje', 'Otra cosa'] })}
+      ${campo({ tipo: 'select', nombre: 'interes', etiqueta: '¿Qué te interesa?', opciones: ['Excursión a Macao', 'Otra excursión', 'Hotel o resort', ...(secciones.paquetes ? ['Paquete de viaje'] : []), 'Crucero', 'Boleto aéreo', 'Rent car', 'Seguro de viaje', 'Otra cosa'] })}
       ${campo({ tipo: 'textarea', nombre: 'mensaje', etiqueta: 'Mensaje', requerido: true, filas: 5, placeholder: 'Destino, fechas, cuántos van…', error: 'Escribe tu mensaje.' })}
       <button class="btn btn--pizarra" type="submit">${icono('whatsapp')}<span>Enviar mensaje</span></button>
       ${panelEnviado({ titulo: 'Recibimos tu mensaje', texto: 'Te escribimos por WhatsApp en horario de oficina. Si quieres adelantar, envíanos el mensaje ya armado:' })}

@@ -60,12 +60,10 @@ FUENTES = {
     'flyer-ballenas': (UP + 'b3581001-image.jpg', None, None, False),
     # Ofertas de resorts (flyers del mayorista, nov 2026)
     'flyer-tropical-cofresi': (UP + 'eb685f6b-image.png', None, None, False),
-    # Nov 2026: fotos que faltaban (Wikimedia Commons, IA de Higgsfield y recorte del flyer)
-    'rio-botafogo': (ENT + 'rio-botafogo.jpg', None, None, False),          # Wilfredor, CC0
+    # Nov 2026: fotos que faltaban (Wikimedia Commons e IA de Higgsfield)
     'hardrock-piscina': (ENT + 'hardrock-piscina.jpg', None, None, False),  # Magnus Bråth, CC BY 2.0
     'cueva-taina': (ENT + 'cueva-taina.jpg', None, None, False),            # ilustrativa, Higgsfield
     'casa-tipica': (ENT + 'casa-tipica.jpg', None, None, False),            # ilustrativa, Higgsfield
-    'cofresi-cabanas': (UP + 'eb685f6b-image.png', None, (0.17, 0.132, 0.87, 0.52), False),
     'flyer-presidential-suites': (UP + '762c4af1-image.png', None, None, False),
     'flyer-hard-rock': (UP + '96825562-image.png', None, None, False),
     'flyer-ocean-blue-sand': (UP + '9e118303-image.png', None, None, False),

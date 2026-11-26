@@ -384,6 +384,8 @@ body.menu-abierto { overflow: hidden; }
   .mosaico__item--cru { grid-column: span 5; }
   .mosaico__item--paq { grid-column: span 5; }
   .mosaico__mas { grid-column: span 7; }
+  .mosaico--sin-paq .mosaico__mas { grid-column: 1 / -1; }
+  .mosaico--sin-paq .mosaico__mas > div { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); column-gap: 2.5rem; }
 }
 
 /* ── Pasos (boleto de 3 tramos) ───────────────────────────────────────────── */

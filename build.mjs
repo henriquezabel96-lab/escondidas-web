@@ -3,7 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { sitio, excursiones, hoteles, cruceros } from './contenido/datos.mjs';
+import { sitio, excursiones, hoteles, cruceros, secciones } from './contenido/datos.mjs';
 import { sprite, BORRADOR, visible } from './plantillas/ui.mjs';
 import { inicio } from './plantillas/pag-inicio.mjs';
 import { listado as excursionesListado, detalle as excursionDetalle, ficha as excursionFicha, ics } from './plantillas/pag-excursiones.mjs';
@@ -37,7 +37,7 @@ for (const e of excursiones.filter(visible)) {
 escribir('/reservar/', reservar(), { prioridad: '0.8' });
 escribir('/hoteles/', hotelesListado(), { prioridad: '0.8' });
 for (const h of hoteles) escribir(`/hoteles/${h.slug}/`, hotelFicha(h), { prioridad: '0.7' });
-escribir('/paquetes/', paginaPaquetes(), { prioridad: '0.7' });
+if (secciones.paquetes) escribir('/paquetes/', paginaPaquetes(), { prioridad: '0.7' });
 escribir('/cruceros/', paginaCruceros(), { prioridad: '0.7' });
 for (const c of cruceros) escribir(`/cruceros/${c.slug}/`, detalleCrucero(c), { prioridad: '0.7' });
 escribir('/como-reservar/', comoReservar(), { prioridad: '0.7' });
