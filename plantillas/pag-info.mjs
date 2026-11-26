@@ -124,7 +124,7 @@ export function contacto() {
   return pagina({
     ruta: '/contacto/',
     titulo: 'Contacto y ubicación',
-    descripcion: 'Oficina en Edificio Reina, Los Jardines Metropolitanos, Santiago. WhatsApp 829-817-8000 y 809-882-7271. Escríbenos y cotiza tu viaje.',
+    descripcion: 'Oficina en Edificio Reina, Los Jardines Metropolitanos, Santiago. WhatsApp 829-817-8000. Escríbenos y cotiza tu viaje.',
     cuerpo,
     jsonld: [m.ld, agenciaLD()],
   });

@@ -25,10 +25,7 @@ export const sitio = {
   urlNetlify: 'https://escondidasmultiservices.netlify.app',
   descripcion:
     'Agencia de viajes en Santiago: excursiones en grupo desde Santiago y Puerto Plata, resorts todo incluido y cruceros. Separa con poco y paga en partes.',
-  whatsapp: [
-    { numero: '18298178000', visible: '829-817-8000' },
-    { numero: '18098827271', visible: '809-882-7271' },
-  ],
+  whatsapp: [{ numero: '18298178000', visible: '829-817-8000' }],
   correo: 'info@escondidasmultiservices.com',
   direccion: {
     calle: 'C/ Proyecto #3, local B8, Edificio Reina',
