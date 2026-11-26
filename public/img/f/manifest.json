@@ -423,5 +423,38 @@
    960
   ],
   "color": "#695d4b"
+ },
+ "hotel-ocean-blue-sand": {
+  "w": 439,
+  "h": 329,
+  "anchos": [
+   439
+  ],
+  "color": "#485766"
+ },
+ "hotel-ocean-el-faro": {
+  "w": 436,
+  "h": 314,
+  "anchos": [
+   436
+  ],
+  "color": "#938877"
+ },
+ "hotel-presidential-suites": {
+  "w": 477,
+  "h": 357,
+  "anchos": [
+   477
+  ],
+  "color": "#717868"
+ },
+ "hotel-tropical-cofresi": {
+  "w": 526,
+  "h": 365,
+  "anchos": [
+   480,
+   526
+  ],
+  "color": "#6c6f76"
  }
 }

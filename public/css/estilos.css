@@ -462,7 +462,7 @@ body.menu-abierto { overflow: hidden; }
 
 /* ── Tarjetas de hotel ────────────────────────────────────────────────────── */
 .tarjeta-hotel__enlace { display: block; text-decoration: none; color: inherit; border-radius: 1.5rem; }
-.tarjeta-hotel__media { position: relative; overflow: hidden; aspect-ratio: 4 / 5; border-radius: 1.5rem; background: var(--bruma); }
+.tarjeta-hotel__media { position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: 1.5rem; background: var(--bruma); }
 .tarjeta-hotel__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--curva); }
 .tarjeta-hotel__enlace:hover img { transform: scale(1.045); }
 .sello { position: absolute; left: .85rem; top: .85rem; background: var(--arena); color: var(--pizarra); font-weight: 660; font-size: .8rem; padding: .35rem .75rem; border-radius: 999px; }
@@ -471,7 +471,7 @@ body.menu-abierto { overflow: hidden; }
 .tarjeta-hotel__nombre { font-size: 1.4rem; font-stretch: 84%; font-weight: 740; line-height: 1.1; }
 .tarjeta-hotel__plan { font-size: .92rem; color: var(--texto-2); }
 .tarjeta-hotel__precio { margin-top: .4rem; }
-.rejilla { display: grid; gap: 2.25rem 1.25rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr)); }
+.rejilla { display: grid; gap: 2.25rem 1.5rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); }
 
 /* ── Banda del crucero ────────────────────────────────────────────────────── */
 .banda { position: relative; isolation: isolate; overflow: hidden; color: #fff; min-height: min(92svh, 48rem); display: flex; align-items: flex-end; --foco: var(--arena); --borde: rgba(255,255,255,.28); }

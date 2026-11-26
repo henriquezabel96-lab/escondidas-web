@@ -105,7 +105,7 @@ export const excursiones = [
     cuposTotal: 100,
     cupos: 77, // 100 en total, 23 ya separados (también se puede cambiar desde la hoja de Google)
     palabraClave: 'MACAO',
-    foto: 'buggy-amigas',
+    foto: 'buggy-caravana',
     resumen:
       'Un día completo con tu coro: buggies, Playa Macao, la Basílica de Higüey, Cueva Taína y casa típica. Con desayuno, almuerzo buffet y transporte desde Santiago o Puerto Plata.',
     incluye: [
@@ -123,7 +123,7 @@ export const excursiones = [
       {
         nombre: 'Buggies dobles',
         texto: 'Buggies de dos puestos por caminos de tierra hasta la orilla. Llegas lleno de polvo y con la sonrisa puesta.',
-        foto: 'buggy-caravana',
+        foto: 'buggy-casco',
       },
       {
         nombre: 'Playa Macao',
@@ -291,7 +291,8 @@ const hotelBase = {
 };
 
 // Hoteles que se publican solo con su oferta: la tarjeta se oculta sola cuando la oferta vence.
-// `galeria`: fotos extra del hotel (slugs del mapa de fotos).
+// `galeria`: fotos extra del hotel (slugs del mapa de fotos). `fotoTarjeta`: foto limpia para la tarjeta
+// (si no hay, la tarjeta usa `foto`). Así el flyer completo se ve en la página del hotel y no en la lista.
 const soloOferta = { plan: null, desde: null, descripcion: null, incluye: [], habitaciones: [], galeria: [], galeriaPendiente: [] };
 
 // Ofertas vigentes: van primero. Cada oferta se oculta sola en la web después de `vence` (AAAA-MM-DD).
@@ -303,6 +304,7 @@ export const hoteles = [
     zona: 'punta-cana',
     lugar: 'Bávaro, Punta Cana',
     foto: 'flyer-ocean-blue-sand',
+    fotoTarjeta: 'hotel-ocean-blue-sand',
     oferta: {
       titulo: 'Oferta Black Friday',
       resumen: 'Desde US$182',
@@ -320,6 +322,7 @@ export const hoteles = [
     zona: 'punta-cana',
     lugar: 'Punta Cana',
     foto: 'flyer-ocean-el-faro',
+    fotoTarjeta: 'hotel-ocean-el-faro',
     oferta: {
       titulo: 'Oferta Black Friday',
       resumen: 'Desde US$196',
@@ -355,6 +358,7 @@ export const hoteles = [
     zona: 'puerto-plata',
     lugar: 'Cofresí, Puerto Plata',
     foto: 'flyer-tropical-cofresi',
+    fotoTarjeta: 'hotel-tropical-cofresi',
     oferta: {
       titulo: 'Para reservar y viajar hasta el 23 de diciembre',
       resumen: 'Desde US$93 por persona por noche',
@@ -372,6 +376,7 @@ export const hoteles = [
     zona: 'puerto-plata',
     lugar: 'Cofresí, Puerto Plata',
     foto: 'flyer-presidential-suites',
+    fotoTarjeta: 'hotel-presidential-suites',
     oferta: {
       titulo: 'Para reservar y viajar hasta el 23 de diciembre',
       resumen: 'US$164 por persona por noche',
@@ -491,6 +496,10 @@ export const fotos = {
   'flyer-hard-rock': { alt: 'Flyer: Hard Rock Punta Cana del 27 al 29 de noviembre, US$998 en ocupación doble', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
   'flyer-tropical-cofresi': { alt: 'Flyer: The Tropical Beach & Cofresí Palm, US$100 fines de semana y US$93 días de semana', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
   'flyer-presidential-suites': { alt: 'Flyer: Presidential Suites by Lifestyle, doble US$164 y niños US$82', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
+  'hotel-ocean-blue-sand': { alt: 'Piscina y palapa del Ocean Blue & Sand vistas desde arriba', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
+  'hotel-ocean-el-faro': { alt: 'Playa con palapas y mar turquesa frente al Ocean El Faro', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
+  'hotel-presidential-suites': { alt: 'Piscina rodeada de camastros y jardines en Presidential Suites, Cofresí', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
+  'hotel-tropical-cofresi': { alt: 'Camas de playa con cortinas blancas bajo las palmeras en Cofresí', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
   hardrock: { alt: 'Vista aérea del Hard Rock Punta Cana y su playa al atardecer', credito: { autor: 'Hard Rock Punta Cana', licencia: 'Cortesía del hotel' } },
   zemi: { alt: 'Piscina infinita frente a la bahía de Miches en Zemi Miches', credito: { autor: 'Zemi Miches', licencia: 'Cortesía del hotel' } },
   bayahibe: { alt: 'Muelle con palapa sobre el mar en Bayahíbe', credito: { autor: 'Mariordo', licencia: 'CC BY-SA 4.0', fuente: 'Wikimedia Commons' } },

@@ -68,6 +68,11 @@ FUENTES = {
     'flyer-hard-rock': (UP + '96825562-image.png', None, None, False),
     'flyer-ocean-blue-sand': (UP + '9e118303-image.png', None, None, False),
     'flyer-ocean-el-faro': (UP + '869bee26-image.png', None, None, False),
+    # Foto limpia de cada hotel para su tarjeta (recorte del flyer, sin textos ni logos)
+    'hotel-ocean-blue-sand': (UP + '9e118303-image.png', None, (0, 0.535, 0.585, 0.885), False),
+    'hotel-ocean-el-faro': (UP + '869bee26-image.png', None, (0.33, 0.535, 0.91, 0.87), False),
+    'hotel-presidential-suites': (UP + '762c4af1-image.png', None, (0.2, 0.128, 0.835, 0.508), False),
+    'hotel-tropical-cofresi': (UP + 'eb685f6b-image.png', None, (0.17, 0.132, 0.87, 0.52), False),
     'flyer-cayo-arena': (UP + 'c5fc5f18-image.jpg', None, None, False),
     'flyer-montecristi': (UP + '1034effe-image.jpg', None, None, False),
     'flyer-el-dorado': (UP + '56426480-image.jpg', None, None, False),

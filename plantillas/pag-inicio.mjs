@@ -57,7 +57,7 @@ export function inicio() {
     })}
     <div class="mosaico${secciones.paquetes ? '' : ' mosaico--sin-paq'}">
       <a class="mosaico__item mosaico__item--exc" href="/excursiones/">
-        ${foto('buggy-amigas', { sizes: '(min-width: 900px) 56vw, 100vw', pos: '50% 38%' })}
+        ${foto('macao-acantilado', { sizes: '(min-width: 900px) 56vw, 100vw', pos: '62% 50%' })}
         <div class="mosaico__txt"><h3 class="mosaico__t">Excursiones</h3><p class="mosaico__d">Salidas en grupo con transporte, comida y actividades incluidas.</p><span class="mosaico__cta">Ver excursiones${icono('flecha')}</span></div>
       </a>
       <a class="mosaico__item mosaico__item--hot" href="/hoteles/">
@@ -97,26 +97,7 @@ export function inicio() {
   </div>
 </section>
 
-<section class="seccion tema-claro" aria-labelledby="mac-t">
-  <div class="cont destacado">
-    <div class="destacado__media">
-      ${foto('buggy-casco', { clase: 'principal', sizes: '(min-width: 1000px) 44vw, 90vw', pos: '50% 30%' })}
-      ${foto('basilica-higuey', { clase: 'inserto', sizes: '(min-width: 1000px) 18vw, 38vw' })}
-    </div>
-    <div class="destacado__txt">
-      <div class="chips"><span class="chip chip--lleno">${icono('calendario')}${esc(fechaLarga(mac.fecha))}</span><span class="chip">${cuenta(mac.fecha, { hora: mac.horaCuenta })}</span></div>
-      <h2 class="t-seccion" id="mac-t">${esc(mac.nombre)}</h2>
-      <p class="t-lead">${esc(mac.resumen)}</p>
-      ${boletos(mac)}
-      <div class="acciones">
-        ${boton('Ver la excursión completa', '/excursiones/macao/', { estilo: 'pizarra' })}
-        ${botonWa('Preguntar por WhatsApp', 'Hola, quiero información de la excursión a Macao.', { estilo: 'borde' })}
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="seccion tema-bruma" aria-labelledby="hot-t">
+<section class="seccion tema-claro" aria-labelledby="hot-t">
   <div class="cont" data-carrusel>
     <div class="cabeza cabeza--fila">
       <h2 class="t-seccion" id="hot-t">Resorts todo incluido</h2>
@@ -153,7 +134,9 @@ export function inicio() {
   ${credito(crucero.foto)}
 </section>
 
-<section class="seccion tema-claro" aria-labelledby="real-t">
+${
+  voces.length
+    ? `<section class="seccion tema-claro" aria-labelledby="real-t">
   <div class="cont">
     <div class="cabeza cabeza--fila">
       <h2 class="t-seccion" id="real-t">Así se viven nuestras excursiones</h2>
@@ -175,7 +158,9 @@ export function inicio() {
         : ''
     }
   </div>
-</section>
+</section>`
+    : ''
+}
 
 <section class="seccion tema-bruma" aria-labelledby="faq-t">
   <div class="cont dos-col">

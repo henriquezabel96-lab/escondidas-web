@@ -86,7 +86,7 @@ export function listado() {
       ${zonasVisibles.map((z) => `<button class="filtro" type="button" aria-pressed="false" data-filtro="${z.id}">${esc(z.nombre)} <small>${conteo(z.id)}</small></button>`).join('')}
     </div>
     <p class="sr" aria-live="polite" data-filtro-estado></p>
-    <div class="rejilla">${hoteles.map((h) => tarjetaHotel(h, zonas, { sizes: '(min-width: 1240px) 290px, (min-width: 700px) 45vw, 92vw' })).join('')}</div>
+    <div class="rejilla">${hoteles.map((h) => tarjetaHotel(h, zonas, { sizes: '(min-width: 1240px) 400px, (min-width: 700px) 45vw, 92vw' })).join('')}</div>
     ${BORRADOR ? `<p style="margin-top:2rem">${ph(null, 'Agregar más hoteles u ofertas con su foto y su precio')}</p>` : ''}
   </div>
 </section>

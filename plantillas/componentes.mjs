@@ -183,7 +183,7 @@ export function tarjetaHotel(h, zonas, { sizes = '(min-width: 1100px) 300px, (mi
   const linea = o ? `<span class="tarjeta-hotel__plan" data-vence="${o.vence}">${esc(o.titulo)}</span>` : h.plan ? `<span class="tarjeta-hotel__plan">${esc(h.plan)}</span>` : '';
   return `<article class="tarjeta-hotel" data-zona="${h.zona}"${soloOferta ? ` data-vence="${o.vence}"` : ''}>
     <a class="tarjeta-hotel__enlace" href="/hoteles/${h.slug}/">
-      <div class="tarjeta-hotel__media">${foto(h.foto, { sizes })}${sello}</div>
+      <div class="tarjeta-hotel__media">${foto(h.fotoTarjeta || h.foto, { sizes })}${sello}</div>
       <div class="tarjeta-hotel__txt">
         <span class="tarjeta-hotel__zona">${esc(h.lugar)}</span>
         <${tag} class="tarjeta-hotel__nombre">${esc(h.nombre)}</${tag}>
