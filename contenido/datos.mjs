@@ -396,6 +396,118 @@ export const hoteles = [
       flyer: 'flyer-presidential-suites',
     },
   },
+  // Viva by Wyndham: tarifas por temporada para viajar del 24 dic 2026 al 30 abr 2027.
+  // Se reservan hasta el 30 de noviembre, así que las cinco tarjetas se esconden solas ese día.
+  {
+    ...soloOferta,
+    slug: 'viva-v-samana',
+    nombre: 'Viva V Samaná',
+    zona: 'samana',
+    lugar: 'Las Terrenas, Samaná',
+    foto: 'flyer-viva-samana',
+    fotoTarjeta: 'hotel-viva-samana',
+    oferta: {
+      titulo: 'Para reservar hasta el 30 de noviembre',
+      resumen: 'Desde US$139 por persona por noche',
+      precios: [['Del 24 dic al 1 ene', 195], ['Del 2 ene al 30 mar', 180], ['Del 31 mar al 30 abr', 139]],
+      unidad: 'Por persona por noche en habitación doble.',
+      vigencia: 'Para reservar hasta el 30 de noviembre de 2026, con viajes del 24 de diciembre al 30 de abril de 2027.',
+      condiciones: ['Solo para adultos.', 'Gala de Año Nuevo: US$50 por persona.'],
+      vence: '2026-11-30',
+      flyer: 'flyer-viva-samana',
+    },
+  },
+  {
+    ...soloOferta,
+    slug: 'viva-heavens',
+    nombre: 'Viva Heavens',
+    zona: 'puerto-plata',
+    lugar: 'Playa Dorada, Puerto Plata',
+    foto: 'flyer-viva-heavens',
+    fotoTarjeta: 'hotel-viva-heavens',
+    oferta: {
+      titulo: 'Para reservar hasta el 30 de noviembre',
+      resumen: 'Desde US$130 por persona por noche',
+      precios: [['Del 24 dic al 1 ene', 153], ['Del 2 ene al 30 mar', 134], ['Del 31 mar al 30 abr', 130]],
+      unidad: 'Por persona por noche en habitación doble.',
+      vigencia: 'Para reservar hasta el 30 de noviembre de 2026, con viajes del 24 de diciembre al 30 de abril de 2027.',
+      condiciones: [
+        'Niños de 3 a 11 años: US$77 del 24 de diciembre al 1 de enero y US$67 del 2 de enero al 30 de marzo.',
+        'Del 31 de marzo al 30 de abril el 1er niño va gratis y el 2do paga US$40.',
+        'Gala de Año Nuevo: US$50 por adulto y US$25 por niño.',
+        'Incluye acceso al Viva Tangerine, el hotel hermano en Cabarete.',
+      ],
+      vence: '2026-11-30',
+      flyer: 'flyer-viva-heavens',
+    },
+  },
+  {
+    ...soloOferta,
+    slug: 'viva-tangerine',
+    nombre: 'Viva Tangerine',
+    zona: 'puerto-plata',
+    lugar: 'Cabarete, Puerto Plata',
+    foto: 'flyer-viva-tangerine',
+    fotoTarjeta: 'hotel-viva-tangerine',
+    oferta: {
+      titulo: 'Para reservar hasta el 30 de noviembre',
+      resumen: 'Desde US$119 por persona por noche',
+      precios: [['Del 24 dic al 1 ene', 150], ['Del 2 ene al 30 mar', 131], ['Del 31 mar al 30 abr', 119]],
+      unidad: 'Por persona por noche en habitación doble.',
+      vigencia: 'Para reservar hasta el 30 de noviembre de 2026, con viajes del 24 de diciembre al 30 de abril de 2027.',
+      condiciones: [
+        'Niños de 3 a 11 años: US$75 del 24 de diciembre al 1 de enero, US$65 del 2 de enero al 30 de marzo y US$35 del 31 de marzo al 30 de abril.',
+        'Gala de Año Nuevo: US$50 por adulto y US$25 por niño.',
+      ],
+      vence: '2026-11-30',
+      flyer: 'flyer-viva-tangerine',
+    },
+  },
+  {
+    ...soloOferta,
+    slug: 'viva-dominicus-palace',
+    nombre: 'Viva Dominicus Palace',
+    zona: 'la-romana',
+    lugar: 'Bayahíbe, La Romana',
+    foto: 'flyer-viva-dominicus',
+    fotoTarjeta: 'hotel-viva-dominicus',
+    oferta: {
+      titulo: 'Para reservar hasta el 30 de noviembre',
+      resumen: 'Desde US$225 por persona por noche',
+      precios: [['Del 24 dic al 1 ene', 391], ['Del 2 ene al 30 mar', 298], ['Del 31 mar al 30 abr', 225]],
+      unidad: 'Por persona por noche en habitación doble.',
+      vigencia: 'Para reservar hasta el 30 de noviembre de 2026, con viajes del 24 de diciembre al 30 de abril de 2027.',
+      condiciones: [
+        'Niños de 3 a 11 años: US$196 del 24 de diciembre al 1 de enero, US$149 del 2 de enero al 30 de marzo y US$113 del 31 de marzo al 30 de abril.',
+        'Gala de Año Nuevo: US$60 por adulto y US$30 por niño.',
+        'Incluye acceso al Viva Dominicus Beach, el hotel vecino.',
+      ],
+      vence: '2026-11-30',
+      flyer: 'flyer-viva-dominicus',
+    },
+  },
+  {
+    ...soloOferta,
+    slug: 'viva-miches',
+    nombre: 'Viva Miches',
+    zona: 'miches',
+    lugar: 'Playa Esmeralda, Miches',
+    foto: 'flyer-viva-miches',
+    fotoTarjeta: 'hotel-viva-miches',
+    oferta: {
+      titulo: 'Para reservar hasta el 30 de noviembre',
+      resumen: 'Desde US$220 por persona por noche',
+      precios: [['Del 24 dic al 1 ene', 280], ['Del 2 ene al 30 mar', 241], ['Del 31 mar al 30 abr', 220]],
+      unidad: 'Por persona por noche en habitación doble.',
+      vigencia: 'Para reservar hasta el 30 de noviembre de 2026, con viajes del 24 de diciembre al 30 de abril de 2027.',
+      condiciones: [
+        'Niños de 3 a 11 años: US$55.',
+        'Gala de Navidad y de Año Nuevo: US$60 por adulto y US$30 por niño.',
+      ],
+      vence: '2026-11-30',
+      flyer: 'flyer-viva-miches',
+    },
+  },
 ];
 
 // ─── PAQUETES ────────────────────────────────────────────────────────────────
@@ -478,6 +590,7 @@ export const testimonios = [
 // ─── FOTOS: texto alternativo y crédito ──────────────────────────────────────
 const propia = { autor: 'Escondidas Multiservices', licencia: 'Foto de una excursión de la agencia' };
 const pendienteWiki = { autor: null, licencia: null, fuente: 'Wikimedia Commons' }; // PENDIENTE: autor y licencia
+const promo = { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' };
 
 export const fotos = {
   'buggy-caravana': { alt: 'Caravana de buggies levantando polvo en un camino de tierra', credito: propia },
@@ -516,6 +629,16 @@ export const fotos = {
   'hotel-ocean-el-faro': { alt: 'Playa con palapas y mar turquesa frente al Ocean El Faro', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
   'hotel-presidential-suites': { alt: 'Piscina rodeada de camastros y jardines en Presidential Suites, Cofresí', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
   'hotel-tropical-cofresi': { alt: 'Camas de playa con cortinas blancas bajo las palmeras en Cofresí', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
+  'flyer-viva-samana': { alt: 'Flyer: Viva V Samaná, desde US$139 por persona por noche', credito: promo },
+  'flyer-viva-heavens': { alt: 'Flyer: Viva Heavens, desde US$130 por persona por noche', credito: promo },
+  'flyer-viva-tangerine': { alt: 'Flyer: Viva Tangerine, desde US$119 por persona por noche', credito: promo },
+  'flyer-viva-dominicus': { alt: 'Flyer: Viva Dominicus Palace, desde US$225 por persona por noche', credito: promo },
+  'flyer-viva-miches': { alt: 'Flyer: Viva Miches, desde US$220 por persona por noche', credito: promo },
+  'hotel-viva-samana': { alt: 'Vista aérea de la piscina y los cocoteros frente a la playa en Viva V Samaná', credito: promo },
+  'hotel-viva-heavens': { alt: 'Playa de arena clara con sombrillas y un catamarán frente al Viva Heavens', credito: promo },
+  'hotel-viva-tangerine': { alt: 'Piscina con camastros azules junto a la playa de Cabarete en Viva Tangerine', credito: promo },
+  'hotel-viva-dominicus': { alt: 'Vista aérea de la piscina y el mar turquesa en Viva Dominicus Palace', credito: promo },
+  'hotel-viva-miches': { alt: 'Camastros y sombrillas blancas en la arena entre palmeras en Viva Miches', credito: promo },
   hardrock: { alt: 'Vista aérea del Hard Rock Punta Cana y su playa al atardecer', credito: { autor: 'Hard Rock Punta Cana', licencia: 'Cortesía del hotel' } },
   zemi: { alt: 'Piscina infinita frente a la bahía de Miches en Zemi Miches', credito: { autor: 'Zemi Miches', licencia: 'Cortesía del hotel' } },
   bayahibe: { alt: 'Muelle con palapa sobre el mar en Bayahíbe', credito: { autor: 'Mariordo', licencia: 'CC BY-SA 4.0', fuente: 'Wikimedia Commons' } },

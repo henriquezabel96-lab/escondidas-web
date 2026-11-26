@@ -522,5 +522,115 @@
    2000
   ],
   "color": "#686a76"
+ },
+ "flyer-viva-samana": {
+  "w": 1279,
+  "h": 1600,
+  "anchos": [
+   480,
+   800,
+   1200,
+   1279
+  ],
+  "color": "#778d86"
+ },
+ "flyer-viva-heavens": {
+  "w": 1280,
+  "h": 1600,
+  "anchos": [
+   480,
+   800,
+   1200,
+   1280
+  ],
+  "color": "#859999"
+ },
+ "flyer-viva-tangerine": {
+  "w": 1279,
+  "h": 1600,
+  "anchos": [
+   480,
+   800,
+   1200,
+   1279
+  ],
+  "color": "#869b9b"
+ },
+ "flyer-viva-dominicus": {
+  "w": 1280,
+  "h": 1600,
+  "anchos": [
+   480,
+   800,
+   1200,
+   1280
+  ],
+  "color": "#7b8e94"
+ },
+ "flyer-viva-miches": {
+  "w": 1280,
+  "h": 1600,
+  "anchos": [
+   480,
+   800,
+   1200,
+   1280
+  ],
+  "color": "#8998a3"
+ },
+ "hotel-viva-samana": {
+  "w": 1279,
+  "h": 608,
+  "anchos": [
+   480,
+   800,
+   1200,
+   1279
+  ],
+  "color": "#4b5b44"
+ },
+ "hotel-viva-heavens": {
+  "w": 1280,
+  "h": 608,
+  "anchos": [
+   480,
+   800,
+   1200,
+   1280
+  ],
+  "color": "#687166"
+ },
+ "hotel-viva-tangerine": {
+  "w": 1279,
+  "h": 608,
+  "anchos": [
+   480,
+   800,
+   1200,
+   1279
+  ],
+  "color": "#667a74"
+ },
+ "hotel-viva-dominicus": {
+  "w": 1280,
+  "h": 608,
+  "anchos": [
+   480,
+   800,
+   1200,
+   1280
+  ],
+  "color": "#49686d"
+ },
+ "hotel-viva-miches": {
+  "w": 1280,
+  "h": 608,
+  "anchos": [
+   480,
+   800,
+   1200,
+   1280
+  ],
+  "color": "#737d88"
  }
 }

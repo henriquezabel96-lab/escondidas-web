@@ -42,9 +42,13 @@ console.log('Hoteles:', await p.$$eval('.tarjeta-hotel__precio', (els) => els.ma
 await p.goto('http://localhost:4173/reservar/?excursion=macao&adultos=2', { waitUntil: 'networkidle' });
 await p.waitForTimeout(500);
 console.log('Reserva total con precio nuevo:', await p.textContent('[data-r="total"]'));
-// Aviso de vista previa: se cierra y no vuelve en la misma sesión
-await p.click('[data-aviso-cerrar]');
-await p.goto('http://localhost:4173/', { waitUntil: 'networkidle' });
-console.log('Aviso oculto tras cerrar:', await p.evaluate(() => document.querySelector('[data-aviso]').hidden));
+// Aviso de vista previa: se cierra y no vuelve en la misma sesión. Solo existe en modo borrador.
+if (await p.$('[data-aviso-cerrar]')) {
+  await p.click('[data-aviso-cerrar]');
+  await p.goto('http://localhost:4173/', { waitUntil: 'networkidle' });
+  console.log('Aviso oculto tras cerrar:', await p.evaluate(() => document.querySelector('[data-aviso]').hidden));
+} else {
+  console.log('Aviso de vista previa: no aplica (sitio en modo final)');
+}
 console.log('Errores JS:', errores);
 await b.close();
