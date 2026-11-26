@@ -6,7 +6,7 @@ const b = await chromium.launch({ executablePath: '/usr/bin/google-chrome' });
 const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 const CSV = {
   salidas: 'id,nombre,fecha,precio_santiago,precio_puerto_plata,cupos,estado\nmacao,Macao + Basílica,2027-01-17,"RD$4,200",4650,8,\n',
-  hoteles: 'id,nombre,desde_usd\nzemi-miches,Zemi Miches,US$ 145\nlopesan-costa-bavaro,Lopesan,129\n',
+  hoteles: 'id,nombre,desde_usd\nhard-rock-punta-cana,Hard Rock,US$ 145\nocean-el-faro,Ocean El Faro,129\n',
 };
 await ctx.route('https://docs.google.com/**', (route) => {
   const hoja = new URL(route.request().url()).searchParams.get('sheet');

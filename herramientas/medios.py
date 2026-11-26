@@ -16,6 +16,7 @@ SALIDA = os.path.join(RAIZ, 'public', 'img', 'f')
 TMP = '/tmp/esc_medios'
 UP = '/mnt/user-data/uploads/'
 W2 = '/home/claude/esc/web2/img/'
+ENT = '/home/claude/esc/entrantes/'
 ANCHOS = [480, 800, 1200, 1600, 2000]
 
 V_BUGGY = UP + 'IMG_2723.MOV'      # 1080x1920, caravana y casco rojo
@@ -59,6 +60,12 @@ FUENTES = {
     'flyer-ballenas': (UP + 'b3581001-image.jpg', None, None, False),
     # Ofertas de resorts (flyers del mayorista, nov 2026)
     'flyer-tropical-cofresi': (UP + 'eb685f6b-image.png', None, None, False),
+    # Nov 2026: fotos que faltaban (Wikimedia Commons, IA de Higgsfield y recorte del flyer)
+    'rio-botafogo': (ENT + 'rio-botafogo.jpg', None, None, False),          # Wilfredor, CC0
+    'hardrock-piscina': (ENT + 'hardrock-piscina.jpg', None, None, False),  # Magnus Bråth, CC BY 2.0
+    'cueva-taina': (ENT + 'cueva-taina.jpg', None, None, False),            # ilustrativa, Higgsfield
+    'casa-tipica': (ENT + 'casa-tipica.jpg', None, None, False),            # ilustrativa, Higgsfield
+    'cofresi-cabanas': (UP + 'eb685f6b-image.png', None, (0.17, 0.132, 0.87, 0.52), False),
     'flyer-presidential-suites': (UP + '762c4af1-image.png', None, None, False),
     'flyer-hard-rock': (UP + '96825562-image.png', None, None, False),
     'flyer-ocean-blue-sand': (UP + '9e118303-image.png', None, None, False),

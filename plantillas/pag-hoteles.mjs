@@ -87,7 +87,7 @@ export function listado() {
     </div>
     <p class="sr" aria-live="polite" data-filtro-estado></p>
     <div class="rejilla">${hoteles.map((h) => tarjetaHotel(h, zonas, { sizes: '(min-width: 1240px) 290px, (min-width: 700px) 45vw, 92vw' })).join('')}</div>
-    ${BORRADOR ? `<p style="margin-top:2rem">${ph(null, 'Agregar más hoteles por zona (Samaná, Puerto Plata…) con foto y precio desde')}</p>` : ''}
+    ${BORRADOR ? `<p style="margin-top:2rem">${ph(null, 'Agregar más hoteles u ofertas con su foto y su precio')}</p>` : ''}
   </div>
 </section>
 
@@ -109,7 +109,7 @@ ${cierre()}`;
   return pagina({
     ruta: '/hoteles/',
     titulo: 'Hoteles y resorts todo incluido',
-    descripcion: 'Resorts todo incluido en Punta Cana, Bávaro, Miches y Bayahíbe. Cotiza con tus fechas y paga en cuotas con Escondidas Multiservices.',
+    descripcion: 'Ofertas de resorts todo incluido en Punta Cana, Bávaro y Puerto Plata. Cotiza con tus fechas y paga en cuotas con Escondidas Multiservices.',
     cuerpo,
     og: '/img/og/hoteles.jpg',
     jsonld: [m.ld],
@@ -124,7 +124,10 @@ export function ficha(h) {
     { texto: h.nombre, href: `/hoteles/${h.slug}/` },
   ]);
   const otros = hoteles.filter((x) => x.slug !== h.slug);
-  const pendientesGaleria = BORRADOR ? h.galeriaPendiente : [];
+  const extras = (h.galeria || []).slice(0, 4);
+  const pendientesGaleria = BORRADOR ? (h.galeriaPendiente || []).slice(0, Math.max(0, 4 - extras.length)) : [];
+  const nGaleria = extras.length + pendientesGaleria.length;
+  const claseGaleria = nGaleria === 0 ? ' galeria--sola' : nGaleria === 1 ? ' galeria--dos' : '';
   const incluye = h.incluye.filter((x) => hay(x) || BORRADOR);
   const habitaciones = h.habitaciones.filter((x) => hay(x.nombre) || BORRADOR);
 
@@ -140,8 +143,9 @@ export function ficha(h) {
 ${seccionOferta(h)}
 ${h.oferta && h.foto === h.oferta.flyer ? '' : `<section class="tema-claro" aria-label="Fotos del hotel">
   <div class="cont">
-    <div class="galeria${pendientesGaleria.length ? '' : ' galeria--sola'}">
+    <div class="galeria${claseGaleria}">
       <div class="galeria__principal">${foto(h.foto, { sizes: '(min-width: 900px) 50vw, 92vw', prioridad: true })}${credito(h.foto)}</div>
+      ${extras.map((g) => `<figure class="galeria__foto">${foto(g, { sizes: nGaleria === 1 ? '(min-width: 900px) 40vw, 92vw' : '(min-width: 900px) 25vw, 46vw' })}${credito(g)}</figure>`).join('')}
       ${pendientesGaleria.map((g) => `<div class="galeria__pend">${ph(null, `Foto: ${g}`)}</div>`).join('')}
     </div>
     ${h.fotoEsZona ? `<p class="credito">Foto de referencia de la zona (${esc(h.lugar)}), no del hotel.</p>` : ''}
@@ -152,7 +156,7 @@ ${h.oferta && h.foto === h.oferta.flyer ? '' : `<section class="tema-claro" aria
   <div class="cont ficha">
     <div>
       ${
-        hay(h.descripcion) || (BORRADOR && !(h.oferta && h.foto === h.oferta.flyer))
+        hay(h.descripcion) || (BORRADOR && !(h.oferta && !hay(h.desde)))
           ? `<div class="ficha__bloque"><h2>Sobre el resort</h2>${hay(h.descripcion) ? `<p class="t-lead">${esc(h.descripcion)}</p>` : ph(null, 'Descripción corta del resort: ambiente, para quién es ideal y qué lo hace especial (2 o 3 líneas)', { bloque: true })}</div>`
           : ''
       }

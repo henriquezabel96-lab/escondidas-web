@@ -34,7 +34,7 @@ const ok = await p.evaluate(() => ({ codigo: document.querySelector('[data-codig
 console.log('Enviado:', ok);
 await p.screenshot({ path: '/tmp/res_ok.png' });
 // 2) Cotización de hotel
-await p.goto('http://localhost:4173/hoteles/zemi-miches/', { waitUntil: 'networkidle' });
+await p.goto('http://localhost:4173/hoteles/hard-rock-punta-cana/', { waitUntil: 'networkidle' });
 await p.fill('form[name="cotizacion-hotel"] input[name="entrada"]', '2027-03-12');
 await p.fill('form[name="cotizacion-hotel"] input[name="salida"]', '2027-03-15');
 await p.fill('form[name="cotizacion-hotel"] input[name="nombre"]', 'Juan Pérez');

@@ -15,7 +15,7 @@ const f = (rel) => 'file://' + path.join(PUB, rel);
 const piezas = [
   { id: 'inicio', foto: f('video/portada-h.webp'), titulo: 'Lo mejor de RD está escondido.', sub: 'Excursiones en grupo, resorts, paquetes y cruceros desde Santiago', pos: '50% 50%' },
   { id: 'macao', foto: f('img/f/buggy-amigas-1200.webp'), titulo: 'Macao + Basílica de Higüey', sub: 'Domingo 17 de enero · desde RD$3,995 · separa con RD$1,000', fecha: 'DOM 17 ENE', pos: '50% 35%' },
-  { id: 'hoteles', foto: f('img/f/lopesan-960.webp'), titulo: 'Resorts todo incluido', sub: 'Punta Cana, Miches, Bayahíbe y más · paga en cuotas', pos: '50% 50%' },
+  { id: 'hoteles', foto: f('img/f/hardrock-960.webp'), titulo: 'Ofertas en resorts todo incluido', sub: 'Punta Cana, Puerto Plata y más · paga en cuotas', pos: '50% 50%' },
   { id: 'paquetes', foto: f('img/f/guatape-1080.webp'), titulo: 'Paquetes con vuelo, hotel y traslados', sub: 'Dentro y fuera del país · un solo precio en cuotas', pos: '50% 50%' },
   { id: 'cruceros', foto: f('img/f/costa-pacifica-1200.webp'), titulo: 'Crucero de Año Nuevo', sub: 'Con el grupo de Escondidas a bordo del Costa Pacifica', pos: '65% 50%' },
 ];

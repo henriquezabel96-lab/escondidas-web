@@ -61,8 +61,8 @@ export function inicio() {
         <div class="mosaico__txt"><h3 class="mosaico__t">Excursiones</h3><p class="mosaico__d">Salidas en grupo con transporte, comida y actividades incluidas.</p><span class="mosaico__cta">Ver excursiones${icono('flecha')}</span></div>
       </a>
       <a class="mosaico__item mosaico__item--hot" href="/hoteles/">
-        ${foto('lopesan', { sizes: '(min-width: 900px) 40vw, 100vw' })}
-        <div class="mosaico__txt"><h3 class="mosaico__t">Hoteles y resorts</h3><p class="mosaico__d">Todo incluido en Punta Cana, Miches, Bayahíbe y más.</p><span class="mosaico__cta">Ver hoteles${icono('flecha')}</span></div>
+        ${foto('hardrock', { sizes: '(min-width: 900px) 40vw, 100vw' })}
+        <div class="mosaico__txt"><h3 class="mosaico__t">Hoteles y resorts</h3><p class="mosaico__d">Ofertas todo incluido en Punta Cana, Puerto Plata y más.</p><span class="mosaico__cta">Ver hoteles${icono('flecha')}</span></div>
       </a>
       <a class="mosaico__item mosaico__item--cru" href="/cruceros/">
         ${foto('costa-pacifica', { sizes: '(min-width: 900px) 40vw, 100vw', pos: '60% 50%' })}

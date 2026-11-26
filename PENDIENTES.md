@@ -24,20 +24,17 @@ En la vista previa, cada dato pendiente aparece como un **recuadro punteado**. C
 
 ## Fotos
 - [ ] Autor y licencia de las fotos de Wikimedia: Basílica de Higüey (fachada y aérea), cuadro de la Altagracia y acantilado de Playa Macao
-- [ ] Fotos reales de la Cueva Taína y de la casa típica (si las tienen)
-- [ ] Confirmar permiso de las fotos de Hard Rock y Zemi (o cambiarlas por fotos del mayorista)
-- [ ] 4 fotos por hotel: piscina, habitación, playa y restaurante
+- [ ] Fotos reales de la Cueva Taína y de la casa típica (hoy son imágenes ilustrativas hechas con IA en Higgsfield)
+- [ ] Confirmar permiso de la foto aérea de Hard Rock (o cambiarla por una del mayorista)
+- [x] Todas las secciones tienen foto (nov 2026): Río de Janeiro (Wilfredor, CC0), piscina de Hard Rock (Magnus Bråth, CC BY 2.0), Cofresí (recorte del flyer), Cueva Taína y casa típica (IA)
 
 ## Ofertas de resorts (flyers, nov 2026, ya en la web)
 - [x] Ocean Blue & Sand y Ocean El Faro (Black Friday, reservar hasta el 30 nov), Hard Rock (27 al 29 nov), The Tropical Beach & Cofresí Palm y Presidential Suites (hasta el 23 dic)
 - Cada oferta se oculta sola en la web al día siguiente de su fecha (`vence` en contenido/datos.mjs). Para una oferta nueva: agregar el flyer en herramientas/medios.py y el hotel con su `oferta` en datos.mjs
 
-## Hoteles (Lopesan, Hard Rock, Zemi Miches, Sunscape Dominicus)
-- [ ] Precio "desde" por persona por noche (también desde la hoja de Google)
-- [ ] Descripción corta de cada resort
-- [ ] Qué incluye el plan (restaurantes, actividades, club de niños, wifi, impuestos)
-- [ ] Tipos de habitación, capacidad y precio
-- [ ] Más hoteles por zona (Samaná, Puerto Plata…)
+## Hoteles
+- [x] Quitados Lopesan Costa Bávaro, Zemi Miches y Sunscape Dominicus (no tenían precio). Ahora solo se publican hoteles con oferta y precio
+- Un hotel sin precio propio se oculta solo cuando vence su oferta. Para publicar uno fijo hace falta: precio desde, descripción, qué incluye, habitaciones y fotos (plantilla `hotelBase` en datos.mjs)
 
 ## Crucero de Año Nuevo (Costa Pacifica)
 - [ ] Fecha, cantidad de noches y puerto de salida

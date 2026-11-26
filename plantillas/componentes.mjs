@@ -171,12 +171,12 @@ export function credito(slug) {
 export function tarjetaHotel(h, zonas, { sizes = '(min-width: 1100px) 300px, (min-width: 700px) 45vw, 82vw', h3 = true } = {}) {
   const tag = h3 ? 'h3' : 'h2';
   const o = h.oferta;
-  // un hotel que solo existe por su flyer desaparece cuando vence la oferta
-  const soloOferta = o && h.foto === o.flyer;
+  // un hotel sin precio propio solo se publica por su oferta: desaparece cuando vence
+  const soloOferta = o && !hay(h.desde);
   const sello = o ? `<span class="sello sello--oferta" data-vence="${o.vence}">Oferta</span>` : h.destacado ? '<span class="sello">Oferta destacada</span>' : '';
   const sinOferta = hay(h.desde) ? `Desde <strong>${usd(h.desde)}</strong> por noche` : BORRADOR ? ph(null, 'Precio desde US$ por confirmar') : 'Cotiza con tus fechas';
   const precio = o
-    ? `<span class="tarjeta-hotel__precio"><span data-vence="${o.vence}"><strong>${esc(o.resumen)}</strong></span><span data-vencida hidden>${sinOferta}</span></span>`
+    ? `<span class="tarjeta-hotel__precio"><span data-vence="${o.vence}"><strong>${esc(o.resumen)}</strong></span>${soloOferta ? '' : `<span data-vencida hidden>${sinOferta}</span>`}</span>`
     : `<span class="tarjeta-hotel__precio" data-dato="hoteles:${h.slug}:desde_usd" data-formato="desde-usd">${sinOferta}</span>`;
   const linea = o ? `<span class="tarjeta-hotel__plan" data-vence="${o.vence}">${esc(o.titulo)}</span>` : h.plan ? `<span class="tarjeta-hotel__plan">${esc(h.plan)}</span>` : '';
   return `<article class="tarjeta-hotel" data-zona="${h.zona}"${soloOferta ? ` data-vence="${o.vence}"` : ''}>

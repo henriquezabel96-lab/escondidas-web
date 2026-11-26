@@ -138,12 +138,12 @@ export const excursiones = [
       {
         nombre: 'Cueva Taína',
         texto: 'Parada en una cueva natural de agua dulce, de las que usaban los taínos.',
-        foto: null,
+        foto: 'cueva-taina',
       },
       {
         nombre: 'Casa típica',
         texto: 'Una casa dominicana tradicional con muestras de café, cacao y productos locales.',
-        foto: null,
+        foto: 'casa-tipica',
       },
     ],
     itinerario: [
@@ -276,6 +276,7 @@ export const excursiones = [
 ];
 
 // ─── HOTELES ─────────────────────────────────────────────────────────────────
+// Plantilla para un hotel con ficha completa y precio propio (hoy no hay ninguno publicado).
 const hotelBase = {
   plan: 'Todo incluido',
   desde: null, // PENDIENTE: precio por persona por noche en habitación doble (US$)
@@ -289,8 +290,9 @@ const hotelBase = {
   galeriaPendiente: ['Piscina', 'Habitación', 'Playa', 'Restaurante'],
 };
 
-// Hoteles que solo se publican con la oferta del flyer (sin ficha completa del resort)
-const soloOferta = { plan: null, desde: null, descripcion: null, incluye: [], habitaciones: [], galeriaPendiente: [] };
+// Hoteles que se publican solo con su oferta: la tarjeta se oculta sola cuando la oferta vence.
+// `galeria`: fotos extra del hotel (slugs del mapa de fotos).
+const soloOferta = { plan: null, desde: null, descripcion: null, incluye: [], habitaciones: [], galeria: [], galeriaPendiente: [] };
 
 // Ofertas vigentes: van primero. Cada oferta se oculta sola en la web después de `vence` (AAAA-MM-DD).
 export const hoteles = [
@@ -329,12 +331,13 @@ export const hoteles = [
     },
   },
   {
-    ...hotelBase,
+    ...soloOferta,
     slug: 'hard-rock-punta-cana',
     nombre: 'Hard Rock Punta Cana',
     zona: 'punta-cana',
     lugar: 'Punta Cana',
     foto: 'hardrock',
+    galeria: ['hardrock-piscina'],
     oferta: {
       titulo: 'Del 27 al 29 de noviembre',
       resumen: 'US$998 en ocupación doble, 3 días y 2 noches',
@@ -379,31 +382,6 @@ export const hoteles = [
       flyer: 'flyer-presidential-suites',
     },
   },
-  {
-    ...hotelBase,
-    slug: 'lopesan-costa-bavaro',
-    nombre: 'Lopesan Costa Bávaro',
-    zona: 'punta-cana',
-    lugar: 'Bávaro, Punta Cana',
-    foto: 'lopesan',
-  },
-  {
-    ...hotelBase,
-    slug: 'zemi-miches',
-    nombre: 'Zemi Miches',
-    zona: 'miches',
-    lugar: 'Miches, El Seibo',
-    foto: 'zemi',
-  },
-  {
-    ...hotelBase,
-    slug: 'sunscape-dominicus',
-    nombre: 'Sunscape Dominicus',
-    zona: 'la-romana',
-    lugar: 'Bayahíbe, La Romana',
-    foto: 'bayahibe',
-    fotoEsZona: true,
-  },
 ];
 
 // ─── PAQUETES (ejemplos pendientes de confirmar) ─────────────────────────────
@@ -422,7 +400,7 @@ export const paquetes = [
     slug: 'rio-de-janeiro',
     nombre: 'Río de Janeiro',
     pais: 'Brasil',
-    foto: null,
+    foto: 'rio-botafogo',
     noches: null,
     desde: null,
     pendiente: true,
@@ -432,7 +410,7 @@ export const paquetes = [
     slug: 'cofresi-palm-beach',
     nombre: 'Cofresí Palm Beach',
     pais: 'Puerto Plata, RD',
-    foto: null,
+    foto: 'cofresi-cabanas',
     noches: 2,
     desde: null,
     pendiente: true,
@@ -553,5 +531,10 @@ export const fotos = {
   'flyer-montecristi': { alt: 'Flyer: Montecristi, banco de arena Grand Grosier, 22 de mayo de 2027', credito: { autor: 'Escondidas Multiservices', licencia: 'Flyer de la agencia' } },
   'flyer-el-dorado': { alt: 'Flyer: El Dorado Park, 24 de julio de 2027', credito: { autor: 'Escondidas Multiservices', licencia: 'Flyer de la agencia' } },
   'flyer-tierra-tropical': { alt: 'Flyer: Tierra Tropical en Baní, junio de 2027', credito: { autor: 'Escondidas Multiservices', licencia: 'Flyer de la agencia' } },
+  'cueva-taina': { alt: 'Cueva de piedra con una poza de agua dulce cristalina y luz que entra desde arriba', credito: { autor: 'Escondidas Multiservices', licencia: 'Imagen ilustrativa generada con IA' } },
+  'casa-tipica': { alt: 'Casa dominicana de madera pintada con café y cacao servidos en la galería', credito: { autor: 'Escondidas Multiservices', licencia: 'Imagen ilustrativa generada con IA' } },
+  'rio-botafogo': { alt: 'El Cristo Redentor y la bahía de Botafogo vistos desde el Pan de Azúcar, en Río de Janeiro', credito: { autor: 'Wilfredor', licencia: 'CC0', fuente: 'Wikimedia Commons' } },
+  'cofresi-cabanas': { alt: 'Camas de playa con cortinas blancas bajo las palmeras en Cofresí, Puerto Plata', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
+  'hardrock-piscina': { alt: 'Piscina y edificios del Hard Rock Punta Cana entre palmeras, con el mar al fondo', credito: { autor: 'Magnus Bråth', licencia: 'CC BY 2.0', fuente: 'Wikimedia Commons' } },
   guatape: { alt: 'Casas de colores en el pueblo de Guatapé, Colombia', credito: { autor: 'Escondidas Multiservices', licencia: 'Publicación de la agencia en Instagram' } },
 };
