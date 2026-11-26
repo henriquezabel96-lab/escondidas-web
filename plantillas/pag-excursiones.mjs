@@ -3,7 +3,7 @@ import { sitio, excursiones, fotos, PUNTOS_SALIDA } from '../contenido/datos.mjs
 import { pagina, migas } from './base.mjs';
 import { esc, icono, foto, fotoUrl, boton, botonWa, wa, ph, rd, fechaLarga, visible, hay, BORRADOR } from './ui.mjs';
 import {
-  cabeza, boletos, cuenta, pasos, faq, cierre, credito, tarjetaExcursion, tablero, formInicio, campo, opcionesTarjeta, contador, panelEnviado,
+  cabeza, boletos, cuenta, pasos, faq, cierre, credito, tarjetaExcursion, tablero, formInicio, campo, opcionesTarjeta, contador, panelEnviado, buenoSaber, enlacesMapa,
 } from './componentes.mjs';
 
 // Formulario "Avísame de la próxima salida"
@@ -142,7 +142,7 @@ export function detalle(e) {
   ].filter(Boolean);
   const politicas = [
     ['Hora de salida', salidaTxt.length ? `En la madrugada del ${fechaLarga(e.fecha, { anio: false })}: ${salidaTxt.join(' y ')}`.replace(/\.?$/, '.') : null, 'Hora de salida en Santiago y Puerto Plata'],
-    ['Punto de encuentro', hay(pe.santiago) && hay(pe['puerto-plata']) ? `Santiago: ${pe.santiago}. Puerto Plata: ${pe['puerto-plata']}.` : null, 'Lugar exacto de salida en Santiago y en Puerto Plata'],
+    ['Punto de encuentro', hay(pe.santiago) && hay(pe['puerto-plata']) ? `Santiago: ${pe.santiago}. Puerto Plata: ${pe['puerto-plata']}.` : null, 'Lugar exacto de salida en Santiago y en Puerto Plata', enlacesMapa(e.salidas)],
     ['Buggies', e.requisitoBuggy, 'Requisitos para manejar el buggy'],
     ['Niños', e.notaNinos || sitio.politicas.menores, 'Edad mínima y precio de niños'],
     ['Si no puedes ir', e.politicaCambios || (sitio.politicas.deposito && sitio.politicas.cambios ? `${sitio.politicas.deposito} ${sitio.politicas.cambios}` : null), 'Cambios de nombre y devolución del depósito'],
@@ -196,7 +196,7 @@ export function detalle(e) {
       ${
         politicas.length
           ? `<h2 class="t-sub" style="margin:2.5rem 0 1rem">Bueno saber</h2>
-      <div class="bueno-saber">${politicas.map(([t, v, p]) => `<div><h3>${esc(t)}</h3><p>${hay(v) ? esc(v) : ph(null, p)}</p></div>`).join('')}</div>`
+      ${buenoSaber(politicas)}`
           : ''
       }
     </div>
@@ -283,7 +283,7 @@ export function ficha(e) {
   // Lo que aún no está en el flyer: visible como recuadro editable en borrador, oculto en la versión final
   const porConfirmar = [
     ['Qué incluye', e.incluye?.length ? e.incluye.map((x) => x.texto || x).join(', ') : null, 'Qué incluye el precio (transporte, comida, entradas…)'],
-    ['Lugar de salida', e.salidas.map((x) => PUNTOS_SALIDA[x.id] && `${x.ciudad}: ${PUNTOS_SALIDA[x.id]}.`).filter(Boolean).join(' ') + (e.horaSalidaTexto ? ` ${e.horaSalidaTexto}` : ' La hora te la confirmamos al reservar.'), 'Hora y punto de salida'],
+    ['Lugar de salida', e.salidas.map((x) => PUNTOS_SALIDA[x.id] && `${x.ciudad}: ${PUNTOS_SALIDA[x.id]}.`).filter(Boolean).join(' ') + (e.horaSalidaTexto ? ` ${e.horaSalidaTexto}` : ' La hora te la confirmamos al reservar.'), 'Hora y punto de salida', enlacesMapa(e.salidas)],
     ['Itinerario', e.itinerarioTexto || null, 'Itinerario del día'],
   ].filter(([, v]) => hay(v) || BORRADOR);
   const politicas = [
@@ -353,7 +353,7 @@ export function ficha(e) {
         : 'Todavía estamos cerrando la fecha y el precio. Déjanos tu WhatsApp y te avisamos primero.',
       extra: `<div>${botonWa('Preguntar por WhatsApp', msgWa, { estilo: 'pizarra' })}</div>`,
     })}
-    <div class="bueno-saber">${[...porConfirmar, ...politicas].map(([t, v, p]) => `<div><h3>${esc(t)}</h3><p>${hay(v) ? esc(v) : ph(null, p)}</p></div>`).join('')}</div>
+    ${buenoSaber([...porConfirmar, ...politicas])}
   </div>
 </section>
 

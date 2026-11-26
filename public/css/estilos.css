@@ -664,11 +664,28 @@ body.menu-abierto { overflow: hidden; }
 .llevar { display: grid; gap: .1rem; }
 .llevar li { display: flex; gap: .75rem; align-items: flex-start; padding: .55rem 0; }
 .llevar .i { color: var(--canela); margin-top: .15rem; }
-.bueno-saber { display: grid; gap: 1rem; }
-.bueno-saber div { padding: 1.1rem 1.25rem; border-radius: 1.1rem; background: var(--bruma); }
-.tema-bruma .bueno-saber div { background: #fff; }
-.bueno-saber h3 { font-size: 1.05rem; font-weight: 680; margin-bottom: .35rem; font-stretch: 100%; }
-.bueno-saber p { margin: 0; color: var(--gris); }
+/* Bueno saber: lista con ícono, separada por líneas; las políticas largas se abren al tocar */
+.saber { display: grid; border-top: 1px solid var(--linea); }
+.saber__item { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: 0 1rem; padding: 1.15rem 0; border-bottom: 1px solid var(--linea); align-items: start; }
+.saber__item > .i, .saber__item summary > .i { width: 2.6rem; height: 2.6rem; padding: .6rem; border-radius: 50%; background: var(--bruma); color: var(--canela); }
+.tema-bruma .saber__item > .i, .tema-bruma .saber__item summary > .i { background: #fff; }
+.saber__txt { display: grid; gap: .3rem; }
+.saber h3 { font-size: 1.05rem; font-weight: 700; font-stretch: 95%; line-height: 1.25; margin: 0; }
+.saber p, .saber__primera { margin: 0; color: var(--gris); }
+.saber__item--largo { display: block; }
+.saber__item--largo summary { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: 0 1rem; list-style: none; cursor: pointer; }
+.saber__item--largo summary::-webkit-details-marker { display: none; }
+.saber__mas { display: inline-flex; align-items: center; gap: .3rem; font-size: .92rem; font-weight: 650; color: var(--canela); }
+.saber__mas .i { width: 1rem; height: 1rem; transition: transform .25s var(--curva); }
+.saber__item--largo[open] .saber__mas { display: none; }
+.saber__resto { margin: .4rem 0 0 3.6rem !important; }
+.saber__mapas { display: flex; flex-wrap: wrap; gap: .35rem 1.25rem; margin-top: .35rem; }
+.saber__mapas a { display: inline-flex; align-items: center; gap: .35rem; font-weight: 620; font-size: .95rem; }
+.saber__mapas .i { width: 1.05rem; height: 1.05rem; color: var(--canela); }
+@supports (interpolate-size: allow-keywords) {
+  .saber__item--largo::details-content { block-size: 0; overflow: hidden; transition: block-size .4s var(--curva), content-visibility .4s allow-discrete; }
+  .saber__item--largo[open]::details-content { block-size: auto; }
+}
 
 /* Barra de reserva fija en celular */
 .barra-reserva {

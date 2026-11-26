@@ -2,7 +2,7 @@
 import { sitio, faqGeneral, fotos, excursiones, secciones } from '../contenido/datos.mjs';
 import { pagina, migas, agenciaLD } from './base.mjs';
 import { esc, icono, foto, boton, botonWa, ph, rd, hay, wa, ig, mapaUrl, manifest, fechaLarga, BORRADOR } from './ui.mjs';
-import { cabeza, cierre, pasos, faq, formInicio, campo, panelEnviado } from './componentes.mjs';
+import { cabeza, cierre, pasos, faq, formInicio, campo, panelEnviado, buenoSaber } from './componentes.mjs';
 
 const mac = excursiones.find((e) => e.slug === 'macao');
 
@@ -59,7 +59,7 @@ ${
     ? `<section class="seccion tema-claro" id="condiciones" aria-labelledby="cond-t">
   <div class="cont dos-col">
     ${cabeza({ titulo: 'Condiciones importantes', id: 'cond-t', texto: 'Léelas antes de separar. El detalle completo está en los términos y condiciones.', extra: `<p><a class="enlace" href="/terminos/">Leer términos y condiciones</a></p>` })}
-    <div class="bueno-saber">${condiciones.map(([t, v, pend]) => `<div><h3>${esc(t)}</h3><p>${hay(v) ? esc(v) : ph(null, pend)}</p></div>`).join('')}</div>
+    ${buenoSaber(condiciones)}
   </div>
 </section>`
     : ''

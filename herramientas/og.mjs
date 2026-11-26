@@ -12,9 +12,32 @@ const SALIDA = path.join(PUB, 'img/og');
 fs.mkdirSync(SALIDA, { recursive: true });
 const f = (rel) => 'file://' + path.join(PUB, rel);
 
+import { excursiones } from '../contenido/datos.mjs';
+import { fechaLarga, fechaTablero, rd } from '../plantillas/ui.mjs';
+const manifest = JSON.parse(fs.readFileSync(path.join(PUB, 'img/f/manifest.json'), 'utf8'));
+const fotoGrande = (slug) => f(`img/f/${slug}-${manifest[slug].anchos[manifest[slug].anchos.length - 1]}.webp`);
+
+// Una imagen por excursión anunciada con flyer: foto limpia, nombre, fecha y precio con el estilo de la marca
+const deExcursiones = excursiones
+  .filter((e) => e.detalle === false && e.foto && manifest[e.foto])
+  .map((e) => {
+    const precio = e.salidas?.map((x) => x.precio).filter(Boolean).sort((a, b) => a - b)[0];
+    const t = e.fecha ? fechaTablero(e.fecha) : null;
+    const cuando = e.fecha ? fechaLarga(e.fecha, { anio: false }) : e.fechaAprox ? `${e.fechaAprox}, fecha por confirmar` : 'Fecha por anunciar';
+    return {
+      id: e.slug,
+      foto: fotoGrande(e.foto),
+      titulo: e.nombre,
+      sub: `${cuando.charAt(0).toUpperCase() + cuando.slice(1)}${precio ? ` · desde ${rd(precio)}` : ''} · salidas en grupo`,
+      fecha: t ? `${t.dia} ${t.fecha}` : null,
+      pos: '50% 50%',
+      espejo: e.slug === 'ballenas-cayo-levantado', // la ballena queda del lado de la foto, no detrás del texto
+    };
+  });
+
 const piezas = [
   { id: 'inicio', foto: f('video/portada-h.webp'), titulo: 'Lo mejor de RD está escondido.', sub: 'Excursiones en grupo, resorts y cruceros desde Santiago', pos: '50% 50%' },
-  { id: 'macao', foto: f('img/f/buggy-amigas-1200.webp'), titulo: 'Macao + Basílica de Higüey', sub: 'Domingo 17 de enero · desde RD$3,995 · separa con RD$1,000', fecha: 'DOM 17 ENE', pos: '50% 35%' },
+  { id: 'macao', foto: fotoGrande('macao-acantilado'), titulo: 'Macao + Basílica de Higüey', sub: 'Domingo 17 de enero · desde RD$3,995 · separa con RD$1,000', fecha: 'DOM 17 ENE', pos: '70% 50%' },
   { id: 'hoteles', foto: f('img/f/hardrock-960.webp'), titulo: 'Ofertas en resorts todo incluido', sub: 'Punta Cana, Puerto Plata y más · paga en cuotas', pos: '50% 50%' },
   { id: 'cruceros', foto: f('img/f/costa-pacifica-1200.webp'), titulo: 'Crucero de Año Nuevo', sub: 'Con el grupo de Escondidas a bordo del Costa Pacifica', pos: '65% 50%' },
 ];
@@ -38,7 +61,7 @@ p{font-size:26px;line-height:1.3;color:rgba(255,255,255,.88);max-width:620px;mar
 .flap .e{background:transparent;min-width:12px}
 .flap .e::after{display:none}
 .url{font-size:20px;color:#eec08a;font-weight:600;letter-spacing:.01em}
-</style></head><body><div class="foto"></div><div class="velo"></div>
+</style></head><body><div class="foto"${x.espejo ? ' style="transform:scaleX(-1)"' : ''}></div><div class="velo"></div>
 <div class="in">
   <div class="marca"><img src="${f('img/marca/emblema.svg')}"><div><div class="n">ESCONDIDAS</div><div class="s">MULTISERVICES</div></div></div>
   <div>${x.fecha ? `<div class="flap">${[...x.fecha].map((c) => (c === ' ' ? '<span class="e"></span>' : `<span>${c}</span>`)).join('')}</div>` : ''}<h1>${x.titulo}</h1><p>${x.sub}</p></div>
@@ -47,7 +70,7 @@ p{font-size:26px;line-height:1.3;color:rgba(255,255,255,.88);max-width:620px;mar
 
 const b = await chromium.launch({ executablePath: '/usr/bin/google-chrome', args: ['--allow-file-access-from-files'] });
 const p = await b.newPage({ viewport: { width: 1200, height: 630 } });
-for (const x of piezas) {
+for (const x of [...piezas, ...deExcursiones]) {
   const tmp = `/tmp/og_${x.id}.html`;
   fs.writeFileSync(tmp, html(x));
   await p.goto('file://' + tmp);

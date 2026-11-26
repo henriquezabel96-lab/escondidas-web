@@ -678,7 +678,7 @@
   // para que los efectos al pasar el mouse no hereden el retraso.
   function revelar() {
     if (reducido || !('IntersectionObserver' in window)) return;
-    var sel = '.fila, .tarjeta-exc, .tarjeta-hotel, .lugar, .mosaico__item, .mosaico__mas, .pasos > *, .voz, .habitacion, .cuenta-pago, .oferta-hotel, .galeria > *, .ficha__bloque, .faq__item';
+    var sel = '.fila, .tarjeta-exc, .tarjeta-hotel, .lugar, .mosaico__item, .mosaico__mas, .pasos > *, .voz, .habitacion, .cuenta-pago, .oferta-hotel, .galeria > *, .ficha__bloque, .faq__item, .saber__item';
     var alto = window.innerHeight;
     var els = $$(sel).filter(function (el) {
       var padre = el.parentElement, ox = padre ? getComputedStyle(padre).overflowX : '';

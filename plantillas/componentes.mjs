@@ -1,5 +1,5 @@
 // Piezas de interfaz que se repiten entre páginas.
-import { sitio, fotos } from '../contenido/datos.mjs';
+import { sitio, fotos, PUNTOS_SALIDA } from '../contenido/datos.mjs';
 import { esc, attr, icono, ph, hay, visible, foto, rd, usd, fechaTablero, fechaLarga, diasHasta, wa, BORRADOR, boton } from './ui.mjs';
 
 // ── Encabezado de sección ────────────────────────────────────────────────────
@@ -320,4 +320,40 @@ export function panelEnviado({ titulo = 'Recibimos tu solicitud', texto = 'Te es
     <p>Puede ser la conexión. Tus datos ya están escritos en un mensaje de WhatsApp: tócalo y envíalo, y te respondemos por ahí.</p>
     <a class="btn btn--arena" data-fallo-wa href="${wa()}" target="_blank" rel="noopener">${icono('whatsapp')}<span>Enviar por WhatsApp</span></a>
   </div>`;
+}
+
+// ── Bueno saber: datos prácticos con ícono; lo largo (políticas) se abre al tocar ──
+const ICONO_SABER = {
+  'Hora de salida': 'reloj', 'Punto de encuentro': 'pin', 'Lugar de salida': 'pin', Buggies: 'buggy', 'Niños': 'personas',
+  'Si no puedes ir': 'ticket', 'Si llueve': 'sol', 'Para separar': 'cuotas', 'Qué incluye': 'check', Itinerario: 'calendario',
+  'Depósito': 'cuotas', 'Cambios de nombre o de fecha': 'ticket', 'Si la agencia cancela': 'escudo', 'Niños y menores de edad': 'personas', 'Mal tiempo': 'sol',
+};
+// Google Maps: la esquina en Santiago y el teleférico en Puerto Plata (el punto está casi enfrente)
+const MAPA_SALIDA = {
+  santiago: 'Av. 27 de Febrero esquina Av. Estrella Sadhalá, Santiago de los Caballeros, República Dominicana',
+  'puerto-plata': 'Teleférico de Puerto Plata, República Dominicana',
+};
+export const mapaUrl = (q) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+export function enlacesMapa(salidas) {
+  const ls = salidas.filter((x) => MAPA_SALIDA[x.id] && PUNTOS_SALIDA[x.id]);
+  if (!ls.length) return '';
+  return `<span class="saber__mapas">${ls
+    .map((x) => `<a class="enlace" href="${mapaUrl(MAPA_SALIDA[x.id])}" target="_blank" rel="noopener">${icono('mapa')}${esc(x.ciudad)} en el mapa</a>`)
+    .join('')}</span>`;
+}
+// Solo las políticas largas se pliegan; lo práctico (hora, lugar, requisitos) siempre se ve completo
+const PLEGABLE = new Set(['Si no puedes ir', 'Si llueve']);
+export function buenoSaber(items) {
+  return `<div class="saber">${items
+    .map(([t, v, p, extra = '']) => {
+      const ico = icono(ICONO_SABER[t] || 'info');
+      if (!hay(v)) return `<div class="saber__item">${ico}<div class="saber__txt"><h3>${esc(t)}</h3><p>${ph(null, p)}</p></div></div>`;
+      const frases = v.split(/(?<=[.!?])\s+/);
+      if (!PLEGABLE.has(t) || v.length <= 170 || frases.length < 2) return `<div class="saber__item">${ico}<div class="saber__txt"><h3>${esc(t)}</h3><p>${esc(v)}</p>${extra}</div></div>`;
+      return `<details class="saber__item saber__item--largo">
+        <summary>${ico}<span class="saber__txt"><h3>${esc(t)}</h3><span class="saber__primera">${esc(frases[0])}</span><span class="saber__mas" aria-hidden="true">Leer más${icono('abajo')}</span></span></summary>
+        <p class="saber__resto">${esc(frases.slice(1).join(' '))}</p>${extra}
+      </details>`;
+    })
+    .join('')}</div>`;
 }
