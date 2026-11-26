@@ -163,6 +163,8 @@ export function credito(slug) {
   const c = fotos[slug]?.credito;
   if (!c) return '';
   if (!hay(c.autor)) return BORRADOR ? `<span class="credito">${ph(null, 'Crédito de la foto por confirmar')}</span>` : '';
+  // las imágenes hechas con IA se marcan en la misma foto para que nadie las confunda con el lugar real
+  if (/ilustrativa/i.test(c.licencia || '')) return '<span class="credito">Imagen ilustrativa</span>';
   if (c.autor === 'Escondidas Multiservices') return '';
   return `<span class="credito">Foto: ${esc(c.autor)}${c.licencia ? `, ${esc(c.licencia)}` : ''}</span>`;
 }
