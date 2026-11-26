@@ -74,6 +74,13 @@ fs.writeFileSync(
 /whatsapp             https://wa.me/${sitio.whatsapp[0].numero}   302
 /ig                   ${ig}   302
 /instagram            ${ig}   302
+
+# Páginas de la web anterior en Hostinger (página "Coming soon", 2024)
+/services             /                            301
+/contact              /contacto/                   301
+/destinations         /excursiones/                301
+/explore-the-world-with-escondidas-multiservices-travel-agency                 /   301
+/explore-the-world-with-escondidas-multiservices-your-trusted-travel-agency    /   301
 `
 );
 

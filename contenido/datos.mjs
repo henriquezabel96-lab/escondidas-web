@@ -16,7 +16,7 @@ export const PUNTOS_SALIDA = {
 };
 
 export const sitio = {
-  borrador: true,
+  borrador: false, // versión final desde el 25 nov 2026 (dominio conectado). Para revisar con recuadros: BORRADOR=1 node build.mjs
   nombre: 'Escondidas Multiservices',
   nombreCorto: 'Escondidas',
   lema: 'sueña, explora, descubre',

@@ -55,3 +55,9 @@ En la vista previa, cada dato pendiente aparece como un **recuadro punteado**. C
 ## Ejemplos que hay que confirmar o quitar
 - [ ] Paquetes: la sección está apagada hasta que la agencia los confirme (`secciones.paquetes` en contenido/datos.mjs). Al volver, agregar los paquetes reales y su imagen para compartir en herramientas/og.mjs
 - [ ] 3 testimonios reales con permiso del cliente (texto, nombre y viaje)
+
+## Dominio (escondidasmultiservices.com)
+- [x] Acceso al DNS de Hostinger por Account sharing (25 nov 2026)
+- [x] Sitio en versión final (`borrador: false`) y redirecciones de la página vieja de Hostinger
+- [ ] Netlify: agregar el dominio al sitio escondidas-nueva
+- [ ] Hostinger DNS: A @ → 75.2.60.5, CNAME www → escondidas-nueva.netlify.app, borrar los A/AAAA viejos. No tocar MX ni TXT (correo)
