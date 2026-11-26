@@ -75,6 +75,7 @@ FUENTES = {
     'hotel-tropical-cofresi': (UP + 'eb685f6b-image.png', None, (0.17, 0.132, 0.87, 0.52), False),
     # Nov 2026: fotos reales de la excursión de Macao (Drive del cliente, carpeta "Contenido IG")
     'macao-grupo-buggies': (ENT + 'drive/macao-grupo-video.mp4', 4.5, None, True),
+    'basilica-real': (ENT + 'drive/basilica-real.jpg', None, None, False),
     'macao-buggy-saludo': (ENT + 'drive/macao-buggy-saludo.jpg', None, None, False),
     'macao-amigas-paz': (ENT + 'drive/macao-buggy-paz.jpg', None, None, False),
     'macao-amigas-risas': (ENT + 'drive/macao-buggy-risas.jpg', None, None, False),

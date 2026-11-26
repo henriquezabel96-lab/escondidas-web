@@ -133,7 +133,7 @@ export const excursiones = [
       {
         nombre: 'Basílica de Higüey',
         texto: 'El santuario de la Virgen de la Altagracia, con su arco de concreto que se ve desde lejos.',
-        foto: 'basilica-higuey',
+        foto: 'basilica-real',
       },
       {
         nombre: 'Cueva Taína',
@@ -494,6 +494,7 @@ export const fotos = {
   'macao-amigas-paz': { alt: 'Dos amigas sonriendo y haciendo la señal de la paz dentro de un buggy', credito: propia, foco: '52% 45%' },
   'macao-amigas-risas': { alt: 'Amigas riendo en un buggy cubierto de lodo bajo el cielo azul', credito: propia, foco: '40% 48%' },
   'macao-brindis': { alt: 'Viajeras y viajeros con casco y bandana brindando bajo un techo de yagua', credito: propia, foco: '48% 50%' },
+  'basilica-real': { alt: 'Fachada roja y el gran arco de la Basílica de Higüey bajo un cielo azul', credito: propia },
   'basilica-higuey': { alt: 'Fachada de la Basílica de Nuestra Señora de la Altagracia en Higüey', credito: pendienteWiki },
   'basilica-aerea': { alt: 'La Basílica de Higüey vista desde arriba, con la ciudad alrededor', credito: pendienteWiki },
   'altagracia-cuadro': { alt: 'Cuadro de la Virgen de la Altagracia', credito: pendienteWiki },
