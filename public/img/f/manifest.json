@@ -348,5 +348,51 @@
    1122
   ],
   "color": "#676143"
+ },
+ "flyer-tropical-cofresi": {
+  "w": 751,
+  "h": 939,
+  "anchos": [
+   480,
+   751
+  ],
+  "color": "#838d95"
+ },
+ "flyer-presidential-suites": {
+  "w": 751,
+  "h": 939,
+  "anchos": [
+   480,
+   751
+  ],
+  "color": "#82887b"
+ },
+ "flyer-hard-rock": {
+  "w": 1080,
+  "h": 1350,
+  "anchos": [
+   480,
+   800,
+   1080
+  ],
+  "color": "#9b9f99"
+ },
+ "flyer-ocean-blue-sand": {
+  "w": 751,
+  "h": 939,
+  "anchos": [
+   480,
+   751
+  ],
+  "color": "#6d7d83"
+ },
+ "flyer-ocean-el-faro": {
+  "w": 751,
+  "h": 939,
+  "anchos": [
+   480,
+   751
+  ],
+  "color": "#858e86"
  }
 }

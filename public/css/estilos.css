@@ -924,3 +924,15 @@ html:not(.js) .filtros { display: none; }
   .exc-hero--flyer { align-items: center; }
   .exc-hero__flyer img { max-height: 86svh; width: auto; max-width: 100%; }
 }
+
+/* ── Ofertas de resorts (flyer) ─────────────────────────────────────────── */
+.sello--oferta { background: var(--pizarra); color: var(--arena); }
+.oferta-hotel { display: grid; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.oferta-hotel__flyer { margin: 0; display: grid; gap: .6rem; justify-items: center; }
+.oferta-hotel__flyer img { width: 100%; max-width: 30rem; height: auto; border-radius: 1.5rem; box-shadow: 0 24px 60px -28px rgba(27, 36, 40, .55); }
+.oferta-hotel__txt { display: grid; gap: 1.1rem; align-content: start; }
+.oferta-precios { display: grid; gap: .6rem; }
+.oferta-precios div { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: .9rem 1.2rem; border-radius: 1rem; background: var(--bruma); }
+.oferta-precios span { font-size: 1.05rem; color: var(--texto-2); }
+.oferta-precios strong { font-size: 2rem; font-stretch: 72%; font-weight: 820; line-height: 1; }
+@media (min-width: 900px) { .oferta-hotel { grid-template-columns: minmax(0, 26rem) minmax(0, 1fr); } }

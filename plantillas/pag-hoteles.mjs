@@ -1,7 +1,7 @@
 // Hoteles: listado con filtro por zona y ficha de cada resort
 import { sitio, hoteles, zonas } from '../contenido/datos.mjs';
 import { pagina, migas } from './base.mjs';
-import { esc, icono, foto, botonWa, ph, usd, hay, BORRADOR } from './ui.mjs';
+import { esc, icono, foto, fotoUrl, botonWa, ph, usd, hay, BORRADOR } from './ui.mjs';
 import { cabeza, cierre, credito, tarjetaHotel, formInicio, campo, contador, panelEnviado } from './componentes.mjs';
 
 function beneficios() {
@@ -37,6 +37,31 @@ export function formHotel({ hotel = '', titulo = 'Cotiza este hotel', id = 'coti
     <button class="btn btn--pizarra" type="submit">${icono('whatsapp')}<span>Pedir cotización</span></button>
     ${panelEnviado({ titulo: 'Recibimos tu solicitud', texto: 'Te escribimos por WhatsApp con la cotización. Si quieres adelantar, envíanos el mensaje ya armado:' })}
   </form>`;
+}
+
+// Oferta del flyer: precios, condiciones y el flyer completo. Se esconde sola al vencer.
+function seccionOferta(h) {
+  const o = h.oferta;
+  if (!o) return '';
+  const msg = `Hola, quiero la oferta del ${h.nombre}: ${o.titulo} (${o.resumen}).`;
+  const fin = new Date(o.vence + 'T12:00:00').toLocaleDateString('es-DO', { day: 'numeric', month: 'long' });
+  return `<section class="seccion seccion--arriba-0 tema-claro" aria-labelledby="oferta-t">
+  <div class="cont oferta-hotel" data-vence="${o.vence}">
+    <figure class="oferta-hotel__flyer">
+      ${foto(o.flyer, { sizes: '(min-width: 900px) 420px, 92vw', prioridad: true })}
+      <figcaption><a class="enlace" href="${fotoUrl(o.flyer, 9999)}" target="_blank" rel="noopener">Ver el flyer en grande</a></figcaption>
+    </figure>
+    <div class="oferta-hotel__txt">
+      <h2 class="t-seccion" id="oferta-t">${esc(o.titulo)}</h2>
+      <div class="oferta-precios">${o.precios.map(([n, v]) => `<div><span>${esc(n)}</span><strong>${usd(v)}</strong></div>`).join('')}</div>
+      ${o.unidad ? `<p class="credito">${esc(o.unidad)}</p>` : ''}
+      <ul class="lista-check">${[o.vigencia, ...o.condiciones].filter(Boolean).map((c) => `<li>${icono('check')}<span>${esc(c)}</span></li>`).join('')}</ul>
+      <p class="credito">Oferta válida hasta el ${fin} o hasta agotar disponibilidad. Te confirmamos el total por WhatsApp antes de pagar.</p>
+      <div class="acciones">${botonWa('Quiero esta oferta', msg, { estilo: 'pizarra' })}<a class="btn btn--borde" href="#cotizar">Cotizar con mis fechas</a></div>
+    </div>
+  </div>
+  <div class="cont" data-vencida hidden><p class="t-lead">Esta oferta ya terminó. Escríbenos y te decimos qué hay disponible para tus fechas.</p><div class="acciones">${botonWa('Preguntar por WhatsApp', `Hola, quiero cotizar el ${h.nombre}.`, { estilo: 'pizarra' })}</div></div>
+</section>`;
 }
 
 export function listado() {
@@ -107,12 +132,13 @@ export function ficha(h) {
 <section class="cabecera-pag tema-claro" style="padding-bottom:2rem">
   <div class="cont">
     ${m.html}
-    <div class="chips" style="margin-bottom:1.25rem"><span class="chip">${icono('pin')}${esc(h.lugar)}</span><span class="chip">${icono('cama')}${esc(h.plan)}</span>${h.destacado ? '<span class="chip chip--lleno">Oferta destacada</span>' : ''}</div>
+    <div class="chips" style="margin-bottom:1.25rem"><span class="chip">${icono('pin')}${esc(h.lugar)}</span>${h.plan ? `<span class="chip">${icono('cama')}${esc(h.plan)}</span>` : ''}${h.oferta ? `<span class="chip chip--lleno" data-vence="${h.oferta.vence}">Oferta</span>` : ''}</div>
     <h1 class="t-titulo">${esc(h.nombre)}</h1>
   </div>
 </section>
 
-<section class="tema-claro" aria-label="Fotos del hotel">
+${seccionOferta(h)}
+${h.oferta && h.foto === h.oferta.flyer ? '' : `<section class="tema-claro" aria-label="Fotos del hotel">
   <div class="cont">
     <div class="galeria${pendientesGaleria.length ? '' : ' galeria--sola'}">
       <div class="galeria__principal">${foto(h.foto, { sizes: '(min-width: 900px) 50vw, 92vw', prioridad: true })}${credito(h.foto)}</div>
@@ -120,13 +146,13 @@ export function ficha(h) {
     </div>
     ${h.fotoEsZona ? `<p class="credito">Foto de referencia de la zona (${esc(h.lugar)}), no del hotel.</p>` : ''}
   </div>
-</section>
+</section>`}
 
 <section class="seccion tema-claro">
   <div class="cont ficha">
     <div>
       ${
-        hay(h.descripcion) || BORRADOR
+        hay(h.descripcion) || (BORRADOR && !(h.oferta && h.foto === h.oferta.flyer))
           ? `<div class="ficha__bloque"><h2>Sobre el resort</h2>${hay(h.descripcion) ? `<p class="t-lead">${esc(h.descripcion)}</p>` : ph(null, 'Descripción corta del resort: ambiente, para quién es ideal y qué lo hace especial (2 o 3 líneas)', { bloque: true })}</div>`
           : ''
       }
@@ -147,7 +173,7 @@ export function ficha(h) {
           : ''
       }
       <div class="ficha__bloque">
-        <h2>Cómo reservar este hotel</h2>
+        <h2>Cómo reservar${h.oferta ? '' : ' este hotel'}</h2>
         <ul class="lista-check">
           <li>${icono('check')}<span>Pides la cotización con tus fechas y cuántos van.</span></li>
           <li>${icono('check')}<span>Te mandamos el total por escrito, con plan e impuestos.</span></li>
@@ -156,7 +182,11 @@ export function ficha(h) {
       </div>
     </div>
     <div class="ficha__lado">
-      <div class="precio-desde" style="margin-bottom:1rem"><span>Desde, por persona por noche</span><strong data-dato="hoteles:${h.slug}:desde_usd" data-formato="usd">${hay(h.desde) ? usd(h.desde) : BORRADOR ? ph(null, 'US$ por confirmar') : 'Cotiza tus fechas'}</strong></div>
+      ${
+        h.oferta
+          ? `<div class="precio-desde" style="margin-bottom:1rem" data-vence="${h.oferta.vence}"><span>${esc(h.oferta.titulo)}</span><strong>${esc(h.oferta.resumen)}</strong></div>`
+          : `<div class="precio-desde" style="margin-bottom:1rem"><span>Desde, por persona por noche</span><strong data-dato="hoteles:${h.slug}:desde_usd" data-formato="usd">${hay(h.desde) ? usd(h.desde) : BORRADOR ? ph(null, 'US$ por confirmar') : 'Cotiza tus fechas'}</strong></div>`
+      }
       ${formHotel({ hotel: h.nombre })}
     </div>
   </div>
@@ -183,7 +213,9 @@ ${cierre()}`;
   return pagina({
     ruta: `/hoteles/${h.slug}/`,
     titulo: `${h.nombre} · ${h.lugar}`,
-    descripcion: `Cotiza el ${h.nombre} (${h.lugar}), ${h.plan.toLowerCase()}, con Escondidas Multiservices. Separa con un depósito y paga en cuotas.`,
+    descripcion: h.oferta
+      ? `${h.nombre} (${h.lugar}): ${h.oferta.titulo.toLowerCase()}, ${h.oferta.resumen.charAt(0).toLowerCase() + h.oferta.resumen.slice(1)}. Reserva con Escondidas Multiservices.`
+      : `Cotiza el ${h.nombre} (${h.lugar})${h.plan ? `, ${h.plan.toLowerCase()},` : ''} con Escondidas Multiservices. Separa con un depósito y paga en cuotas.`,
     cuerpo,
     og: '/img/og/hoteles.jpg',
     jsonld: [m.ld],

@@ -649,7 +649,19 @@
     });
   }
 
+  /* ── Ofertas con fecha de vencimiento: se ocultan solas al pasar la fecha ── */
+  function vencimientos() {
+    var d = new Date(), hoy = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+    $$('[data-vence]').forEach(function (el) {
+      if (hoy <= el.getAttribute('data-vence')) return;
+      el.hidden = true;
+      // lo que se muestra en su lugar (un hermano con data-vencida)
+      var alt = el.nextElementSibling;
+      if (alt && alt.hasAttribute('data-vencida')) alt.hidden = false;
+    });
+  }
+
   /* ── Arranque ──────────────────────────────────────────────────────────── */
-  [cabecera, menu, aviso, flotante, videoPortada, tablero, cuentas, carruseles, filtros, contadores, calculadoras, formularios, copiarYCompartir, barraReserva, hoja]
+  [vencimientos, cabecera, menu, aviso, flotante, videoPortada, tablero, cuentas, carruseles, filtros, contadores, calculadoras, formularios, copiarYCompartir, barraReserva, hoja]
     .forEach(function (fn) { try { fn(); } catch (e) { if (window.console) console.error(e); } });
 })();

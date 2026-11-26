@@ -87,7 +87,7 @@ export function reservar() {
 
         <fieldset class="paso" data-paso="4" style="border:0;padding:0;margin:0;min-width:0">
           <legend class="paso__t" tabindex="-1">Revisa y envía</legend>
-          <p class="form__nota">Revisa el resumen. Al enviar, te damos tu código y la cuenta para el depósito.</p>
+          <p class="form__nota">Revisa el resumen. Al enviar, te damos tu código y te escribimos por WhatsApp con los datos para el depósito.</p>
           <label class="check"><input type="checkbox" name="acepto" value="Sí" required data-error="Marca la casilla para continuar."><span>Leí y acepto los <a class="enlace" href="/terminos/" target="_blank">términos y condiciones</a>.</span></label>
           <span class="campo__error" aria-live="polite"></span>
         </fieldset>
@@ -127,8 +127,8 @@ export function reservar() {
 <section class="seccion tema-bruma" id="pagos" aria-labelledby="pagos-t">
   <div class="cont">
     <div class="cabeza">
-      <h2 class="t-seccion" id="pagos-t">Dónde hacer el depósito</h2>
-      <p class="t-lead">Después de pagar, envíanos el comprobante por WhatsApp con tu código de reserva.</p>
+      <h2 class="t-seccion" id="pagos-t">Cómo hacer el depósito</h2>
+      <p class="t-lead">Te enviamos los datos para el depósito por WhatsApp. Después de pagar, nos mandas el comprobante con tu código de reserva.</p>
     </div>
     <div class="cuentas">
       ${cuentas
@@ -140,6 +140,7 @@ export function reservar() {
         ${hay(c.numero) ? `<button class="copiar" type="button" data-copiar="${esc(c.numero)}">${icono('copiar')}<span>Copiar número</span></button>` : ''}</div>`
         )
         .join('')}
+      <div class="cuenta-pago">${icono('banco')}<h3>Transferencia o depósito</h3><p>Te enviamos los datos de la cuenta por WhatsApp cuando confirmes tu reserva.</p></div>
       <div class="cuenta-pago">${icono('efectivo')}<h3>Efectivo en la oficina</h3><p>${esc(sitio.pagos.efectivo)}</p><p>${ph(sitio.horario, 'Horario por confirmar')}</p></div>
       <div class="cuenta-pago">${icono('whatsapp')}<h3>Envía tu comprobante</h3><p>Una foto del recibo o la captura de la transferencia, con tu código de reserva.</p><a class="enlace" href="${wa('Hola, envío el comprobante de mi reserva. Mi código es: ')}" target="_blank" rel="noopener">${sitio.whatsapp[0].visible}</a></div>
     </div>

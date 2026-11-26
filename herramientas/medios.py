@@ -57,6 +57,12 @@ FUENTES = {
     'exc-el-dorado': (UP + '56426480-image.jpg', None, (0, .371, 1, .66), False),
     'exc-tierra-tropical': (UP + 'c037dbf6-image.jpg', None, (0, .425, 1, .695), False),
     'flyer-ballenas': (UP + 'b3581001-image.jpg', None, None, False),
+    # Ofertas de resorts (flyers del mayorista, nov 2026)
+    'flyer-tropical-cofresi': (UP + 'eb685f6b-image.png', None, None, False),
+    'flyer-presidential-suites': (UP + '762c4af1-image.png', None, None, False),
+    'flyer-hard-rock': (UP + '96825562-image.png', None, None, False),
+    'flyer-ocean-blue-sand': (UP + '9e118303-image.png', None, None, False),
+    'flyer-ocean-el-faro': (UP + '869bee26-image.png', None, None, False),
     'flyer-cayo-arena': (UP + 'c5fc5f18-image.jpg', None, None, False),
     'flyer-montecristi': (UP + '1034effe-image.jpg', None, None, False),
     'flyer-el-dorado': (UP + '56426480-image.jpg', None, None, False),

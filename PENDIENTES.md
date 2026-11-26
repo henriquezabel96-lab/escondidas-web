@@ -5,13 +5,13 @@ En la vista previa, cada dato pendiente aparece como un **recuadro punteado**. C
 ## Agencia
 - [x] Horario de la oficina
 - [x] Usuario de Instagram: @escondidasmultiservices
-- [ ] Cuentas para depósitos: banco, tipo de cuenta, número y a nombre de quién (Pedro envía foto)
+- [x] Cuentas para depósitos: se envían por WhatsApp al confirmar la reserva (no van en la web)
 - [x] Aceptan tarjeta
 - [ ] (Opcional) Registro de la agencia y años organizando viajes
 
 ## Condiciones de reserva (términos y condiciones)
 - [x] Depósito, cambios de nombre, cancelación por la agencia, niños y mal tiempo
-- [ ] Revisión y aprobación final del texto de términos por parte de Pedro
+- [x] Revisión y aprobación final del texto de términos por parte de Pedro
 
 ## Excursión Macao + Basílica de Higüey (17 de enero)
 - [x] Horas de salida (Puerto Plata 12:30 a. m., Santiago 2:00 a. m.) e itinerario
@@ -27,6 +27,10 @@ En la vista previa, cada dato pendiente aparece como un **recuadro punteado**. C
 - [ ] Fotos reales de la Cueva Taína y de la casa típica (si las tienen)
 - [ ] Confirmar permiso de las fotos de Hard Rock y Zemi (o cambiarlas por fotos del mayorista)
 - [ ] 4 fotos por hotel: piscina, habitación, playa y restaurante
+
+## Ofertas de resorts (flyers, nov 2026, ya en la web)
+- [x] Ocean Blue & Sand y Ocean El Faro (Black Friday, reservar hasta el 30 nov), Hard Rock (27 al 29 nov), The Tropical Beach & Cofresí Palm y Presidential Suites (hasta el 23 dic)
+- Cada oferta se oculta sola en la web al día siguiente de su fecha (`vence` en contenido/datos.mjs). Para una oferta nueva: agregar el flyer en herramientas/medios.py y el hotel con su `oferta` en datos.mjs
 
 ## Hoteles (Lopesan, Hard Rock, Zemi Miches, Sunscape Dominicus)
 - [ ] Precio "desde" por persona por noche (también desde la hoja de Google)

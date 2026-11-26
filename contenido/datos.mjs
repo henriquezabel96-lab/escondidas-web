@@ -52,9 +52,7 @@ export const sitio = {
     pestanas: { salidas: 'salidas', hoteles: 'hoteles', cruceros: 'cruceros' },
   },
   pagos: {
-    cuentas: [
-      { banco: null, tipo: null, numero: null, titular: null }, // PENDIENTE
-    ],
+    cuentas: [], // Los datos de la cuenta se envían por WhatsApp al confirmar la reserva
     efectivo: 'En la oficina de Los Jardines Metropolitanos, Santiago.',
     tarjeta: 'Sí, aceptamos pagos con tarjeta.',
   },
@@ -291,15 +289,44 @@ const hotelBase = {
   galeriaPendiente: ['Piscina', 'Habitación', 'Playa', 'Restaurante'],
 };
 
+// Hoteles que solo se publican con la oferta del flyer (sin ficha completa del resort)
+const soloOferta = { plan: null, desde: null, descripcion: null, incluye: [], habitaciones: [], galeriaPendiente: [] };
+
+// Ofertas vigentes: van primero. Cada oferta se oculta sola en la web después de `vence` (AAAA-MM-DD).
 export const hoteles = [
   {
-    ...hotelBase,
-    slug: 'lopesan-costa-bavaro',
-    nombre: 'Lopesan Costa Bávaro',
+    ...soloOferta,
+    slug: 'ocean-blue-sand',
+    nombre: 'Ocean Blue & Sand',
     zona: 'punta-cana',
     lugar: 'Bávaro, Punta Cana',
-    foto: 'lopesan',
-    destacado: true,
+    foto: 'flyer-ocean-blue-sand',
+    oferta: {
+      titulo: 'Oferta Black Friday',
+      resumen: 'Desde US$182',
+      precios: [['Desde', 182]],
+      vigencia: 'Para reservar hasta el 30 de noviembre de 2026, con viajes hasta el 23 de diciembre de 2027.',
+      condiciones: ['1er niño gratis (3 a 12 años) del 1 de mayo al 30 de junio y del 17 de agosto al 31 de octubre.'],
+      vence: '2026-11-30',
+      flyer: 'flyer-ocean-blue-sand',
+    },
+  },
+  {
+    ...soloOferta,
+    slug: 'ocean-el-faro',
+    nombre: 'Ocean El Faro',
+    zona: 'punta-cana',
+    lugar: 'Punta Cana',
+    foto: 'flyer-ocean-el-faro',
+    oferta: {
+      titulo: 'Oferta Black Friday',
+      resumen: 'Desde US$196',
+      precios: [['Desde', 196]],
+      vigencia: 'Para reservar hasta el 30 de noviembre de 2026, con viajes hasta el 23 de diciembre de 2027.',
+      condiciones: ['1er niño gratis (3 a 12 años) del 1 de mayo al 30 de junio y del 17 de agosto al 31 de octubre.'],
+      vence: '2026-11-30',
+      flyer: 'flyer-ocean-el-faro',
+    },
   },
   {
     ...hotelBase,
@@ -308,6 +335,57 @@ export const hoteles = [
     zona: 'punta-cana',
     lugar: 'Punta Cana',
     foto: 'hardrock',
+    oferta: {
+      titulo: 'Del 27 al 29 de noviembre',
+      resumen: 'US$998 en ocupación doble, 3 días y 2 noches',
+      precios: [['Ocupación doble', 998]],
+      unidad: 'Tarifa por 3 días y 2 noches.',
+      condiciones: ['2 niños gratis hasta los 17 años.', 'Tarifa sujeta a cambio y disponibilidad sin previo aviso.'],
+      vence: '2026-11-27',
+      flyer: 'flyer-hard-rock',
+    },
+  },
+  {
+    ...soloOferta,
+    slug: 'tropical-beach-cofresi-palm',
+    nombre: 'The Tropical Beach & Cofresí Palm',
+    zona: 'puerto-plata',
+    lugar: 'Cofresí, Puerto Plata',
+    foto: 'flyer-tropical-cofresi',
+    oferta: {
+      titulo: 'Para reservar y viajar hasta el 23 de diciembre',
+      resumen: 'Desde US$93 por persona por noche',
+      precios: [['Fines de semana', 100], ['Días de semana', 93]],
+      unidad: 'Por persona por noche.',
+      condiciones: ['Mínimo 2 noches.', '1er niño gratis y el 2do paga US$50.', 'Días de semana: niños gratis.', 'Niños de 4 a 12 años.'],
+      vence: '2026-12-23',
+      flyer: 'flyer-tropical-cofresi',
+    },
+  },
+  {
+    ...soloOferta,
+    slug: 'presidential-suites-lifestyle',
+    nombre: 'Presidential Suites by Lifestyle',
+    zona: 'puerto-plata',
+    lugar: 'Cofresí, Puerto Plata',
+    foto: 'flyer-presidential-suites',
+    oferta: {
+      titulo: 'Para reservar y viajar hasta el 23 de diciembre',
+      resumen: 'US$164 por persona por noche',
+      precios: [['Doble', 164], ['Niños (4 a 12 años)', 82]],
+      unidad: 'Por persona por noche.',
+      condiciones: ['Mínimo 2 noches.'],
+      vence: '2026-12-23',
+      flyer: 'flyer-presidential-suites',
+    },
+  },
+  {
+    ...hotelBase,
+    slug: 'lopesan-costa-bavaro',
+    nombre: 'Lopesan Costa Bávaro',
+    zona: 'punta-cana',
+    lugar: 'Bávaro, Punta Cana',
+    foto: 'lopesan',
   },
   {
     ...hotelBase,
@@ -457,6 +535,11 @@ export const fotos = {
   'pico-duarte': { alt: 'Pinos y sol en el camino al Pico Duarte', credito: { autor: 'jvg19', licencia: 'CC BY 3.0', fuente: 'Wikimedia Commons' } },
   'costa-pacifica': { alt: 'El crucero Costa Pacifica atracado entre montañas', credito: { autor: 'Diego Delso', licencia: 'CC BY-SA 4.0', fuente: 'Wikimedia Commons' } },
   lopesan: { alt: 'Vista aérea del Lopesan Costa Bávaro frente a la playa', credito: { autor: 'IsaiahRogers', licencia: 'CC BY-SA 4.0', fuente: 'Wikimedia Commons' } },
+  'flyer-ocean-blue-sand': { alt: 'Flyer: Ocean Blue & Sand, oferta Black Friday desde US$182', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
+  'flyer-ocean-el-faro': { alt: 'Flyer: Ocean El Faro, oferta Black Friday desde US$196', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
+  'flyer-hard-rock': { alt: 'Flyer: Hard Rock Punta Cana del 27 al 29 de noviembre, US$998 en ocupación doble', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
+  'flyer-tropical-cofresi': { alt: 'Flyer: The Tropical Beach & Cofresí Palm, US$100 fines de semana y US$93 días de semana', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
+  'flyer-presidential-suites': { alt: 'Flyer: Presidential Suites by Lifestyle, doble US$164 y niños US$82', credito: { autor: 'Hotel o mayorista de la oferta', licencia: 'Material promocional' } },
   hardrock: { alt: 'Vista aérea del Hard Rock Punta Cana y su playa al atardecer', credito: { autor: 'Hard Rock Punta Cana', licencia: 'Cortesía del hotel' } },
   zemi: { alt: 'Piscina infinita frente a la bahía de Miches en Zemi Miches', credito: { autor: 'Zemi Miches', licencia: 'Cortesía del hotel' } },
   bayahibe: { alt: 'Muelle con palapa sobre el mar en Bayahíbe', credito: { autor: 'Mariordo', licencia: 'CC BY-SA 4.0', fuente: 'Wikimedia Commons' } },

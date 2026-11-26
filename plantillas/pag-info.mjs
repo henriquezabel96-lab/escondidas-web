@@ -46,6 +46,7 @@ export function comoReservar() {
         ${hay(c.numero) ? `<button class="copiar" type="button" data-copiar="${esc(c.numero)}">${icono('copiar')}<span>Copiar número</span></button>` : ''}</div>`
         )
         .join('')}
+      <div class="cuenta-pago">${icono('banco')}<h3>Transferencia o depósito</h3><p>Te enviamos los datos de la cuenta por WhatsApp cuando confirmes tu reserva.</p></div>
       <div class="cuenta-pago">${icono('efectivo')}<h3>Efectivo en la oficina</h3><p>${esc(sitio.pagos.efectivo)}</p><p>${ph(sitio.horario, 'Horario por confirmar')}</p></div>
       ${hay(sitio.pagos.tarjeta) || BORRADOR ? `<div class="cuenta-pago">${icono('tarjeta')}<h3>Tarjeta</h3><p>${ph(sitio.pagos.tarjeta, '¿Aceptan tarjeta en la oficina o por enlace de pago?')}</p></div>` : ''}
     </div>
