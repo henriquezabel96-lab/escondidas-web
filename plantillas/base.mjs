@@ -9,7 +9,7 @@ export const NAV = [
   { href: '/excursiones/', texto: 'Excursiones' },
   { href: '/hoteles/', texto: 'Hoteles' },
   ...(secciones.paquetes ? [{ href: '/paquetes/', texto: 'Paquetes' }] : []),
-  { href: '/cruceros/', texto: 'Cruceros' },
+  ...(secciones.cruceros ? [{ href: '/cruceros/', texto: 'Cruceros' }] : []),
   { href: '/como-reservar/', texto: 'Cómo reservar' },
   { href: '/contacto/', texto: 'Contacto' },
 ];
@@ -74,7 +74,7 @@ function pie() {
         <li><a href="/excursiones/macao/">Macao + Basílica de Higüey</a></li>
         <li><a href="/hoteles/">Hoteles y resorts</a></li>
         ${secciones.paquetes ? '<li><a href="/paquetes/">Paquetes</a></li>' : ''}
-        <li><a href="/cruceros/">Cruceros</a></li>
+        ${secciones.cruceros ? '<li><a href="/cruceros/">Cruceros</a></li>' : ''}
       </ul>
     </nav>
     <nav aria-labelledby="pie-ayuda">

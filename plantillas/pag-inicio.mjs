@@ -53,9 +53,9 @@ export function inicio() {
     ${cabeza({
       titulo: 'Todo para tu viaje, en un solo lugar',
       id: 'serv-t',
-      texto: 'Desde una excursión de un día hasta una semana en un resort o un crucero de Año Nuevo. Te cotizamos, reservamos y te acompañamos por WhatsApp.',
+      texto: 'Desde una excursión de un día hasta una semana en un resort o un crucero. Te cotizamos, reservamos y te acompañamos por WhatsApp.',
     })}
-    <div class="mosaico${secciones.paquetes ? '' : ' mosaico--sin-paq'}">
+    <div class="mosaico mosaico--${['dos', 'tres', 'cuatro'][(secciones.cruceros ? 1 : 0) + (secciones.paquetes ? 1 : 0)]}">
       <a class="mosaico__item mosaico__item--exc" href="/excursiones/">
         ${foto('macao-acantilado', { sizes: '(min-width: 900px) 56vw, 100vw', pos: '62% 50%' })}
         <div class="mosaico__txt"><h3 class="mosaico__t">Excursiones</h3><p class="mosaico__d">Salidas en grupo con transporte, comida y actividades incluidas.</p><span class="mosaico__cta">Ver excursiones${icono('flecha')}</span></div>
@@ -64,10 +64,14 @@ export function inicio() {
         ${foto('hardrock', { sizes: '(min-width: 900px) 40vw, 100vw' })}
         <div class="mosaico__txt"><h3 class="mosaico__t">Hoteles y resorts</h3><p class="mosaico__d">Ofertas todo incluido en Punta Cana, Puerto Plata y más.</p><span class="mosaico__cta">Ver hoteles${icono('flecha')}</span></div>
       </a>
-      <a class="mosaico__item mosaico__item--cru" href="/cruceros/">
+      ${
+        secciones.cruceros
+          ? `<a class="mosaico__item mosaico__item--cru" href="/cruceros/">
         ${foto('costa-pacifica', { sizes: '(min-width: 900px) 40vw, 100vw', pos: '60% 50%' })}
         <div class="mosaico__txt"><h3 class="mosaico__t">Cruceros</h3><p class="mosaico__d">Salidas en grupo, como el de Año Nuevo.</p><span class="mosaico__cta">Ver cruceros${icono('flecha')}</span></div>
-      </a>
+      </a>`
+          : ''
+      }
       ${
         secciones.paquetes
           ? `<a class="mosaico__item mosaico__item--paq" href="/paquetes/">
@@ -114,7 +118,9 @@ export function inicio() {
   </div>
 </section>
 
-<section class="banda" aria-labelledby="cru-t">
+${
+  secciones.cruceros
+    ? `<section class="banda" aria-labelledby="cru-t">
   ${foto(crucero.foto, { sizes: '100vw', pos: '70% 50%' })}
   <div class="cont">
     <div class="banda__txt">
@@ -132,7 +138,9 @@ export function inicio() {
     </div>
   </div>
   ${credito(crucero.foto)}
-</section>
+</section>`
+    : ''
+}
 
 ${`<section class="seccion tema-claro" aria-labelledby="real-t">
   <div class="cont">

@@ -10,17 +10,20 @@ pendientes: `BORRADOR=1 node build.mjs`.
 
 ## Lo que falta de verdad (bloquea a un cliente)
 
-### Crucero de Año Nuevo (Costa Pacifica)
-La página existe pero no dice ni fecha ni precio. Hoy muestra "Consultar".
+### Crucero de Año Nuevo (Costa Pacifica) — sección apagada el 26 nov
+`secciones.cruceros: false` en `contenido/datos.mjs`. Sale del menú, del pie, del mosaico del
+inicio y de la franja de la portada. `/cruceros/` y `/cruceros/ano-nuevo/` redirigen a `/contacto/`,
+así que los enlaces ya compartidos no se caen. Mientras tanto los cruceros se cotizan desde
+"También te cotizamos" en el inicio y desde el formulario de contacto.
+Para encenderla de nuevo: `cruceros: true` y devolver su imagen para compartir en `herramientas/og.mjs`.
 - [ ] Fecha, cantidad de noches y puerto de salida
 - [ ] Itinerario por día (puertos)
 - [ ] Precio por persona de cada cabina: interior, exterior y balcón
 - [ ] Depósito para separar
 - [ ] Qué incluye (comidas, entretenimiento, propinas e impuestos)
-- [ ] **Decisión:** si no hay datos pronto, apagar la página como se hizo con paquetes
 
 ### Las 5 excursiones nuevas (Ballenas, Cayo Arena, Montecristi, El Dorado, Tierra Tropical)
-Hoy solo se ve el flyer. Sin estos datos no se puede reservar.
+Hoy solo se ve el flyer. Se van completando poco a poco, una por una, según Pedro mande los datos.
 - [ ] Ballenas: ¿qué significa "DE 4 A 10 AÑOS" debajo de los precios? ¿Es el precio de niños? ¿Hay precio de adulto?
 - [ ] Cayo Arena, Montecristi y El Dorado: ¿salen solo desde Santiago o también desde Puerto Plata, y a qué precio?
 - [ ] Depósito para separar en cada una (la web usa RD$1,000 por ahora)
@@ -70,7 +73,7 @@ Hoy solo se ve el flyer. Sin estos datos no se puede reservar.
 - [x] escondidasmultiservices.com en línea con https (25 nov 2026)
 - [x] Hostinger DNS: A @ → 75.2.60.5, CNAME www → escondidas-nueva.netlify.app. Correo (MX y TXT) sin tocar
 - [x] Redirecciones de la página vieja de Hostinger (/services, /contact, /destinations)
-- [ ] Netlify: apagar la insignia "Powered by Netlify" en Project configuration → General
+- [x] Insignia "Powered by Netlify" apagada (26 nov)
 
 ### Excursión Macao
 - [x] Horas de salida (Puerto Plata 12:30 a. m., Santiago 2:00 a. m.) e itinerario

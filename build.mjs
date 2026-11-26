@@ -38,8 +38,10 @@ escribir('/reservar/', reservar(), { prioridad: '0.8' });
 escribir('/hoteles/', hotelesListado(), { prioridad: '0.8' });
 for (const h of hoteles) escribir(`/hoteles/${h.slug}/`, hotelFicha(h), { prioridad: '0.7' });
 if (secciones.paquetes) escribir('/paquetes/', paginaPaquetes(), { prioridad: '0.7' });
-escribir('/cruceros/', paginaCruceros(), { prioridad: '0.7' });
-for (const c of cruceros) escribir(`/cruceros/${c.slug}/`, detalleCrucero(c), { prioridad: '0.7' });
+if (secciones.cruceros) {
+  escribir('/cruceros/', paginaCruceros(), { prioridad: '0.7' });
+  for (const c of cruceros) escribir(`/cruceros/${c.slug}/`, detalleCrucero(c), { prioridad: '0.7' });
+}
 escribir('/como-reservar/', comoReservar(), { prioridad: '0.7' });
 escribir('/contacto/', contacto(), { prioridad: '0.7' });
 escribir('/terminos/', terminos(), { prioridad: '0.3' });
@@ -74,6 +76,10 @@ fs.writeFileSync(
 /whatsapp             https://wa.me/${sitio.whatsapp[0].numero}   302
 /ig                   ${ig}   302
 /instagram            ${ig}   302
+${secciones.cruceros ? '' : `
+# Secciones apagadas: los enlaces ya compartidos no se caen
+/cruceros             /contacto/                   302
+/cruceros/*           /contacto/                   302`}
 
 # Páginas de la web anterior en Hostinger (página "Coming soon", 2024)
 /services             /                            301

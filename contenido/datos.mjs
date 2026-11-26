@@ -511,7 +511,10 @@ export const hoteles = [
 // Sección apagada: la agencia todavía no confirma paquetes (nov 2026). No sale en el menú,
 // el pie, el inicio ni el formulario de contacto, y no se genera /paquetes/.
 // Para volver a mostrarla: `paquetes: true` y agregar aquí los paquetes reales.
-export const secciones = { paquetes: false };
+// `cruceros: false` (26 nov 2026): el crucero de Año Nuevo no tiene fecha, precio ni itinerario,
+// así que la página decía "Consultar". Mientras tanto los cruceros se cotizan por WhatsApp desde
+// "También te cotizamos" en el inicio y desde el formulario de contacto.
+export const secciones = { paquetes: false, cruceros: false };
 export const paquetes = [];
 
 // ─── CRUCEROS ────────────────────────────────────────────────────────────────
@@ -546,6 +549,10 @@ export const cruceros = [
 
 // ─── OTROS SERVICIOS (se cotizan por WhatsApp; páginas en la Fase 3) ─────────
 export const otrosServicios = [
+  // Mientras la sección de cruceros está apagada, se cotizan por aquí.
+  ...(secciones.cruceros
+    ? []
+    : [{ icono: 'barco', nombre: 'Cruceros', texto: 'En grupo o a tu medida, con tus fechas.', mensaje: 'Hola, quiero cotizar un crucero.' }]),
   { icono: 'avion', nombre: 'Boletos aéreos', texto: 'Te buscamos el mejor vuelo para tus fechas.', mensaje: 'Hola, quiero cotizar un boleto aéreo.' },
   { icono: 'auto', nombre: 'Rent car', texto: 'Vehículo listo para tus vacaciones.', mensaje: 'Hola, quiero cotizar un rent car.' },
   { icono: 'escudo', nombre: 'Seguros de viaje', texto: 'Viaja cubierto dentro y fuera del país.', mensaje: 'Hola, quiero cotizar un seguro de viaje.' },
